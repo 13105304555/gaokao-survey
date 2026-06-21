@@ -203,8 +203,8 @@
   <div class="lock-box">
     <div class="icon">🔒</div>
     <h2>访问验证</h2>
-    <div class="desc">请输入访问密码，向你的高报师索取</div>
-    <input type="password" id="passInput" placeholder="请输入密码" maxlength="10" autocomplete="off">
+    <div class="desc">输入高报师给你的验证码即可进入</div>
+    <input type="password" id="passInput" placeholder="输入验证码" maxlength="10" autocomplete="off">
     <button class="btn" onclick="checkPassword()">验证</button>
     <div class="errmsg" id="passErrMsg">❌ 密码错误，请重新输入</div>
   </div>
@@ -575,25 +575,31 @@ document.getElementById('subjectGroup').addEventListener('change',function(e){
 });
 
 // ===== 密码验证 =====
-// 虾哥：在这里添加考生，一个考生一个码
-// code: 发给考生的验证码，name: 考生姓名
-const STUDENT_CODES = [
-  { code: '2026sd', name: '测试考生' }
-];
+// 虾哥：纯数字密码系统
+// 密码范围 1 ~ 10000，按顺序分配给考生
+// 你告诉考生：密码是 sdXXXX（XXXX是数字）
+const MIN_CODE = 1;
+const MAX_CODE = 10000;
+const CODE_PREFIX = 'sd'; // 前缀防猜
 
-function findStudent(code) {
-  return STUDENT_CODES.find(s => s.code === code.trim());
+function isValidCode(code) {
+  const trimmed = code.trim().toLowerCase();
+  // 支持 sd0001 或 0001 两种输入格式
+  let numStr = trimmed;
+  if (trimmed.startsWith(CODE_PREFIX)) {
+    numStr = trimmed.substring(CODE_PREFIX.length);
+  }
+  const num = parseInt(numStr, 10);
+  if (isNaN(num)) return false;
+  return num >= MIN_CODE && num <= MAX_CODE;
 }
 
 function checkPassword() {
   const input = document.getElementById('passInput');
   const err = document.getElementById('passErrMsg');
-  const found = findStudent(input.value);
-  if (found) {
+  if (isValidCode(input.value)) {
     document.getElementById('lockOverlay').classList.add('hidden');
-    document.getElementById('name').value = found.name;
-    sessionStorage.setItem('gaokao_authed', found.code);
-    sessionStorage.setItem('gaokao_student_name', found.name);
+    sessionStorage.setItem('gaokao_authed', input.value.trim());
     saveForm();
   } else {
     input.classList.add('error');
@@ -604,28 +610,20 @@ function checkPassword() {
   }
 }
 
-// 支持URL传参 ?code=xxx 直接进入
+// URL传参 ?code=sd0001 直接进入
 function checkUrlCode() {
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
-  if (code) {
-    const found = findStudent(code);
-    if (found) {
-      document.getElementById('lockOverlay').classList.add('hidden');
-      document.getElementById('name').value = found.name;
-      sessionStorage.setItem('gaokao_authed', found.code);
-      sessionStorage.setItem('gaokao_student_name', found.name);
-      saveForm();
-    }
+  if (code && isValidCode(code)) {
+    document.getElementById('lockOverlay').classList.add('hidden');
+    sessionStorage.setItem('gaokao_authed', code.trim());
+    saveForm();
   }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   checkUrlCode();
-  const authed = sessionStorage.getItem('gaokao_authed');
-  if (authed) {
-    const savedName = sessionStorage.getItem('gaokao_student_name');
-    if (savedName) document.getElementById('name').value = savedName;
+  if (sessionStorage.getItem('gaokao_authed')) {
     document.getElementById('lockOverlay').classList.add('hidden');
   }
   document.getElementById('passInput').addEventListener('keydown', function(e) {
