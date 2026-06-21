@@ -575,15 +575,26 @@ document.getElementById('subjectGroup').addEventListener('change',function(e){
 });
 
 // ===== 密码验证 =====
-const ACCESS_PASSWORD = '2026sd'; // ← 虾哥，改密码就在这里改
+// 虾哥：在这里添加考生，一个考生一个码
+// code: 发给考生的验证码，name: 考生姓名
+const STUDENT_CODES = [
+  { code: '2026sd', name: '测试考生' }
+];
+
+function findStudent(code) {
+  return STUDENT_CODES.find(s => s.code === code.trim());
+}
 
 function checkPassword() {
   const input = document.getElementById('passInput');
   const err = document.getElementById('passErrMsg');
-  if (input.value === ACCESS_PASSWORD) {
+  const found = findStudent(input.value);
+  if (found) {
     document.getElementById('lockOverlay').classList.add('hidden');
-    // 保存到session，刷新页面不用再输
-    sessionStorage.setItem('gaokao_authed', '1');
+    document.getElementById('name').value = found.name;
+    sessionStorage.setItem('gaokao_authed', found.code);
+    sessionStorage.setItem('gaokao_student_name', found.name);
+    saveForm();
   } else {
     input.classList.add('error');
     err.classList.add('show');
@@ -593,10 +604,28 @@ function checkPassword() {
   }
 }
 
-// 回车键验证
+// 支持URL传参 ?code=xxx 直接进入
+function checkUrlCode() {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (code) {
+    const found = findStudent(code);
+    if (found) {
+      document.getElementById('lockOverlay').classList.add('hidden');
+      document.getElementById('name').value = found.name;
+      sessionStorage.setItem('gaokao_authed', found.code);
+      sessionStorage.setItem('gaokao_student_name', found.name);
+      saveForm();
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-  // 如果session里已经验证过，直接跳过
-  if (sessionStorage.getItem('gaokao_authed') === '1') {
+  checkUrlCode();
+  const authed = sessionStorage.getItem('gaokao_authed');
+  if (authed) {
+    const savedName = sessionStorage.getItem('gaokao_student_name');
+    if (savedName) document.getElementById('name').value = savedName;
     document.getElementById('lockOverlay').classList.add('hidden');
   }
   document.getElementById('passInput').addEventListener('keydown', function(e) {
