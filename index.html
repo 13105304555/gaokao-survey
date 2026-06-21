@@ -3,629 +3,351 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>灞变笢楂樿€冨織鎰垮～鎶ヂ锋暟鎹噰闆?/title>
+<title>山东高考志愿填报</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
-    background: #f0f2f5;
-    color: #333;
-    line-height: 1.6;
-    padding-bottom: 80px;
-  }
-  .header {
-    background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 100%);
-    color: #fff;
-    padding: 30px 20px 24px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::after {
-    content: '';
-    position: absolute;
-    bottom: -30px;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: #f0f2f5;
-    border-radius: 50% 50% 0 0;
-  }
-  .header h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; letter-spacing: 2px; }
-  .header .sub { font-size: 13px; opacity: .85; }
-  .header .badge {
-    display: inline-block;
-    background: rgba(255,255,255,.2);
-    padding: 2px 12px;
-    border-radius: 12px;
-    font-size: 11px;
-    margin-top: 8px;
-  }
-  .progress-bar {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    padding: 12px 16px;
-    background: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 1px 4px rgba(0,0,0,.06);
-  }
-  .progress-bar .dot { width: 8px; height: 8px; border-radius: 50%; background: #d9d9d9; transition: all .3s; }
-  .progress-bar .dot.done { background: #2d6a9f; }
-  .progress-bar .dot.active { background: #e67e22; transform: scale(1.3); }
-  .progress-label { text-align: center; font-size: 12px; color: #888; margin-bottom: 2px; }
-
-  .container { max-width: 640px; margin: 0 auto; padding: 0 16px; }
-  .section {
-    background: #fff;
-    border-radius: 12px;
-    margin: 16px 0;
-    padding: 20px;
-    box-shadow: 0 1px 4px rgba(0,0,0,.06);
-  }
-  .section-title {
-    font-size: 16px; font-weight: 700; color: #1a3a5c; margin-bottom: 16px;
-    padding-bottom: 8px; border-bottom: 2px solid #e8eef4; display: flex; align-items: center; gap: 8px;
-  }
-  .section-title .num {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 22px; height: 22px; background: #2d6a9f; color: #fff;
-    border-radius: 50%; font-size: 12px; font-weight: 700;
-  }
-  .field-group { margin-bottom: 18px; }
-  .field-group:last-child { margin-bottom: 0; }
-  .field-group label { display: block; font-size: 14px; font-weight: 600; color: #444; margin-bottom: 4px; }
-  .field-group .hint { font-size: 12px; color: #999; margin-bottom: 6px; }
-  .field-group .required::after { content: ' *'; color: #e74c3c; font-weight: 700; }
-
-  input[type="text"], input[type="tel"], input[type="number"], select, textarea {
-    width: 100%; padding: 10px 12px; border: 1.5px solid #d9d9d9;
-    border-radius: 8px; font-size: 15px; background: #fafafa;
-    transition: border .2s, box-shadow .2s; font-family: inherit;
-  }
-  input:focus, select:focus, textarea:focus {
-    outline: none; border-color: #2d6a9f; box-shadow: 0 0 0 3px rgba(45,106,159,.12); background: #fff;
-  }
-  textarea { min-height: 60px; resize: vertical; }
-
-  .radio-group, .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
-  .radio-group label, .checkbox-group label {
-    display: flex; align-items: center; gap: 4px; padding: 6px 14px;
-    border: 1.5px solid #d9d9d9; border-radius: 20px; font-size: 13px;
-    font-weight: 400; cursor: pointer; transition: all .2s; user-select: none;
-  }
-  .radio-group input, .checkbox-group input { display: none; }
-  .radio-group input:checked + span, .checkbox-group input:checked + span { color: #2d6a9f; font-weight: 600; }
-  .radio-group label:has(input:checked), .checkbox-group label:has(input:checked) {
-    border-color: #2d6a9f; background: #eef4fa;
-  }
-
-  .inline-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .inline-group-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-
-  .btn-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
-  .btn {
-    flex: 1; padding: 14px 20px; border: none; border-radius: 10px;
-    font-size: 16px; font-weight: 700; cursor: pointer; transition: all .2s;
-    min-width: 120px; text-align: center;
-  }
-  .btn:active { transform: scale(.97); }
-  .btn-primary { background: linear-gradient(135deg, #2d6a9f, #1a3a5c); color: #fff; }
-  .btn-primary:hover { opacity: .92; }
-  .btn-secondary { background: #e8eef4; color: #1a3a5c; }
-  .btn-secondary:hover { background: #d5e0ea; }
-  .btn-success { background: linear-gradient(135deg, #27ae60, #1e8449); color: #fff; }
-  .btn-danger { background: #e74c3c; color: #fff; }
-
-  .result-panel { display: none; background: #fff; border-radius: 12px; padding: 20px; margin: 16px 0; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
-  .result-panel.show { display: block; }
-  .result-panel pre {
-    background: #f5f7fa; padding: 14px; border-radius: 8px; font-size: 13px;
-    line-height: 1.5; overflow-x: auto; white-space: pre-wrap; word-break: break-all; max-height: 400px; overflow-y: auto;
-  }
-  .copy-ok { display: none; color: #27ae60; font-size: 13px; margin-top: 6px; }
-  .copy-ok.show { display: block; }
-
-  .toast {
-    position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px);
-    background: rgba(0,0,0,.78); color: #fff; padding: 10px 24px;
-    border-radius: 24px; font-size: 14px; opacity: 0; transition: all .3s; pointer-events: none; z-index: 100;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  @media (max-width: 420px) {
-    .inline-group { grid-template-columns: 1fr; }
-    .inline-group-3 { grid-template-columns: 1fr 1fr; }
-    .header h1 { font-size: 20px; }
-    .btn { font-size: 14px; padding: 12px 16px; }
-  }
-  .footer-note { text-align: center; color: #aaa; font-size: 12px; margin-top: 20px; padding: 0 16px; }
-  .tag-orange { display: inline-block; background: #fef3e2; color: #e67e22; padding: 1px 10px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-left: 6px; }
-
-  /* ===== 瀵嗙爜閿?===== */
-  .lock-overlay {
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 100%);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  .lock-overlay.hidden { display: none; }
-  .lock-box {
-    background: #fff;
-    border-radius: 20px;
-    padding: 40px 30px 30px;
-    max-width: 380px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,.3);
-  }
-  .lock-box .icon { font-size: 48px; margin-bottom: 10px; }
-  .lock-box h2 { font-size: 18px; color: #1a3a5c; margin-bottom: 4px; }
-  .lock-box .desc { font-size: 13px; color: #888; margin-bottom: 20px; }
-  .lock-box input {
-    width: 100%; padding: 12px 14px;
-    border: 2px solid #d9d9d9; border-radius: 10px;
-    font-size: 20px; text-align: center; letter-spacing: 6px;
-    outline: none; transition: border .2s;
-    font-family: inherit;
-  }
-  .lock-box input:focus { border-color: #2d6a9f; }
-  .lock-box input.error { border-color: #e74c3c; animation: shake .3s; }
-  .lock-box .btn {
-    width: 100%; margin-top: 14px; padding: 12px;
-    background: linear-gradient(135deg, #2d6a9f, #1a3a5c);
-    color: #fff; border: none; border-radius: 10px;
-    font-size: 16px; font-weight: 700; cursor: pointer;
-    transition: opacity .2s;
-  }
-  .lock-box .btn:hover { opacity: .9; }
-  .lock-box .btn:active { transform: scale(.97); }
-  .lock-box .errmsg { font-size: 12px; color: #e74c3c; margin-top: 8px; display: none; }
-  .lock-box .errmsg.show { display: block; }
-  @keyframes shake {
-    0%,100%{transform:translateX(0)}
-    20%{transform:translateX(-6px)}
-    40%{transform:translateX(6px)}
-    60%{transform:translateX(-4px)}
-    80%{transform:translateX(4px)}
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f0f2f5;color:#333;line-height:1.6;padding-bottom:80px}
+.header{background:linear-gradient(135deg,#1a3a5c 0%,#2d6a9f 100%);color:#fff;padding:30px 20px 24px;text-align:center;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;bottom:-30px;left:0;right:0;height:60px;background:#f0f2f5;border-radius:50% 50% 0 0}
+.header h1{font-size:24px;font-weight:700;margin-bottom:4px;letter-spacing:2px}
+.header .sub{font-size:13px;opacity:.85}
+.header .badge{display:inline-block;background:rgba(255,255,255,.2);padding:2px 12px;border-radius:12px;font-size:11px;margin-top:8px}
+.container{max-width:640px;margin:0 auto;padding:0 16px}
+.section{background:#fff;border-radius:12px;margin:16px 0;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.section-title{font-size:16px;font-weight:700;color:#1a3a5c;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e8eef4;display:flex;align-items:center;gap:8px}
+.section-title .num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:#2d6a9f;color:#fff;border-radius:50%;font-size:12px;font-weight:700}
+.field-group{margin-bottom:18px}
+.field-group:last-child{margin-bottom:0}
+.field-group label{display:block;font-size:14px;font-weight:600;color:#444;margin-bottom:4px}
+.field-group .hint{font-size:12px;color:#999;margin-bottom:6px}
+.field-group .required::after{content:' *';color:#e74c3c;font-weight:700}
+input[type="text"],input[type="tel"],input[type="number"],textarea{width:100%;padding:10px 12px;border:1.5px solid #d9d9d9;border-radius:8px;font-size:15px;background:#fafafa;transition:border .2s;font-family:inherit}
+input:focus,textarea:focus{outline:none;border-color:#2d6a9f;box-shadow:0 0 0 3px rgba(45,106,159,.12);background:#fff}
+textarea{min-height:60px;resize:vertical}
+.radio-group,.checkbox-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.radio-group label,.checkbox-group label{display:flex;align-items:center;gap:4px;padding:6px 14px;border:1.5px solid #d9d9d9;border-radius:20px;font-size:13px;font-weight:400;cursor:pointer;transition:all .2s;user-select:none}
+.radio-group input,.checkbox-group input{display:none}
+.radio-group input:checked+span,.checkbox-group input:checked+span{color:#2d6a9f;font-weight:600}
+.radio-group label:has(input:checked),.checkbox-group label:has(input:checked){border-color:#2d6a9f;background:#eef4fa}
+.inline-group{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.inline-group-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.btn-row{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.btn{flex:1;padding:14px 20px;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;min-width:120px;text-align:center}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:linear-gradient(135deg,#2d6a9f,#1a3a5c);color:#fff}
+.btn-secondary{background:#e8eef4;color:#1a3a5c}
+.btn-success{background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff}
+.result-panel{display:none;background:#fff;border-radius:12px;padding:20px;margin:16px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.result-panel.show{display:block}
+.result-panel pre{background:#f5f7fa;padding:14px;border-radius:8px;font-size:13px;line-height:1.5;overflow-x:auto;white-space:pre-wrap;word-break:break-all;max-height:400px;overflow-y:auto}
+.copy-ok{display:none;color:#27ae60;font-size:13px;margin-top:6px}
+.copy-ok.show{display:block}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,0,0,.78);color:#fff;padding:10px 24px;border-radius:24px;font-size:14px;opacity:0;transition:all .3s;pointer-events:none;z-index:100}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:420px){.inline-group{grid-template-columns:1fr}.inline-group-3{grid-template-columns:1fr 1fr}.header h1{font-size:20px}.btn{font-size:14px;padding:12px 16px}}
+.footer-note{text-align:center;color:#aaa;font-size:12px;margin-top:20px;padding:0 16px}
 </style>
 </head>
 <body>
 
-<!-- ===== 瀵嗙爜閿侀伄缃?===== -->
-<div class="lock-overlay" id="lockOverlay">
-  <div class="lock-box">
-    <div class="icon">馃敀</div>
-    <h2>璁块棶楠岃瘉</h2>
-    <div class="desc">杈撳叆楂樻姤甯堢粰浣犵殑楠岃瘉鐮佸嵆鍙繘鍏?/div>
-    <input type="password" id="passInput" placeholder="杈撳叆楠岃瘉鐮? maxlength="10" autocomplete="off">
-    <button class="btn" onclick="checkPassword()">楠岃瘉</button>
-    <div class="errmsg" id="passErrMsg">鉂?瀵嗙爜閿欒锛岃閲嶆柊杈撳叆</div>
-  </div>
-</div>
-
 <div class="header">
-  <h1>馃帗 灞变笢楂樿€冨織鎰垮～鎶?/h1>
-  <div class="sub">鏁版嵁閲囬泦琛?鈥?濉姤瓒婅鐪燂紝鎺ㄨ崘瓒婄簿鍑?/div>
-  <div class="badge">馃搶 鏁版嵁浠呮湰鍦颁繚瀛橈紝闅愮瀹夊叏</div>
+  <h1>🎓 山东高考志愿填报</h1>
+  <div class="sub">数据采集表</div>
+  <div class="badge">🛡 数据仅本地保存，隐私安全</div>
 </div>
-
-<div class="progress-label"><span id="progressText">宸插～ 0 / 19 椤?/span></div>
-<div class="progress-bar" id="progressBar"></div>
 
 <div class="container">
-
-  <!-- Part 1 -->
   <div class="section">
-    <div class="section-title"><span class="num">1</span> 鍩烘湰淇℃伅</div>
-    <div class="field-group">
-      <label class="required">濮撳悕</label>
-      <input type="text" id="name" placeholder="璇疯緭鍏ョ湡瀹炲鍚? oninput="saveForm()">
-    </div>
+    <div class="section-title"><span class="num">1</span> 基本信息</div>
+    <div class="field-group"><label class="required">姓名</label><input type="text" id="name" placeholder="请输入真实姓名" oninput="saveForm()"></div>
     <div class="inline-group">
       <div class="field-group">
-        <label class="required">鎬у埆</label>
+        <label class="required">性别</label>
         <div class="radio-group">
-          <label><input type="radio" name="gender" value="鐢? onchange="saveForm()"><span>鐢?/span></label>
-          <label><input type="radio" name="gender" value="濂? onchange="saveForm()"><span>濂?/span></label>
+          <label><input type="radio" name="gender" value="男" onchange="saveForm()"><span>男</span></label>
+          <label><input type="radio" name="gender" value="女" onchange="saveForm()"><span>女</span></label>
         </div>
       </div>
       <div class="field-group">
-        <label class="required">鑰冪敓绫诲埆</label>
+        <label class="required">考生类别</label>
         <div class="radio-group">
-          <label><input type="radio" name="category" value="搴斿眾" onchange="saveForm()"><span>搴斿眾</span></label>
-          <label><input type="radio" name="category" value="澶嶈" onchange="saveForm()"><span>澶嶈</span></label>
+          <label><input type="radio" name="category" value="应届" onchange="saveForm()"><span>应届</span></label>
+          <label><input type="radio" name="category" value="复读" onchange="saveForm()"><span>复读</span></label>
         </div>
       </div>
     </div>
     <div class="inline-group">
-      <div class="field-group">
-        <label>鑱旂郴鐢佃瘽</label>
-        <input type="tel" id="phone" placeholder="鎵嬫満鍙? oninput="saveForm()">
-      </div>
-      <div class="field-group">
-        <label>寰俊</label>
-        <input type="text" id="wechat" placeholder="寰俊鍙? oninput="saveForm()">
-      </div>
+      <div class="field-group"><label>联系电话</label><input type="tel" id="phone" placeholder="手机号" oninput="saveForm()"></div>
+      <div class="field-group"><label>微信</label><input type="text" id="wechat" placeholder="微信号" oninput="saveForm()"></div>
     </div>
     <div class="field-group">
-      <label class="required">鎴峰彛鎬ц川</label>
+      <label class="required">户口性质</label>
       <div class="radio-group">
-        <label><input type="radio" name="hukou" value="鍩庨晣" onchange="saveForm()"><span>鍩庨晣</span></label>
-        <label><input type="radio" name="hukou" value="鍐滄潙" onchange="saveForm()"><span>鍐滄潙</span></label>
+        <label><input type="radio" name="hukou" value="城镇" onchange="saveForm()"><span>城镇</span></label>
+        <label><input type="radio" name="hukou" value="农村" onchange="saveForm()"><span>农村</span></label>
       </div>
-      <div class="hint">鈿?鍐滄潙鎴峰彛娑夊強鍦版柟涓撻」/鍐滄潙涓撻」璁″垝</div>
+      <div class="hint">农村户口涉及地方专项/农村专项计划</div>
     </div>
   </div>
 
-  <!-- Part 2 -->
   <div class="section">
-    <div class="section-title"><span class="num">2</span> 楂樿€冩垚缁?<span class="tag-orange">鍛芥牴瀛愭暟鎹?/span></div>
+    <div class="section-title"><span class="num">2</span> 高考成绩</div>
     <div class="inline-group">
-      <div class="field-group">
-        <label class="required">楂樿€冩€诲垎</label>
-        <input type="number" id="totalScore" placeholder="瑁稿垎锛屼笉鍚姞鍒? min="0" max="750" oninput="saveForm()">
-      </div>
-      <div class="field-group">
-        <label class="required">鍏ㄧ渷浣嶆 <span style="color:#e74c3c;">鈽?/span></label>
-        <input type="number" id="rank" placeholder="涓€鍒嗕竴娈佃〃鏌ヨ" min="1" oninput="saveForm()">
-        <div class="hint">姣斿垎鏁伴噸瑕侊紒鍘荤渷鎷涜€冮櫌鏌ヤ竴鍒嗕竴娈佃〃</div>
-      </div>
+      <div class="field-group"><label class="required">高考总分</label><input type="number" id="totalScore" placeholder="裸分，不含加分" min="0" max="750" oninput="saveForm()"></div>
+      <div class="field-group"><label class="required">全省位次</label><input type="number" id="rank" placeholder="一分一段表查询" min="1" oninput="saveForm()"><div class="hint">比分数重要！去省招考院查一分一段表</div></div>
     </div>
     <div class="field-group">
-      <label class="required">閫夌缁勫悎</label>
+      <label class="required">选科组合</label>
       <div class="checkbox-group" id="subjectGroup">
-        <label><input type="checkbox" value="鐗╃悊" onchange="saveForm()"><span>鐗╃悊</span></label>
-        <label><input type="checkbox" value="鍖栧" onchange="saveForm()"><span>鍖栧</span></label>
-        <label><input type="checkbox" value="鐢熺墿" onchange="saveForm()"><span>鐢熺墿</span></label>
-        <label><input type="checkbox" value="鍘嗗彶" onchange="saveForm()"><span>鍘嗗彶</span></label>
-        <label><input type="checkbox" value="鍦扮悊" onchange="saveForm()"><span>鍦扮悊</span></label>
-        <label><input type="checkbox" value="鏀挎不" onchange="saveForm()"><span>鏀挎不</span></label>
+        <label><input type="checkbox" value="物理" onchange="saveForm()"><span>物理</span></label>
+        <label><input type="checkbox" value="化学" onchange="saveForm()"><span>化学</span></label>
+        <label><input type="checkbox" value="生物" onchange="saveForm()"><span>生物</span></label>
+        <label><input type="checkbox" value="历史" onchange="saveForm()"><span>历史</span></label>
+        <label><input type="checkbox" value="地理" onchange="saveForm()"><span>地理</span></label>
+        <label><input type="checkbox" value="政治" onchange="saveForm()"><span>政治</span></label>
       </div>
-      <div class="hint" id="subjectHint">璇烽€?绉戯紙宸查€?<span id="subjectCount">0</span>/3锛?/div>
+      <div class="hint">请选3科（已选 <span id="subjectCount">0</span>/3）</div>
     </div>
     <div class="inline-group-3">
-      <div class="field-group"><label>璇枃</label><input type="number" id="scoreChinese" placeholder="鎴愮哗" min="0" max="150" oninput="saveForm()"></div>
-      <div class="field-group"><label>鏁板</label><input type="number" id="scoreMath" placeholder="鎴愮哗" min="0" max="150" oninput="saveForm()"></div>
-      <div class="field-group"><label>鑻辫</label><input type="number" id="scoreEnglish" placeholder="鎴愮哗" min="0" max="150" oninput="saveForm()"></div>
+      <div class="field-group"><label>语文</label><input type="number" id="scoreChinese" placeholder="成绩" min="0" max="150" oninput="saveForm()"></div>
+      <div class="field-group"><label>数学</label><input type="number" id="scoreMath" placeholder="成绩" min="0" max="150" oninput="saveForm()"></div>
+      <div class="field-group"><label>英语</label><input type="number" id="scoreEnglish" placeholder="成绩" min="0" max="150" oninput="saveForm()"></div>
     </div>
     <div class="inline-group-3">
-      <div class="field-group"><label>閫夌1</label><input type="number" id="scoreSub1" placeholder="鎴愮哗" min="0" max="100" oninput="saveForm()"></div>
-      <div class="field-group"><label>閫夌2</label><input type="number" id="scoreSub2" placeholder="鎴愮哗" min="0" max="100" oninput="saveForm()"></div>
-      <div class="field-group"><label>閫夌3</label><input type="number" id="scoreSub3" placeholder="鎴愮哗" min="0" max="100" oninput="saveForm()"></div>
+      <div class="field-group"><label>选科1</label><input type="number" id="scoreSub1" placeholder="成绩" min="0" max="100" oninput="saveForm()"></div>
+      <div class="field-group"><label>选科2</label><input type="number" id="scoreSub2" placeholder="成绩" min="0" max="100" oninput="saveForm()"></div>
+      <div class="field-group"><label>选科3</label><input type="number" id="scoreSub3" placeholder="成绩" min="0" max="100" oninput="saveForm()"></div>
     </div>
   </div>
 
-  <!-- Part 3 -->
   <div class="section">
-    <div class="section-title"><span class="num">3</span> 鎰忓悜鍋忓ソ</div>
+    <div class="section-title"><span class="num">3</span> 意向偏好</div>
     <div class="field-group">
-      <label>鎰忓悜涓撲笟鏂瑰悜锛堝彲澶氶€夛級</label>
+      <label>意向专业方向（可多选）</label>
       <div class="checkbox-group" id="majorGroup">
-        <label><input type="checkbox" value="璁＄畻鏈虹被(CS/SE/AI/澶ф暟鎹?" onchange="saveForm()"><span>馃捇 璁＄畻鏈虹被</span></label>
-        <label><input type="checkbox" value="鐢靛瓙淇℃伅绫?閫氫俊/鐢靛瓙/闆嗘垚鐢佃矾)" onchange="saveForm()"><span>馃摗 鐢靛瓙淇℃伅绫?/span></label>
-        <label><input type="checkbox" value="鐢垫皵宸ョ▼鍙婂叾鑷姩鍖? onchange="saveForm()"><span>鈿?鐢垫皵宸ョ▼</span></label>
-        <label><input type="checkbox" value="涓村簥鍖诲" onchange="saveForm()"><span>馃彞 涓村簥鍖诲</span></label>
-        <label><input type="checkbox" value="鍙ｈ厰鍖诲" onchange="saveForm()"><span>馃Ψ 鍙ｈ厰鍖诲</span></label>
-        <label><input type="checkbox" value="娉曞" onchange="saveForm()"><span>鈿栵笍 娉曞</span></label>
-        <label><input type="checkbox" value="甯堣寖绫? onchange="saveForm()"><span>馃摎 甯堣寖绫?/span></label>
-        <label><input type="checkbox" value="閲戣瀺缁忔祹绫? onchange="saveForm()"><span>馃挵 閲戣瀺缁忔祹绫?/span></label>
-        <label><input type="checkbox" value="寤虹瓚绫?鍦熸湪绫? onchange="saveForm()"><span>馃彈锔?寤虹瓚鍦熸湪绫?/span></label>
-        <label><input type="checkbox" value="鑷姩鍖?鏈烘绫? onchange="saveForm()"><span>馃敡 鑷姩鍖栨満姊扮被</span></label>
-        <label><input type="checkbox" value="鏁板/鐗╃悊绛夊熀纭€瀛︾" onchange="saveForm()"><span>馃敩 鍩虹瀛︾</span></label>
-        <label><input type="checkbox" value="鍖诲鎶€鏈被(褰卞儚/妫€楠?鎶ょ悊)" onchange="saveForm()"><span>馃┖ 鍖诲鎶€鏈被</span></label>
-        <label><input type="checkbox" value="绠＄悊绫?宸ュ晢/浼氳/鍏)" onchange="saveForm()"><span>馃搳 绠＄悊绫?/span></label>
-        <label><input type="checkbox" value="鍐滄灄鍦扮熆绫? onchange="saveForm()"><span>馃尵 鍐滄灄鍦扮熆绫?/span></label>
-        <label><input type="checkbox" value="鍏朵粬" onchange="saveForm()"><span>鍏朵粬</span></label>
+        <label><input type="checkbox" value="计算机类" onchange="saveForm()"><span>💻 计算机类</span></label>
+        <label><input type="checkbox" value="电子信息类" onchange="saveForm()"><span>📡 电子信息类</span></label>
+        <label><input type="checkbox" value="电气工程" onchange="saveForm()"><span>⚡ 电气工程</span></label>
+        <label><input type="checkbox" value="临床医学" onchange="saveForm()"><span>🏥 临床医学</span></label>
+        <label><input type="checkbox" value="口腔医学" onchange="saveForm()"><span>🦷 口腔医学</span></label>
+        <label><input type="checkbox" value="法学" onchange="saveForm()"><span>⚖️ 法学</span></label>
+        <label><input type="checkbox" value="师范类" onchange="saveForm()"><span>📚 师范类</span></label>
+        <label><input type="checkbox" value="金融经济类" onchange="saveForm()"><span>💰 金融经济类</span></label>
+        <label><input type="checkbox" value="建筑土木类" onchange="saveForm()"><span>🏗️ 建筑土木类</span></label>
+        <label><input type="checkbox" value="自动化机械类" onchange="saveForm()"><span>🔧 自动化机械类</span></label>
+        <label><input type="checkbox" value="基础学科" onchange="saveForm()"><span>🔬 基础学科</span></label>
+        <label><input type="checkbox" value="医学技术类" onchange="saveForm()"><span>🩺 医学技术类</span></label>
+        <label><input type="checkbox" value="管理类" onchange="saveForm()"><span>📊 管理类</span></label>
+        <label><input type="checkbox" value="农林地矿类" onchange="saveForm()"><span>🌾 农林地矿类</span></label>
+        <label><input type="checkbox" value="其他" onchange="saveForm()"><span>其他</span></label>
       </div>
     </div>
     <div class="field-group">
-      <label>闄㈡牎灞傛鍋忓ソ</label>
+      <label>院校层次偏好</label>
       <div class="radio-group">
-        <label><input type="radio" name="schoolLevel" value="985" onchange="saveForm()"><span>鍙幓985</span></label>
-        <label><input type="radio" name="schoolLevel" value="211浠ヤ笂" onchange="saveForm()"><span>211鍙婁互涓?/span></label>
-        <label><input type="radio" name="schoolLevel" value="鍙屼竴娴? onchange="saveForm()"><span>鍙屼竴娴?/span></label>
-        <label><input type="radio" name="schoolLevel" value="涓€鏈互涓? onchange="saveForm()"><span>涓€鏈強浠ヤ笂</span></label>
-        <label><input type="radio" name="schoolLevel" value="鏈夊涓婂氨琛? onchange="saveForm()"><span>鏈夊涓婂氨琛?/span></label>
-        <label><input type="radio" name="schoolLevel" value="鏃犳墍璋? onchange="saveForm()"><span>鏃犳墍璋?/span></label>
+        <label><input type="radio" name="schoolLevel" value="985" onchange="saveForm()"><span>只去985</span></label>
+        <label><input type="radio" name="schoolLevel" value="211以上" onchange="saveForm()"><span>211及以上</span></label>
+        <label><input type="radio" name="schoolLevel" value="双一流" onchange="saveForm()"><span>双一流</span></label>
+        <label><input type="radio" name="schoolLevel" value="一本以上" onchange="saveForm()"><span>一本及以上</span></label>
+        <label><input type="radio" name="schoolLevel" value="有学上就行" onchange="saveForm()"><span>有学上就行</span></label>
+        <label><input type="radio" name="schoolLevel" value="无所谓" onchange="saveForm()"><span>无所谓</span></label>
       </div>
     </div>
     <div class="field-group">
-      <label>鍦板煙鍋忓ソ</label>
+      <label>地域偏好</label>
       <div class="radio-group">
-        <label><input type="radio" name="region" value="鐪佸唴" onchange="saveForm()"><span>鐣欏湪灞变笢</span></label>
-        <label><input type="radio" name="region" value="鐪佸" onchange="saveForm()"><span>鍘荤渷澶?/span></label>
-        <label><input type="radio" name="region" value="涓嶉檺" onchange="saveForm()"><span>涓嶉檺</span></label>
+        <label><input type="radio" name="region" value="省内" onchange="saveForm()"><span>留在山东</span></label>
+        <label><input type="radio" name="region" value="省外" onchange="saveForm()"><span>去省外</span></label>
+        <label><input type="radio" name="region" value="不限" onchange="saveForm()"><span>不限</span></label>
+      </div>
+    </div>
+    <div class="field-group"><label>想去的城市</label><input type="text" id="prefCities" placeholder="济南、青岛、北京、上海..." oninput="saveForm()"></div>
+    <div class="field-group">
+      <label>学费承受能力</label>
+      <div class="radio-group">
+        <label><input type="radio" name="tuition" value="无所谓" onchange="saveForm()"><span>无所谓</span></label>
+        <label><input type="radio" name="tuition" value="1万以内" onchange="saveForm()"><span>1万以内</span></label>
+        <label><input type="radio" name="tuition" value="1-3万" onchange="saveForm()"><span>1-3万</span></label>
+        <label><input type="radio" name="tuition" value="3-6万" onchange="saveForm()"><span>3-6万</span></label>
+        <label><input type="radio" name="tuition" value="6万以上" onchange="saveForm()"><span>6万以上</span></label>
       </div>
     </div>
     <div class="field-group">
-      <label>鍏蜂綋鎯冲幓鐨勫煄甯?/label>
-      <input type="text" id="prefCities" placeholder="娴庡崡銆侀潚宀涖€佸寳浜€佷笂娴?.." oninput="saveForm()">
-    </div>
-    <div class="field-group">
-      <label>瀛﹁垂鎵垮彈鑳藉姏</label>
+      <label>是否接受公费/定向项目</label>
       <div class="radio-group">
-        <label><input type="radio" name="tuition" value="鏃犳墍璋? onchange="saveForm()"><span>鏃犳墍璋?/span></label>
-        <label><input type="radio" name="tuition" value="1涓囦互鍐?鍏姙涓轰富)" onchange="saveForm()"><span>馃挵 1涓囦互鍐?/span></label>
-        <label><input type="radio" name="tuition" value="1-3涓? onchange="saveForm()"><span>馃挵馃挵 1-3涓?/span></label>
-        <label><input type="radio" name="tuition" value="3-6涓? onchange="saveForm()"><span>馃挵馃挵馃挵 3-6涓?/span></label>
-        <label><input type="radio" name="tuition" value="6涓囦互涓?涓鍚堜綔/姘戝姙)" onchange="saveForm()"><span>馃挵馃挵馃挵馃挵 6涓囦互涓?/span></label>
-      </div>
-    </div>
-    <div class="field-group">
-      <label>鏄惁鎺ュ彈鍏垂/瀹氬悜椤圭洰</label>
-      <div class="hint">濡傚叕璐瑰笀鑼冪敓銆佸厤璐瑰尰瀛︾敓銆佸畾鍚戝氨涓?/div>
-      <div class="radio-group">
-        <label><input type="radio" name="freeEdu" value="鎰挎剰" onchange="saveForm()"><span>鎰挎剰锛岀渷瀛﹁垂+鍖呭垎閰?/span></label>
-        <label><input type="radio" name="freeEdu" value="涓嶆効鎰? onchange="saveForm()"><span>涓嶆効鎰忥紝璧扮粺鎷?/span></label>
-        <label><input type="radio" name="freeEdu" value="鐪嬫儏鍐? onchange="saveForm()"><span>鐪嬫儏鍐?/span></label>
+        <label><input type="radio" name="freeEdu" value="愿意" onchange="saveForm()"><span>愿意，省学费</span></label>
+        <label><input type="radio" name="freeEdu" value="不愿意" onchange="saveForm()"><span>不愿意，走统招</span></label>
+        <label><input type="radio" name="freeEdu" value="看情况" onchange="saveForm()"><span>看情况</span></label>
       </div>
     </div>
   </div>
 
-  <!-- Part 4 -->
   <div class="section">
-    <div class="section-title"><span class="num">4</span> 瀹跺涵鑳屾櫙 <span class="tag-orange">璁ょ湡濉紝绠＄敤</span></div>
+    <div class="section-title"><span class="num">4</span> 家庭背景</div>
     <div class="field-group">
-      <label>瀹跺涵骞存敹鍏?/label>
+      <label>家庭年收入</label>
       <div class="radio-group">
-        <label><input type="radio" name="income" value="5涓囦互涓? onchange="saveForm()"><span>5涓囦互涓?/span></label>
-        <label><input type="radio" name="income" value="5-15涓? onchange="saveForm()"><span>5-15涓?/span></label>
-        <label><input type="radio" name="income" value="15-30涓? onchange="saveForm()"><span>15-30涓?/span></label>
-        <label><input type="radio" name="income" value="30-100涓? onchange="saveForm()"><span>30-100涓?/span></label>
-        <label><input type="radio" name="income" value="100涓囦互涓? onchange="saveForm()"><span>100涓囦互涓?/span></label>
+        <label><input type="radio" name="income" value="5万以下" onchange="saveForm()"><span>5万以下</span></label>
+        <label><input type="radio" name="income" value="5-15万" onchange="saveForm()"><span>5-15万</span></label>
+        <label><input type="radio" name="income" value="15-30万" onchange="saveForm()"><span>15-30万</span></label>
+        <label><input type="radio" name="income" value="30-100万" onchange="saveForm()"><span>30-100万</span></label>
+        <label><input type="radio" name="income" value="100万以上" onchange="saveForm()"><span>100万以上</span></label>
       </div>
     </div>
     <div class="field-group">
-      <label>瀹跺涵琛屼笟浜鸿剦锛堝閫夛級</label>
-      <div class="hint">瀹堕噷鏈夎繖涓涓氱殑浜鸿剦锛岄珮鎶ユ椂浼樺厛鑰冭檻</div>
+      <label>家庭行业人脉（多选）</label>
       <div class="checkbox-group" id="guanxiGroup">
-        <label><input type="checkbox" value="鍖荤枟/鍖荤敓璧勬簮" onchange="saveForm()"><span>馃彞 鍖荤枟鍦?/span></label>
-        <label><input type="checkbox" value="鐢电綉/鑳芥簮绯荤粺" onchange="saveForm()"><span>鈿?鐢电綉鑳芥簮</span></label>
-        <label><input type="checkbox" value="鏁欒偛/瀛︽牎绯荤粺" onchange="saveForm()"><span>馃摎 鏁欒偛绯荤粺</span></label>
-        <label><input type="checkbox" value="浣撳埗鍐?鍏姟鍛? onchange="saveForm()"><span>馃彌锔?浣撳埗鍐?/span></label>
-        <label><input type="checkbox" value="閲戣瀺/閾惰绯荤粺" onchange="saveForm()"><span>馃挵 閲戣瀺鍦?/span></label>
-        <label><input type="checkbox" value="IT/浜掕仈缃戣涓? onchange="saveForm()"><span>馃捇 IT浜掕仈缃?/span></label>
-        <label><input type="checkbox" value="娉曞緥/娉曞姟绯荤粺" onchange="saveForm()"><span>鈿栵笍 娉曞緥鍦?/span></label>
-        <label><input type="checkbox" value="缁忓晢/浼佷笟绠＄悊" onchange="saveForm()"><span>馃彮 缁忓晢鍔炰紒涓?/span></label>
-        <label><input type="checkbox" value="鍐涘伐/鍥戒紒" onchange="saveForm()"><span>馃彈锔?鍐涘伐鍥戒紒</span></label>
-        <label><input type="checkbox" value="鏃犵壒娈婁汉鑴? onchange="saveForm()"><span>鉂?鏃犵壒娈婁汉鑴?/span></label>
+        <label><input type="checkbox" value="医疗圈" onchange="saveForm()"><span>🏥 医疗圈</span></label>
+        <label><input type="checkbox" value="电网能源" onchange="saveForm()"><span>⚡ 电网能源</span></label>
+        <label><input type="checkbox" value="教育系统" onchange="saveForm()"><span>📚 教育系统</span></label>
+        <label><input type="checkbox" value="体制内" onchange="saveForm()"><span>🏛️ 体制内</span></label>
+        <label><input type="checkbox" value="金融圈" onchange="saveForm()"><span>💰 金融圈</span></label>
+        <label><input type="checkbox" value="IT互联网" onchange="saveForm()"><span>💻 IT互联网</span></label>
+        <label><input type="checkbox" value="法律圈" onchange="saveForm()"><span>⚖️ 法律圈</span></label>
+        <label><input type="checkbox" value="经商办企业" onchange="saveForm()"><span>🏭 经商办企业</span></label>
+        <label><input type="checkbox" value="军工国企" onchange="saveForm()"><span>🏗️ 军工国企</span></label>
+        <label><input type="checkbox" value="无特殊人脉" onchange="saveForm()"><span>❌ 无特殊人脉</span></label>
       </div>
     </div>
     <div class="field-group">
-      <label>瀹舵棌鏁欒偛璧勬簮</label>
+      <label>家族教育资源</label>
       <div class="radio-group">
-        <label><input type="radio" name="familyEdu" value="鏈夛紝鑳芥寚瀵煎涓氳鍒? onchange="saveForm()"><span>鏈夛紝鑳芥寚瀵?/span></label>
-        <label><input type="radio" name="familyEdu" value="鏈夛紝浣嗗府涓嶄笂蹇? onchange="saveForm()"><span>鏈夛紝甯笉涓婂繖</span></label>
-        <label><input type="radio" name="familyEdu" value="鏃? onchange="saveForm()"><span>鏃?/span></label>
+        <label><input type="radio" name="familyEdu" value="有，能指导" onchange="saveForm()"><span>有，能指导</span></label>
+        <label><input type="radio" name="familyEdu" value="有，帮不上忙" onchange="saveForm()"><span>有，帮不上忙</span></label>
+        <label><input type="radio" name="familyEdu" value="无" onchange="saveForm()"><span>无</span></label>
       </div>
     </div>
     <div class="field-group">
-      <label class="required">鑰冪爺鎰忓悜</label>
+      <label class="required">考研意向</label>
       <div class="radio-group">
-        <label><input type="radio" name="gradSchool" value="涓€瀹氳鑰冪爺" onchange="saveForm()"><span>馃幆 涓€瀹氳鑰冪爺</span></label>
-        <label><input type="radio" name="gradSchool" value="鐪嬫儏鍐? onchange="saveForm()"><span>馃 鐪嬫儏鍐?/span></label>
-        <label><input type="radio" name="gradSchool" value="涓嶈€冪爺锛岀洿鎺ュ伐浣? onchange="saveForm()"><span>馃捈 鐩存帴宸ヤ綔</span></label>
+        <label><input type="radio" name="gradSchool" value="一定要考研" onchange="saveForm()"><span>🎯 一定要考研</span></label>
+        <label><input type="radio" name="gradSchool" value="看情况" onchange="saveForm()"><span>🤔 看情况</span></label>
+        <label><input type="radio" name="gradSchool" value="直接工作" onchange="saveForm()"><span>💼 直接工作</span></label>
       </div>
     </div>
   </div>
 
-  <!-- Part 5 -->
   <div class="section">
-    <div class="section-title"><span class="num">5</span> 鍏朵粬</div>
+    <div class="section-title"><span class="num">5</span> 其他</div>
     <div class="field-group">
-      <label>韬綋鏉′欢闄愬埗</label>
-      <div class="hint">褰卞搷涓撲笟闄愭姤锛屽瀹炲～鍐?/div>
+      <label>身体条件限制</label>
       <div class="checkbox-group" id="healthGroup">
-        <label><input type="checkbox" value="鑹茬洸" onchange="saveForm()"><span>鑹茬洸</span></label>
-        <label><input type="checkbox" value="鑹插急" onchange="saveForm()"><span>鑹插急</span></label>
-        <label><input type="checkbox" value="杩戣800搴︿互涓? onchange="saveForm()"><span>杩戣800搴︿互涓?/span></label>
-        <label><input type="checkbox" value="楂樺害杩戣涓嶅疁灏辫" onchange="saveForm()"><span>楂樺害杩戣涓嶅疁灏辫</span></label>
-        <label><input type="checkbox" value="鍚姏闅滅" onchange="saveForm()"><span>鍚姏闅滅</span></label>
-        <label><input type="checkbox" value="韬珮闄愬埗(鎶ょ悊/鍐涙牎)" onchange="saveForm()"><span>韬珮涓嶈揪鏍?/span></label>
-        <label><input type="checkbox" value="鏃犻檺鍒? onchange="saveForm()"><span>鉁?鏃犻檺鍒?/span></label>
+        <label><input type="checkbox" value="色盲" onchange="saveForm()"><span>色盲</span></label>
+        <label><input type="checkbox" value="色弱" onchange="saveForm()"><span>色弱</span></label>
+        <label><input type="checkbox" value="近视800度以上" onchange="saveForm()"><span>近视800度以上</span></label>
+        <label><input type="checkbox" value="高度近视不宜就读" onchange="saveForm()"><span>高度近视不宜就读</span></label>
+        <label><input type="checkbox" value="听力障碍" onchange="saveForm()"><span>听力障碍</span></label>
+        <label><input type="checkbox" value="身高不达标" onchange="saveForm()"><span>身高不达标</span></label>
+        <label><input type="checkbox" value="无限制" onchange="saveForm()"><span>✅ 无限制</span></label>
       </div>
     </div>
     <div class="field-group">
-      <label>鎬ф牸鑷瘎</label>
+      <label>性格自评</label>
       <div class="radio-group">
-        <label><input type="radio" name="personality" value="鍋忔妧鏈?閽荤爺鍨? onchange="saveForm()"><span>馃敡 鍋忔妧鏈捇鐮?/span></label>
-        <label><input type="radio" name="personality" value="鍋忎汉闄?绠＄悊鍨? onchange="saveForm()"><span>馃 鍋忎汉闄呯鐞?/span></label>
-        <label><input type="radio" name="personality" value="鍏ㄨ兘鍨? onchange="saveForm()"><span>馃専 鍏ㄨ兘鍨?/span></label>
-        <label><input type="radio" name="personality" value="涓嶆竻妤? onchange="saveForm()"><span>鉂?涓嶆竻妤?/span></label>
+        <label><input type="radio" name="personality" value="偏技术钻研" onchange="saveForm()"><span>🔧 偏技术钻研</span></label>
+        <label><input type="radio" name="personality" value="偏人际管理" onchange="saveForm()"><span>🤝 偏人际管理</span></label>
+        <label><input type="radio" name="personality" value="全能型" onchange="saveForm()"><span>🌟 全能型</span></label>
+        <label><input type="radio" name="personality" value="不清楚" onchange="saveForm()"><span>❓ 不清楚</span></label>
       </div>
     </div>
-    <div class="field-group">
-      <label>瀹堕暱鏈熸湜</label>
-      <textarea id="parentExpect" placeholder="瀹堕暱鏈変粈涔堟兂娉曪紵鎯宠瀛╁瓙瀛︿粈涔堬紵鍘诲摢宸ヤ綔锛? oninput="saveForm()"></textarea>
-    </div>
-    <div class="field-group">
-      <label>鑰冪敓澶囨敞</label>
-      <textarea id="notes" placeholder="杩樻湁浠€涔堟兂璇寸殑锛? oninput="saveForm()"></textarea>
-    </div>
+    <div class="field-group"><label>家长期望</label><textarea id="parentExpect" placeholder="家长有什么想法？" oninput="saveForm()"></textarea></div>
+    <div class="field-group"><label>考生备注</label><textarea id="notes" placeholder="还有什么想说的？" oninput="saveForm()"></textarea></div>
   </div>
 
   <div class="btn-row">
-    <button class="btn btn-primary" onclick="exportData()">馃摛 瀵煎嚭鏁版嵁</button>
-    <button class="btn btn-secondary" onclick="resetForm()">馃攧 閲嶇疆</button>
+    <button class="btn btn-primary" onclick="exportData()">📤 导出数据</button>
+    <button class="btn btn-secondary" onclick="resetForm()">🔄 重置</button>
   </div>
   <div class="btn-row" style="margin-top:8px;">
-    <button class="btn btn-success" onclick="copyToClipboard()">馃搵 澶嶅埗鏁版嵁</button>
-    <button class="btn btn-secondary" onclick="previewData()">馃憗锔?棰勮</button>
+    <button class="btn btn-success" onclick="copyToClipboard()">📋 复制数据</button>
+    <button class="btn btn-secondary" onclick="previewData()">👁️ 预览</button>
   </div>
 
   <div class="result-panel" id="resultPanel">
-    <div class="section-title">馃搵 瀵煎嚭鏁版嵁</div>
+    <div class="section-title">📋 导出数据</div>
     <pre id="resultData"></pre>
     <div class="btn-row">
-      <button class="btn btn-primary" onclick="copyToClipboard()">馃搵 澶嶅埗</button>
-      <button class="btn btn-secondary" onclick="document.getElementById('resultPanel').classList.remove('show')">鍏抽棴</button>
+      <button class="btn btn-primary" onclick="copyToClipboard()">📋 复制</button>
+      <button class="btn btn-secondary" onclick="document.getElementById('resultPanel').classList.remove('show')">关闭</button>
     </div>
-    <div class="copy-ok" id="copyOk">鉁?宸插鍒跺埌鍓创鏉匡紒鍙戠粰浣犵殑楂樻姤甯堝嵆鍙?/div>
+    <div class="copy-ok" id="copyOk">✅ 已复制到剪贴板，发给高报师即可</div>
   </div>
 
-  <div class="footer-note">鏁版嵁浠呬繚瀛樺湪浣犳墜鏈烘湰鍦帮紝涓嶄細涓婁紶浠讳綍鏈嶅姟鍣ㄣ€傚～瀹屽鍑哄彂缁欓珮鎶ュ笀銆?/div>
+  <div class="footer-note">数据仅保存在你手机本地，不会上传任何服务器。填完导出发给高报师。</div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const STORAGE_KEY = '***';
-
-function saveForm() { const data = collectData(); localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); updateProgress(); }
-
-function loadForm() {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return;
-  try {
-    const data = JSON.parse(raw);
-    setVal('name',data.name); setVal('phone',data.phone); setVal('wechat',data.wechat);
-    setVal('totalScore',data.totalScore); setVal('rank',data.rank);
-    setVal('scoreChinese',data.scoreChinese); setVal('scoreMath',data.scoreMath); setVal('scoreEnglish',data.scoreEnglish);
-    setVal('scoreSub1',data.scoreSub1); setVal('scoreSub2',data.scoreSub2); setVal('scoreSub3',data.scoreSub3);
-    setVal('prefCities',data.prefCities); setVal('parentExpect',data.parentExpect); setVal('notes',data.notes);
-    setRadio('gender',data.gender); setRadio('category',data.category); setRadio('hukou',data.hukou);
-    setRadio('schoolLevel',data.schoolLevel); setRadio('region',data.region); setRadio('tuition',data.tuition);
-    setRadio('freeEdu',data.freeEdu); setRadio('income',data.income); setRadio('familyEdu',data.familyEdu);
-    setRadio('gradSchool',data.gradSchool); setRadio('personality',data.personality);
-    if(data.subjects) setCheckboxes('subjectGroup',data.subjects);
-    if(data.majors) setCheckboxes('majorGroup',data.majors);
-    if(data.guanxi) setCheckboxes('guanxiGroup',data.guanxi);
-    if(data.health) setCheckboxes('healthGroup',data.health);
-  } catch(e) { console.log(e); }
-  updateProgress(); updateSubjectCount();
-}
-function setVal(id,v) { const e=document.getElementById(id); if(e&&v) e.value=v; }
-function setRadio(n,v) { if(!v)return; const e=document.querySelector(`input[name="${n}"][value="${v}"]`); if(e)e.checked=true; }
-function setCheckboxes(g,v) { if(!v||!v.length)return; const c=document.getElementById(g); if(!c)return; c.querySelectorAll('input[type="checkbox"]').forEach(cb=>{cb.checked=v.includes(cb.value);}); }
-function getCheckedValues(g) { const c=document.getElementById(g); return c?Array.from(c.querySelectorAll('input:checked')).map(cb=>cb.value):[]; }
-function getRadioValue(n) { const e=document.querySelector(`input[name="${n}"]:checked`); return e?e.value:''; }
-
-function collectData() {
-  return {
-    name: document.getElementById('name').value.trim(), gender: getRadioValue('gender'), category: getRadioValue('category'),
-    phone: document.getElementById('phone').value.trim(), wechat: document.getElementById('wechat').value.trim(),
-    hukou: getRadioValue('hukou'), totalScore: document.getElementById('totalScore').value, rank: document.getElementById('rank').value,
-    subjects: getCheckedValues('subjectGroup'), scoreChinese: document.getElementById('scoreChinese').value,
-    scoreMath: document.getElementById('scoreMath').value, scoreEnglish: document.getElementById('scoreEnglish').value,
-    scoreSub1: document.getElementById('scoreSub1').value, scoreSub2: document.getElementById('scoreSub2').value,
-    scoreSub3: document.getElementById('scoreSub3').value, majors: getCheckedValues('majorGroup'),
-    schoolLevel: getRadioValue('schoolLevel'), region: getRadioValue('region'), prefCities: document.getElementById('prefCities').value.trim(),
-    tuition: getRadioValue('tuition'), freeEdu: getRadioValue('freeEdu'), income: getRadioValue('income'),
-    guanxi: getCheckedValues('guanxiGroup'), familyEdu: getRadioValue('familyEdu'), gradSchool: getRadioValue('gradSchool'),
-    health: getCheckedValues('healthGroup'), personality: getRadioValue('personality'),
-    parentExpect: document.getElementById('parentExpect').value.trim(), notes: document.getElementById('notes').value.trim(),
-    timestamp: new Date().toISOString()
+const STORAGE_KEY = "gaokao_survey_data";
+function saveForm(){var d=collectData();localStorage.setItem(STORAGE_KEY,JSON.stringify(d));updateProgress();}
+function collectData(){
+  function gv(n){var e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:"";}
+  function gcg(i){var c=document.getElementById(i);return c?Array.from(c.querySelectorAll("input:checked")).map(function(x){return x.value}):[];}
+  return{
+    name:document.getElementById("name").value.trim(),gender:gv("gender"),category:gv("category"),
+    phone:document.getElementById("phone").value.trim(),wechat:document.getElementById("wechat").value.trim(),
+    hukou:gv("hukou"),totalScore:document.getElementById("totalScore").value,rank:document.getElementById("rank").value,
+    subjects:gcg("subjectGroup"),scoreChinese:document.getElementById("scoreChinese").value,
+    scoreMath:document.getElementById("scoreMath").value,scoreEnglish:document.getElementById("scoreEnglish").value,
+    scoreSub1:document.getElementById("scoreSub1").value,scoreSub2:document.getElementById("scoreSub2").value,
+    scoreSub3:document.getElementById("scoreSub3").value,majors:gcg("majorGroup"),
+    schoolLevel:gv("schoolLevel"),region:gv("region"),prefCities:document.getElementById("prefCities").value.trim(),
+    tuition:gv("tuition"),freeEdu:gv("freeEdu"),income:gv("income"),
+    guanxi:gcg("guanxiGroup"),familyEdu:gv("familyEdu"),gradSchool:gv("gradSchool"),
+    health:gcg("healthGroup"),personality:gv("personality"),
+    parentExpect:document.getElementById("parentExpect").value.trim(),notes:document.getElementById("notes").value.trim(),
+    timestamp:new Date().toISOString()
   };
 }
-
-function exportData() { const data=collectData(); document.getElementById('resultData').textContent=formatData(data); document.getElementById('resultPanel').classList.add('show'); document.getElementById('copyOk').classList.remove('show'); document.getElementById('resultPanel').scrollIntoView({behavior:'smooth'}); }
-function previewData() { exportData(); }
-
-function formatData(data) {
-  const l=(k,v)=>v?`${k}锛?{v}`:null; const l2=(k,v)=>v&&v.length?`${k}锛?{v.join('銆?)}`:null;
-  return [
-    '鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?,'  灞变笢楂樿€冨織鎰垮～鎶?路 鏁版嵁閲囬泦琛?,'鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?,'',
-    '銆愬熀鏈俊鎭€?,l('濮撳悕',data.name),l('鎬у埆',data.gender),l('鑰冪敓绫诲埆',data.category),l('鑱旂郴鐢佃瘽',data.phone),l('寰俊',data.wechat),l('鎴峰彛鎬ц川',data.hukou),'',
-    '銆愰珮鑰冩垚缁┿€?,l('楂樿€冩€诲垎',data.totalScore),l('鍏ㄧ渷浣嶆',data.rank),l2('閫夌缁勫悎',data.subjects),l('璇枃',data.scoreChinese),l('鏁板',data.scoreMath),l('鑻辫',data.scoreEnglish),l('閫夌1',data.scoreSub1),l('閫夌2',data.scoreSub2),l('閫夌3',data.scoreSub3),'',
-    '銆愭剰鍚戝亸濂姐€?,l2('鎰忓悜涓撲笟鏂瑰悜',data.majors),l('闄㈡牎灞傛鍋忓ソ',data.schoolLevel),l('鍦板煙鍋忓ソ',data.region),l('鎯冲幓鍩庡競',data.prefCities),l('瀛﹁垂鎵垮彈',data.tuition),l('鍏垂/瀹氬悜鎺ュ彈搴?,data.freeEdu),'',
-    '銆愬搴儗鏅€?,l('瀹跺涵骞存敹鍏?,data.income),l2('琛屼笟浜鸿剦璧勬簮',data.guanxi),l('瀹舵棌鏁欒偛璧勬簮',data.familyEdu),l('鑰冪爺鎰忓悜',data.gradSchool),'',
-    '銆愬叾浠栥€?,l2('韬綋闄愬埗',data.health),l('鎬ф牸鑷瘎',data.personality),l('瀹堕暱鏈熸湜',data.parentExpect),l('鑰冪敓澶囨敞',data.notes),'',`濉啓鏃堕棿锛?{new Date(data.timestamp).toLocaleString('zh-CN')}`,'鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€','灏嗘鏁版嵁鍙戠粰浣犵殑楂樻姤甯堝嵆鍙紑濮嬪垎鏋?馃幆'
-  ].filter(Boolean).join('\n');
+function exportData(){
+  var d=collectData();
+  function l(k,v){return v?k+": "+v:null;}
+  function l2(k,v){return v&&v.length?k+": "+v.join("、"):null;}
+  var t=[
+    "═══════════════════════════════════","  山东高考志愿填报 · 数据采集表","═══════════════════════════════════","",
+    "【基本信息】",l("姓名",d.name),l("性别",d.gender),l("类别",d.category),l("电话",d.phone),l("微信",d.wechat),l("户口",d.hukou),"",
+    "【高考成绩】",l("总分",d.totalScore),l("位次",d.rank),l2("选科",d.subjects),l("语文",d.scoreChinese),l("数学",d.scoreMath),l("英语",d.scoreEnglish),l("选科1",d.scoreSub1),l("选科2",d.scoreSub2),l("选科3",d.scoreSub3),"",
+    "【意向】",l2("专业方向",d.majors),l("院校层次",d.schoolLevel),l("地域",d.region),l("城市",d.prefCities),l("学费",d.tuition),l("公费/定向",d.freeEdu),"",
+    "【家庭背景】",l("年收入",d.income),l2("人脉",d.guanxi),l("家族教育",d.familyEdu),l("考研",d.gradSchool),"",
+    "【其他】",l2("身体限制",d.health),l("性格",d.personality),l("家长期望",d.parentExpect),l("备注",d.notes),"",
+    "填写时间:"+new Date(d.timestamp).toLocaleString("zh-CN"),"───────────────────────────────────","发给你高报师即可🎯"
+  ];
+  document.getElementById("resultData").textContent=t.filter(Boolean).join("\n");
+  document.getElementById("resultPanel").classList.add("show");
+  document.getElementById("copyOk").classList.remove("show");
+  document.getElementById("resultPanel").scrollIntoView({behavior:"smooth"});
 }
-
-async function copyToClipboard() {
-  const t=document.getElementById('resultData').textContent; if(!t){showToast('璇峰厛瀵煎嚭鏁版嵁');return;}
-  try{await navigator.clipboard.writeText(t);}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}
-  document.getElementById('copyOk').classList.add('show'); showToast('鉁?宸插鍒讹紒');
+function previewData(){exportData();}
+async function copyToClipboard(){
+  var t=document.getElementById("resultData").textContent;
+  if(!t){showToast("请先导出数据");return;}
+  try{await navigator.clipboard.writeText(t);}catch(e){var ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);}
+  document.getElementById("copyOk").classList.add("show");showToast("复制成功！");
 }
-
-function resetForm() { if(!confirm('纭畾閲嶇疆鎵€鏈夋暟鎹悧锛?))return; localStorage.removeItem(STORAGE_KEY); location.reload(); }
-
-function updateProgress() {
-  const data=collectData(); let filled=0;
-  if(data.name)filled++;if(data.gender)filled++;if(data.category)filled++;if(data.hukou)filled++;
-  if(data.totalScore)filled++;if(data.rank)filled++;if(data.subjects&&data.subjects.length>=3)filled++;
-  if(data.majors&&data.majors.length>0)filled++;if(data.gradSchool)filled++;
-  ['phone','wechat','income','guanxi','tuition','schoolLevel','region','freeEdu','prefCities','parentExpect','notes','health','personality','familyEdu','scoreChinese','scoreMath','scoreEnglish'].forEach(f=>{
-    const v=data[f]; if(v&&(typeof v==='string'?v.trim():(Array.isArray(v)?v.length>0:true)))filled++;
-  });
-  document.getElementById('progressText').textContent=`宸插～ ${filled} / 19 椤筦;
-  const bar=document.getElementById('progressBar'); bar.innerHTML='';
-  for(let i=0;i<19;i++){const d=document.createElement('div');d.className='dot';if(i<filled)d.className+=' done';if(i===filled)d.className+=' active';bar.appendChild(d);}
+function resetForm(){if(!confirm("确定重置所有数据吗？"))return;localStorage.removeItem(STORAGE_KEY);location.reload();}
+function updateProgress(){
+  var d=collectData();var f=0;
+  if(d.name)f++;if(d.gender)f++;if(d.category)f++;if(d.hukou)f++;
+  if(d.totalScore)f++;if(d.rank)f++;if(d.subjects&&d.subjects.length>=3)f++;
+  if(d.majors&&d.majors.length>0)f++;if(d.gradSchool)f++;
+  ["phone","wechat","income","guanxi","tuition","schoolLevel","region","freeEdu","prefCities","parentExpect","notes","health","personality","familyEdu","scoreChinese","scoreMath","scoreEnglish"].forEach(function(x){var v=d[x];if(v&&(typeof v==="string"?v.trim():v.length>0))f++;});
+  document.getElementById("progressText").textContent="已填 "+f+" / 19 项";
 }
-
-function updateSubjectCount() {
-  const c=document.querySelectorAll('#subjectGroup input:checked').length;
-  document.getElementById('subjectCount').textContent=c;
-  document.getElementById('subjectHint').innerHTML=c>3?'鈿狅笍 閫夌瓒呭嚭3绉戜簡锛佸凡閫?<span id="subjectCount">'+c+'</span>/3':'璇烽€?绉戯紙宸查€?<span id="subjectCount">'+c+'</span>/3锛?;
-}
-
-function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
-
-document.getElementById('subjectGroup').addEventListener('change',function(e){
-  if(this.querySelectorAll('input:checked').length>3){e.target.checked=false;showToast('灞变笢楂樿€冨彧鑳介€?绉戝摝锛?);}
-  updateSubjectCount(); saveForm();
+function showToast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},2000);}
+document.getElementById("subjectGroup").addEventListener("change",function(e){
+  var c=this.querySelectorAll("input:checked");
+  if(c.length>3){e.target.checked=false;showToast("山东高考只能选3科");}
+  document.getElementById("subjectCount").textContent=this.querySelectorAll("input:checked").length;saveForm();
 });
-
-// ===== 瀵嗙爜楠岃瘉 =====
-// 铏惧摜锛氱函鏁板瓧瀵嗙爜绯荤粺
-// 瀵嗙爜鑼冨洿 1 ~ 10000锛屾寜椤哄簭鍒嗛厤缁欒€冪敓
-// 浣犲憡璇夎€冪敓锛氬瘑鐮佹槸 sdXXXX锛圶XXX鏄暟瀛
-
-// ===== 随机验证码系统 =====
-// 每个考生一个独立随机6位验证码，不可猜测
-const STUDENT_CODES = new Set(['cktf6p','ata374','9jnctc','gkj43b','h53vhs','3pxxvy','cce8j9','njca6x','g58vs7','dtncfm','yruwxv','ahnj9r','fsynhj','eh6hus','vwf8sr','fzkbrv','j57anu','u57a9n','9wxeh8','98mraj','8znvnd','d2fykd','5ma6b3','t55smp','gteavd','8euc8w','m56fr3','jq3nec','pmvcvq','w9z8sf','fvzprd','veje77','5ysmcu','57dvke','gm29uf','543ysz','bpq293','zd8v2f','epphee','tdm2ug','z9ndps','dfvmfx','gkd5eh','897wku','e45rtx','jja6eu','zhwk4e','jxgyj4','vgbfwv','uc88vs','hqubdz','bdx4nq','yqherw','cp66pb','b8fw7j','xxjutz','mgfb95','mav6gu','8mzss7','4nuwfh','cz5gwp','r6h59u','6de5rx','92m9tw','uft8zx','9egge6','7wtabx','mjpqbk','qrnsak','wcgbdx','h7crrk','wnu7ae','vpybvj','unevfg','arz9mu','ae2zb4','pcn8cw','ygse63','cpxasf','tsgctk','t3wnk6','qsg3pq','ej2pjn','whq6tn','e7hxd4','6ayqeh','mnb9jr','pnvcqh','jqhncj','vx4x3r','6tgfff','zwr8we','eyrmug','5s9w62','czzjhx','n58st3','7dv3ks','xpy8q6','fyt3jh','q6xbdc','97vfta','4xcf4j','ww95vq','ecnh5g','sn2hdr','qsqgmm','9gtrqe','5bvchb','swtk6f','q8mcu9','s9kwpb','f3n9a8','ta4kst','mp5x7s','mx2yt7','4e356x','eh57hu','a9ezz5','csbacm','6dss47','kjjv4n','8gks9f','ryu8a4','qecrtw','w648hq','ee7kny','32fyf4','5hg9kr','m46t48','gu6qhb','pwx2nh','nc7yxx','94gvuk','fgxyvy','rg2r3d','teg9mt','setpgm','fs9w74','pypqrj','bzsu9f','tmjsxp','zdk4h9','f6tahd','mxd7aq','ejyc9a','tmpnbb','ph8at4','2vgwu3','sbq868','d9rcdv','4r9f6c','7dpba3','wqdxm4','9hyhqs','fw3ngc','7ajwtq','3gg9hy','4sf2s9','ne4whe','jnpyuz','wz8p8u','tk2733','f9234x','d53pk6','4uwqwy','f5gphe','2qur8y','xakwbu','gw62vg','pgps8x','ryxx8n','jw7u9b','gad5nn','pdqkwy','tyvyky','tad39q','67rsvk','dxt4ex','tqndv6','u3nm8x','gzkzhe','9ebdu7','9myc7u','grwnfm','8748kq','fq89ya','re4qgh','3vppnu','8qd6vc','gppgv3','s8hsag','uy3edx','4j55gu','p53mxc','yur4zu','6hcxjq','9mxk4p','w8j65s','eh77sv','ybadbs','edawpv','2bhw74','ddjmwf','htgmwq','rdde2e','wk37v4','fus2gt','4jhy5m','9efpcs','mgga8m','hqf7mh','2p97hm','g46zz6','smyu72','wqjtt2','bpbyvt','t2ph2f','8p9adm','ayddfs','s7nrrv','m469rc','5uj5qc','xu3q48','ksqqar','54ekh5','ekzacn','6h6ssm','bgfvmh','f5dyct','fmwr6d','ap5rwv','w64xqa','nne3h4','fun23q','3qarg2','x27xzc','zgwmkr','sm46we','apy4dm','4r28kf','arjwtt','tnvs3s','qhqq7y','pd6t47','553bj3','zgt9zn','g7frme','yv5g3k','b2779j','vp8523','dnrqsp','ptmzkg','h5f6rg','7zwy6c','2v6s9j','wd2cfu','8hzrjh','u5sbc9','6beyyp','22sndq','2aampd','2u54vn','h3xr44','3y897y','8fm2xe','fvyy34','bch5pd','v724uk','edncxf','9ctb8j','r2cgkq','e4fn4q','nt5rv3','2bmc5n','czb366','phzpta','ugdbq4','cfpefu','uf7qvd','qkm4na','5k9j5c','mcm9nc','y254ea','f8p9ny','j7ks43','xwrz34','7pjz2z','5c297h','ctsdb8','fxcjvh','mmdcc2','kekqes','sstvcj','ak5qsn','pruefe','4nrnnh','pnfdar','h4rpnp','qg2cpt','y37j8d','f542x3','zmg5rr','kwgq8z','zhqax9','qe4kbd','4ecvzt','n6phud','243jf5','zyazyv','7abpf2','3893fk','tvfbvd','5kc4ks','8em9g6','xqaht5','j6qmvr','pgw4cv','jz5r8g','hwfw4u','5ydzwc','4zbe96','uquukq','nsvtum','bft97j','s7mht3','pcd7yy','ja3ptb','4envjd','k8sk7m','2d4z3p','eakrek','nvntdc','v5z8v9','ypcpyf','vxky7f','mbw6rm','3j3rtv','8fg92s','5mvnar','z9bjwk','pctrx7','jbeg3s','8jszfs','drhjtk','dtxqxw','y7y88g','dcpvjw','dkeerx','k8sg35','4cu3n3','b58jf2','uj5fxk','tcrd6z','8zarqk','xh43py','frvwzv','5ej6nq','n2aczb','s5adkj','vs2hgz','x6hdy2','w7yu46','9zcyzn','dq63hr','3v862s','e6vsjm','sgnuue','dkwmvf','zuyrth','aar944','a45phb','5tg48m','d3uxjc','5dvhg6','2yun7h','4a64dd','cd6wuz','3afube','xcrt3j','b837t5','87yguq','8h2t3e','yyen6d','x265g9','wdh3kt','ujuyfg','cfwasa','j5d324','3ze49e','r5jxqk','uwmg4t','p5nznk','gjws2p','txcty4','4bfurq','9eb8nm','8vd4un','u77wry','d68y29','pmkthf','7j24jk','8sxzkf','cjk477','csy6d4','vyyvpp','967wzk','c8sder','ghx99k','shgzxw','vw64bv','9g8vad','4qj2py','qjgge8','6nyycj','hn3j2m','v4t37h','z9u88s','cusdys','4kwurx','qp52g2','wxv6sj','6rk4km','fu7946','2ez82d','r3pkpd','9qg648','khmhef','6u9neh','hxjjpy','mbtkk8','cvsqyb','g86h9n','uuf2kc','prvbs4','unfp8w','yv9rdu','vt9vjk','3kn9fg','e32asx','8gwbss','n3hcwg','dwbew7','33ntmz','7k53kd','7d2mba','pxt9zq','pnrqxd','299njd','m89nvm','t7dxam','43g33s','mmsxeb','zsquqm','5h5md2','xhaz5y','fxb54g','sywxsm','pbpm5f','r36khb','2yqnvn','vhae6d','ehgc4m','j288ma','38tbtv','mbujpx','xzwhqp','fpnqr9','87cn4x','u9g4zz','npzt2n','md8kpp','9se3y2','2np3wq','phq9r6','6ez27n','2meqhp','fbxxjw','vvbenm','t46yj8','gres5f','mgzzs4','fr4zyh','gus4nb','4hqd9h','58rjak','23dzdd','s59jkf','m6ymqf','phhj8r','wubb3y','bh5z65','cdpxpg','2nudhz','zbeazc','rhhdwd','3qrvek','jfyyag','3we44p','j9qshr','47t8nf','vshgkz','r89dqj','e4rytq','gzx7sa','xzqawj','3snp98','7d9bfe','4z889n','4wfqf6','qat25g','cnwdf4','42725v','dfqnbg','yfpz64','hzzgmm','xubfbu','fqbcja','gqhw76','tqtam3','n6pshp','qj7ygh','ra63tp','v7bb4u','jvbf6m','xd8w4s','eytum8','pwc9eq','smjhsn','rtq698','aew72w','w8v3q2','pvkpkj','p5xvg8','2udz9q','yvahhp','95as7z','2n49jy','9g6d6w','g9pwz3','net2ka','7r9n34','68tj8v','nn723a','uzfkjy','6ayn56','cwmrzw','wcf6rb','8kg9r6','977asb','ap39dt','bn4wzu','rq9bj3','5994tm','ybtjas','594zp9','6nvx3f','yhrarv','jd8wm5','8js842','r88dcf','yxtpeg','5a2s9n','xphjzh','s4kjtt','t234r7','94n3uc','93v3by','4cg53k','a3kjwx','ycz98b','f835jt','gaajhu','tmwwfq','mamzn4','be6b93','z9j4d2','2vwn9a','n7m3fj','g6senq','e6jpwa','3pq843','mp5sd4','5x56th','hk8frs','sdrxuj','9kq8tg','gyq8b4','wm66cv','t46yqb','7f2pqa','9t8xm7','vvxnat','tpcfxm','6krscb','scemrf','vn9yjc','mcp7xk','n2zunn','hu5kn3','daspzu','2s35fu','gcfvk8','8bd32g','pqh4vg','wssqru','cmh3dm','jtpkcw','62kqcu','yq9e4f','7eunra','ws4pu4','zpqgkh','xyfecr','djkbxq','d6c8tc','y9wvup','3my8r5','gvy3jh','e5juar','tcfq6v','f5gcfh','h6aspy','km9zkn','xzrg5j','hnsm9n','nn96ur','eyzphe','xjqvqb','4zjmp6','hbhky7','kwt8z4','vvhj7c','qwdujt','rk9akk','3tjwyq','a3xhe9','476s4n','qu794g','2f39tj','86kphw','7u33we','v74qfs','9cjmfs','fcmbjc','p2x2t9','q2m66h','n9xfn4','y5b6ns','tr2d5t','9v7ey8','ezdkb9','cjfbud','mpgfn2','4kr53n','92k77y','67qpm5','sde23x','c5am7e','qwnwms','9ch38g','fquswg','9jueta','mjw3v6','b8ywtt','uc53gc','8q7w8k','qvd9nc','9pxuxj','t3em9f','4wb6kw','sc86m9','kkxrh9','39bscn','ws3c37','kfbf7a','rb9ts8','vj5dmb','pgza8q','yn5t7g','ye7f8r','4y7ns3','779sfq','37cbtj','db7nf3','zf223m','s32hmn','3gs7r7','6atuy7','dgbuav','br5qy7','gu9zt2','bfsuns','e3fbzg','2ew57q','8vcyw3','ey769g','shyvm9','cmxf9g','xwzxff','r6eakg','dj76mn','q4rsea','bt3pjg','46recw','dk9es2','sjy78u','ej8hdu','83nt4v','mfrw2y','ty5vuz','whcuxb','8jyhsn','hrjxms','edk4ex','vzcusr','uyxmjt','5crhar','3mjrgc','c4g6jx','3wnd5a','9zqx8z','8pfddq','7fcxa2','cdezsf','uffsxk','cvtzjp','w55tnx','ha66xc','jssync','datsr7','eeruv6','tgvgna','guccaj','8gxbcq','y8m8qk','ynaj22','gnjxxh','eq4469','2w3dcm','j4nvt9','z22trk','8zr99p','z4k99b','ast3f4','ecrnjf','hx7xx6','n4nfcp','yuqspe','3r5fsu','pweq2z','hezw3a','7bztbz','2vfkez','kmjc9b','ryys87','fnfchh','q3tumd','zgma8k','5a6h7c','qr2wqh','qd3q8f','txwm9p','kk6syc','qk4a5m','gcnzfy','vvdrk9','akkcr8','dt22f9','ss55dt','h8cvpe','hccuca','8uaaek','e6ntxd','54fnce','f9s7s4','arbjn4','fhtcbk','rd3wgk','jcnygw','2avxkt','3agwxa','8gfpse','gmeg32','m8y63t','bxtu5q','pmj4vp','64d8s7','u2jkgp','j2efcg','fwwsj2','tduwvu','ta634z','ekfuat','5qb2u3','gxhkq6','kr3844','nc797k','u9uphn','f4ydgm','g2rgwb','smd6fn','mbytyb','xbhmga','44rcsj','ea35t2','9sw7e2','f92jbk','kgm662','bsz78f','mfb9b5','ab8wp4','zqz532','ery59s','t3w3y5','xw7k86','msz9g7','6mh6gs','tu7ckb','tgbf9y','hu9xcs','csyar6','fcuhjd','2rfruc','gjq696','638pdb','k8bqnn','2hursw','vqbaxu','qz28ns','dsrzs5','7e8kbj','h5reaa','xvt3nu','fc7asq','mgkvud','mnynzx','v7jbps','63qwdw','pm7d5p','vwu2wm','9rhz8q','uj4sf9','sw8j9x','p63w8b','yt99xr','rbeyjb','a737cb','264rdn','7kyhjh','sm65gw','zt9ejj','yytkb3','mnt3ff','8rjxpa','8hyshf','m5nr9x','dpvrrm','mtb6pz','3s286m','m36duc','fhmp7c','b98v9e','eeh4xh','s35nbp','k84a8p','k9pyth','gt8jcc','t94m5a','m6hnfg','pvz8uq','xbyz8g','8scdyk','mwpxjm','shsp4s','8kr4dy','595k8r','7dz5s7','dcs4jr','5dqkxf','bg23f5','awfwwg','z5njb2','727jb7','d4vbhy','jhtsbt','qpgs9t','kxuxuh','8erpdn','r6azne','e6znje','59p3jb','g5mncu','8smu9h','gf8dy5','s6bzk5','6ph4zd','vhfynj','fmsgsw','h2f5pn','mjmgr7','5zh8sa','vmjhnm','fqed2v','625jmg','ne2mym','6eds6x','ph2qn6','2b2ga7','xreqru','d4ryre','r5fuag','y5rwqm','tmrhqc','c6qaws','6ppjb4','hxk7eq','s9rpym','k6maa7','v59xfp','qruumw','mhgp9c','pyjaaj','nxaxvs','h6ab8r','xju3wy','cwxb6j','pa8f5m','k9h93f','9yrerk','v6p44n','j86xzm','t4t7jf','n3e94v','6rmtkg','evzkgd','qgvtju','wn2x77','kskq5t','je4vvc','35kvjy','ndqbvs','unvwny','qhj6xb','m4zmwn','55w2xa','hbyyt8','qx8de7','pens9f','3mgs5p','kj6kuh','gtpvuy','pagkk4','ankkfg','fdrs2x','9sepuj','ykpa33','gexjbd','8e2wje','hcjyxa','75wp6e','f4ygp3','wcmjxu','aueg2v','bqdy65','urvsvh','48r54s','bnpwta','nz7pv5','6978rc','aufgkh','fumca7','p8rnd8','ze6sqc','4q24a3','2r8zjy','97r7he','grybzw','48b99e','fh3ang','4wqecq','35fhyh','tbyw9w','mk6b32','yq67vt','8wna4t','w5u8pc','m55jwd','5dyk4b','t94d75','nhnjfh','z6u7xc','5k3rtd','txkp84','pwa5d5','e578tu','jgaj5u','6zktnk','fmgq35','ysj9wa','tynf6j','mjcsf3','7ggkb8','gg2p5f','x22umn','taez9b','9bpf4c','cy4fyp','uvk69a','wkwgzb','b6z9x2','88m3qw','ctwcjm','7e7as8','s7gr5r','r3rka8','hy6ejz','2kc3jn','auuyrd','3w2enj','3b5mr9','559gny','wwwsar','wxgdat','tqahw8','nwkytf','yaeqeb','k9cd4g','gjs7dt','rf8uub','sa7y9h','29wvy3','98jcam','egmk5a','v7mdsg','qg43xa','2ya9kr','pgeree','2khsay','npth8r','jfsv2z','s8at8m','adsd4g','ks2etk','svkr4v','ehuc6x','byfcwd','938jhu','7rabmx','zrgm89','g3nw7j','emeke2','7axsb5','chc74h','vj43fr','q8dykw','xn544g','vsxrrn','rmpzd6','n4wbvk','n47sag','crwyx6','qa79wc','n6jnve','4ebxvk','aqmv8c','peyhca','mk3vfz','3tn62c','tjbcr9','fnygsj','f7n2fd','q3nkre','agjykp','na4zqm','sx5mhw','k6t2d2','mwaqha','w3ewza','qfm3p9','k2ww7r','zhmbmb','a3mdjr','57859u','dga3rn','z84e96','m9sntg','zv4bnn','s5v4u8','m6cngs','r5x8b9','dwsb7b','wtcrqp','jz9cqa','9kw6k6','92d4gz','cbemxb','4ec8gw','7yyg4v','kkgxnm','y9ry6v','7352a4','zyqs37','8ft4y3','ujruf4','dxzch4','cp8tcj','t5wppc','zr26dc','brjz7g','r6q8tp','kkcdqy','dsc5uv','nzqbj9','r8wbtj','ejeggw','r4ujgu','tc7yer','x3rydh','xw3vfp','vdtsfy','49xhet','fqrrvt','752kc7','yv8ms2','kajtcj','zsbzbe','nax7a6','m2fzah','wgmqfu','ktbs8b','vka2fy','hwm6qq','fgx678','xssfmu','cygkdz','emxqcc','4fz8rw','pt598r','hdg62k','d95a4w','gah846','jafsqa','jeygcx','dcwphx','s5sm2k','5zzepj','h4fe37','cbzxpp','kg5hna','abz7b9','tsn57f','z7pxeg','pvznmk','4v5t3n','yrqygx','aybnk7','y5ysjj','vwuzmh','r9r4ch','dypr7c','ntvdh3','nwap2z','dqmcgz','wsc5c4','k3nmf8','vk5936','gr6cwm','egzqh4','5whyw6','8xgrnm','tra9ch','5me6cq','gwxmgn','gg38ft','u8eeqd','rvs49r','qp83k6','xj2dp3','m92v9e','3g6tma','dh38mm','g6mjcs','juvq7g','aq3brt','jcjdte','35f8re','4nwm3e','mqjrg8','d936y6','eem3aa','8kfher','sxfv8g','ce6qp9','qkggat','gajqjf','rfahzr','a6aue5','fmzfw2','cjxsgu','fxwhav','34x626','j9j2de','4v2hwr','pu7tkn','hhusgp','5auebv','2xrmjn','8ujd2g','rj9hs7','dbfd7z','hkusm2','cjptsb','ppdndm','6unfuy','t7hwwa','z3pcu5','5gpx4p','rze3tr','jr25b9','5qjbfq','3bwxt8','x5bcwq','kdx8ja','3apxn3','qgy3mm','y6q563','4ujvr2','dfdwqb','ax5s6j','fubtjg','ffss2q','jerj6a','xw5gq9','ru5y4w','5rebzs','2ukd7d','pcar6b','8vuufc','u4nap8','bwwdhz','2n7jkn','4gkbtt','w6pspz','yrr7mq','bda8pn','e9q2p8','da8t6r','xefksz','4bzsgh','d3ncpj','fenwct','5gwj58','85p683','r2tbpy','pd7nhb','yqbb6k','ar5nyy','vhvuha','qz3cb6','jn9tzb','rnbpd2','aehtgt','6bq8c2','x9fd7v','7ks4nf','k7b8vq','npbu6n','ppqrdb','mgukp2','uedckf','ds5ufx','hzjbrh','9hpkj4','ub4wef','m6sp4x','xmf6xq','4ntk68','yf5b7x','mqf6wx','wdv6ws','2vadzp','uafkz7','s54krt','x52mnz','wwrh5k','3y7sy8','7d6x9y','pdgr79','byf8fp','6cdnk4','xhbsq5','y6e5f2','n4ym6m','knm3xd','wyyd22','kpjdfd','vm8hcs','zakfyh','e7hb2h','3afu3h','va9q6y','96ruam','jn5h9u','3zbp56','tatuxr','zpxmh4','s635gz','qfmhzb','cqshcx','e64tax','axg43z','3ugp3r','37zt3c','6qrcdg','yshcfh','77ndd7','ztavpc','tgvmpb','epwyyh','vgd3pv','6ws6af','85eq7p','57bwrk','4wy264','max529','wzr3yj','3hu5kg','j5gcmj','kj6pfd','57pwyy','yr7euy','8qdzf9','886vb5','zx9a93','5xbvp3','9zz3zk','mn8hhf','g5pr83','ng378e','awdyjr','3jewhm','5zf6w8','8nmrdr','e7pg37','nqpnes','qyd8hd','rrd8sx','za4mhw','efp7z6','85xqa8','6bbtqa','cg993c','gtc3kn','xqrtr8','6d43jk','mj82qp','bfgjv9','jzyrg5','9dzrdj','dvm96w','46kcee','dj9rjq','yyzj8a','he2h8f','v4kasu','tc3834','6j6bkw','y9ku5s','quuawh','zaya6r','ptmygn','ypnsrg','7xnywc','7323n9','k6g6gp','88dndf','mg69sr','h8fb6h','avkwk2','ghsjmm','st9hyr','4yu5a9','y5t74r','ws5xep','mjuzy7','b5t8ca','8nmwq2','kyb7v6','jkbeqm','tdmbe5','t5qeys','9yd232','c66nqd','3ckcc4','kf3vxr','w288rq','xx8suw','v2w6d4','kzrbme','dbg8cx','9cbwg4','84s37v','8fqewf','exa4ct','wbr3ge','nnphzm','8ks366','g5m9jk','38eae7','4nrj93','vryfaw','v8upjv','zug3d6','wcpx7m','9cx5fp','3229vd','meyhk6','t62yrf','xuch2m','zksehs','p2gkf4','7ahm9t','w63ga7','34p3bz','2399yn','2v6veb','a9qdav','5y5tm4','gjbarn','vvtze7','fmke85','qufndt','6jkxbq','r4v2sz','w3d5vf','zh287j','3gj5n9','5qz34r','ravqcy','mr7ynb','3a2mvd','wxtesc','djngrn','sb4k3x','xcbf5w','bqrwmt','k2hqfk','hbgs6j','bn8nnr','2dkthc','d9vy2f','qzzkt9','cg47cm','hrefhv','uc7urg','4t3un2','kzpf6r','uz957r','dbmnpd','a2zfwh','4abyxm','dbyssw','42b784','v78uvy','bqdfqe','84n27q','xt5ba7','r5u5fw','xr9wgk','8wtktb','efss84','kt3q3w','6jpp5e','aft6xs','bdeft5','u8hwru','6hx8en','hgpnc2','jdpk8h','yfce5d','dzgbmn','x8uere','d243t9','gkxqvj','t59x9p','zwwtrc','zp8p7x','g9zcae','72pqnq','du5y2h','p8jhk8','c5t9cr','stjfu5','j3tjjc','wbmzzx','e3p296','qry62f','mn99rn','cvt2ma','bgjyzy','fdu334','vktxtv','4yjfcb','zjkxz7','47wgam','6dv6xf','jcbhf8','j4xmuf','wvw8xc','n5v3j6','vq99eu','wj7pww','9feyhc','stkt65','mu36tx','ypw88n','3mkzef','ae8bx6','tfbwkc','c5mrjt','55fyd6','fqrak3','3bsx9y','3p2jg3','gn24p7','wtubfa','xnudnz','7hgj34','w5549b','4vsws7','q9tujm','xawck8','z8rbk7','2xv78h','h7phpe','evz2tx','ba88xx','3wbehj','bsu2sq','9qpe4x','w7364n','gz9cwn','na98fw','9mytpm','8epbjp','su92rd','rtyqbu','dfdna9','s6kwj5','pruf9c','k85rzp','usehxa','8b5ge8','fnxvsc','bctqys','v7mxe5','zrs623','dk7j34','m88gam','n2tsf5','28s882','ru3jhc','3r8rc4','vfmsp8','z6adny','9jtk4t','7bg9rv','jtbbby','p8e86e','7csfna','s9yyus','ecdyv7','cgnupn','3k3yvn','jrvyn4','jsv368','tn5pk3','gk3y9f','m6smak','zkfs2d','2sjmdm','zv6w3m','5kry2c','ktjxz6','2z82w7','wx2k5y','nm96fn','xn5uk9','hnmmfa','tc45vc','a69gnn','5rqhun','ktk5he','g59keh','247bcw','9fbxed','978pyc','besex7','2gxyx8','vbcwac','s95fab','vd9nvn','8vahj8','4eekxy','mrcvkc','3zmscs','snreuq','v4uekd','znnmpp','vkr94u','zckygg','87qtjc','dm6kgd','py3mzt','habzec','sa6yas','qwgtsa','chkvbk','p68nun','cehhdr','4nurjc','uyu8zd','ffedbn','nybnqd','54nap7','reghby','wzn8aq','pwe98w','sxecks','z7fhsa','p52wqp','2uqfjw','uhjhx4','duzra3','w9uuxe','qxmauq','yzhzcp','t37j7c','42q4mu','29v9tj','2ut6kv','94zc6r','xwzubz','9eep2s','5pkpqw','eb4fcn','mkdjdj','nhsr72','escme5','sqs6j5','rcc7gn','hjjwbw','3ghzce','bdyzsd','k7ag4y','23a4yc','dfh2rd','nqv3pn','ky5mw5','rzp97u','dqqk29','nttnkp','8x6ay7','krey9c','rk2ns7','pg2jgz','828s8s','d9n3p3','5wuucn','epyzbc','c9p52u','va6um2','cg57nj','y7g7r9','pkzjfv','eqsjan','tgnz24','srcue4','x6wmpe','ukca92','dw5rbn','wvj99h','k5fede','666bab','gzcr2h','wqk9jx','uhwmaj','gxapz9','7xn8hm','t2nchk','x98nra','fekk6q','9qap38','9gxgh7','7my3n9','2283sq','t2f9e8','gpygmq','ptjm5g','y4es64','mktmnj','42p2wq','u7mbk6','vrgngx','tp6hj4','sj3pp8','hptucz','y8ffa6','3snbsz','tgmqpe','86xkgw','em8mre','a85f7j','jau33y','r645dt','d38gnv','w98syb','kg4vp9','f6zzmb','8b5q37','6sw3y2','mabshb','58rs82','xt49d7','h5sh5d','jyuezj','d4ebsh','q5jsem','447xyw','affveg','3h7yv5','yqfwnq','kkfjrc','wb8c3h','52rt2x','47z5h8','f4b72w','u6367w','8j8n52','z2376d','geys5h','5ant62','6b6jq2','3yvhgx','wqa622','s7hc4q','4fdken','vb4qec','facw3n','wuj8c8','qyuj6v','9a5u6e','x9f5u4','kzqg4e','26p8z6','yj5ahs','ebw7jw','rzhy93','xcpg7v','ehqfz9','p32wb4','xdwa4e','kerxz2','9kh8xv','n7hw77','3kf3vs','yn7bsk','7e7ctq','wqhf7a','rzxefw','4qeypn','ja927w','64my7t','ehkvq8','nh4ue2','mfe85f','jtwxzd','bv2b8j','bb2pcx','aue3ae','2dsayq','vafpsz','87vy6z','wsf5d7','jt4hgv','kjhjfd','efpzve','4uhq9b','d3vsjf','3br73m','r48rxn','b2j5f7','p5ye8v','ahgr66','gavbxt','mr5m2b','d5dxy9','scynbh','k9n6ch','y8gsxy','nu3h2u','v3emzt','dsytzm','3jhvcg','usj377','ww32wm','crqk7a','cpxdcq','xgrpa4','czur33','ma733x','2fba3t','amwnuc','jadbcc','adks9a','5yme7w','mmew5v','pbgwkp','9gzyc6','yyfj2k','p7g3hd','urnv96','5mj5mq','f9per3','8548zv','cqxces','9ejdwj','kdhuhm','fy8enj','q2rhfr','tksbpy','g7a62r','yumgk8','rreqph','rjpk42','5re5ka','hbhyh8','jqbv4j','stz6fr','px247j','bnmp78','a6s4jk','vex84b','2s9xbj','f7x7rp','2k2rra','qdnnwc','fparqs','ucn5bc','u3979q','5zke64','xw743a','4jneh8','vv4mbv','jjrbwj','q8wqy8','vqq282','y6evxx','zf9qpt','ew3v6h','sfc42h','453mny','crquzr','sr3ceh','ga3je2','a2rf7q','xs49t7','4zhug3','nrwdkn','sg8z8s','ak635c','kacu4h','yhr7pp','xz65rv','4ytyga','n834ed','zefg7a','mysx2k','dqc4c5','hs6sbn','vrav3c','t6v3vg','deddyd','w3eqrq','wrnu9v','2zd5su','cev4qt','krw3vb','94b8du','2d8tcy','mucnwz','6nxe4k','g3vzgn','h4v6mn','tpz4k6','xesszw','aawn8n','3hjcf4','fxegk9','e5gmbt','ybm9gq','hrr44b','6yywkp','s5wzfc','mj3g58','3qng6d','ferugy','7hsykt','7n8k4e','r3rycc','jtx3ny','a9eesd','j2tvd2','3y8gyu','42gen2','3sfc5u','y7yefb','z7zcbd','x83k43','evh6kv','ac2ka2','az3jmf','7y2yw6','9jd8cj','thvba3','rzsc2w','4h6w8p','puztpg','p6zu9a','k3mvrn','mdptgf','v675k6','umc6sm','wzph2s','4r79zb','879dbt','szdjp5','2b2755','meju3p','8yktz4','6jstt6','rf46dr','5e8cxj','c2vqmz','c88p2v','dx9gzz','zdarhy','aqhvd6','6ksg4w','btpuyr','8crdsq','2saf3w','en7w69','2tdsmj','y9an9b','ecpns9','qfez6j','mjdsu7','4b74we','cvdq3p','4cezpr','737zt7','fbbcw3','8shsyw','pzqb4j','tyj4x6','ad7uyc','wdnxbn','92d6bd','qm2byh','ukgq2x','7bbnff','3anatq','btdhzw','xfhxnn','dy296m','52mxe3','ydw7g3','zdhqn3','cxvnz8','2u857e','jxctw6','fxt7xj','7788dd','xxqbrd','yufzr7','yd5sn4','hbfu7r','ke8scx','5tqmzz','5y7mm2','x49acr','2ffu5g','adjhn3','c7jrt4','ab8nkp','kthgae','wqd6fc','tsk5rb','su63zt','tt9dts','r8uby5','vy4f35','j2tetf','wwhbuy','dz5tgw','dbk9ba','ty3pfk','85mfjx','cyxtx2','9xnyqd','gqh7zm','ek6yrw','bxzgqn','7jak64','vhzgxy','a94h8k','33f56s','xg79fu','4y2zd4','h6sad9','9k25fp','uqu6ge','dd6nzn','c7jemm','9t22z2','tghh4k','9pvmyb','nacnqb','47rdyz','5u5d2h','qcwcrh','xd7uf6','24r5ct','7wqtuc','esgtxv','67g7ws','dn3bpt','hgaqrh','yr9tk6','2pusn7','tdp9zf','gre7kw','unrpgp','serm5c','kg78xv','gueeb4','bedru4','3rrb43','5ryxd4','3twhem','mrfe35','vy2d24','6rxsjj','97d9nv','zpy8qa','he7un6','gz3huc','u85pyk','7r4htx','zhh779','dg6jvn','5zqenw','utax6h','tcz52d','tdjhca','2ncpez','8zepry','6x3uf2','5kunsk','xd3f8w','js58gt','vjzrd9','h36a66','v35xnj','3d64sm','zhddyh','44y6jc','eeswv6','bnwkw5','4xu9ag','4dwnz6','4vpr6g','mxzks5','c8ak6f','g7ht55','p5tpm6','smf7tx','z9p6fr','vdrtjc','avdwnc','2ptt9h','k4qm5k','dwc3ra','uk5t8y','x98ed3','szwswq','rqq324','vscveg','3945kc','5pjbzc','b9mkb3','k4ek3v','8r7p9x','hw6de7','kggzek','3gkuyb','ym6eqp','82pjs4','xjdazf','6ym3p7','96aje3','tpvsbu','fsd267','mssgpf','fbugka','ddmkh7','bx5rsx','5n9wx9','snaj6c','9gw6eq','77k5mj','p8jqxb','k7nm8g','9drtq2','ef87t5','dczsfx','p8epty','ym9fq9','swwqt6','7hhec4','7gxnu4','xmkcd5','yuckzu','k624wm','pz9ak6','cnqps6','3yjapp','wqhmdc','7vffe5','b3rt3m','r8u3zq','fb89pj','d656wn','63mez8','8u7p3f','7pz8j7','budht2','zfc68b','t83nyz','axhgc5','555wr5','pzggys','99zkpa','vchj9a','wmhzph','w6gt8n','qtbz5d','qh5nqw','9b8qg4','mb5arz','67cvs3','9eng9u','c3bp6y','jqg44t','4m4jxp','s39rbd','g9mt7b','56p5az','scsqp7','x9t9gx','87gcme','zzctgr','sckzqs','nqfan7','b4tv4z','hgef94','zd4dm2','cr5z8h','s8cqzx','4byr9f','sf6abh','c8aqhn','6v7see','ax4c7k','5aduet','7236mx','6nuxzv','qgbruj','yfz4mz','z5ad33','vv395f','66j93e','zxmp8z','g4a7w5','gsh93d','qh64mr','r8n2w8','gux5fy','fdd8vn','3p5n4k','jmdg66','9qn2zm','rf8kf2','xkcp5p','6gdkpz','hsagyw','jd9356','jjdcup','zh57nd','8vhcuu','n9weaa','nxymhp','pdkp8b','t4ptsy','h2mqbz','kpzep7','6j2vs4','7d8wns','66qgyk','nrynuc','n5egtw','ubu3wx','4678kv','w3ksk5','u5ac2v','z3ct33','hczpst','7xh2uf','w5pr7t','yfe3q6','eawdm4','g3shfv','wd64cy','yxs2u5','rmattn','ee4s78','ef7mnr','mr5y45','ub7zg4','p49jdp','2e5aaj','x6wtwq','4wwbg6','c632ap','w7qkc8','ck93ke','czumg3','ynnpr5','62bzs8','4r79a6','anm6a5','xzf226','6x6c5m','8exuzy','pqgsqz','4ybkb9','6r6rqt','djmz2a','fp2ypu','br5rdu','yn5795','79kpeb','t49e2w','psyhrm','ymay9a','sxmbcv','4535yk','qnukpw','jvvp8h','phrrx9','d8rc56','s6sfkb','jjt7h5','ny7jbs','euxqak','8ypn5m','pztngd','99arc9','myjrgg','mpfxwz','6s2swc','htybxm','puyctw','ghdyrf','pdmr3x','28rfbj','4fhrmh','2m69tq','8dh25c','6epsm7','wht3gh','3vznq6','pjj38r','9dxg2r','pdehaw','bvycsx','4n68ma','q7d3u7','zsk6a3','uyxx3n','rstc6j','7pfpmy','8g2zm4','q2ufqe','5fzu3b','hdkbdu','vbwydv','bn7ugk','eg7w66','aa9s9e','7b2hxt','ekcckm','h28d38','cqqvf3','eusumm','s55t3k','9p42x2','nuffhh','jkqpf8','97zjhx','75jja7','m9attc','msecb9','z3gcs8','6c7y4m','2hrkb3','fks54j','khjdt5','xarfdk','zkxpr7','w968gs','edxg8q','jy9279','bwykn5','ybsqyu','j5ephy','agtvu6','ceyazh','gdjmht','n6bhnw','rvzzrg','esqyy6','v8uh3e','6h533y','pjpvf5','95tv73','gwsxvx','yzb6k8','x5trkt','sz33mw','dj2esu','797yge','xctrqj','zjb9pb','ycpn5g','695c7h','wpcg5h','4ft33g','7pk3uc','u4vsay','rzsjxx','nnyj24','y74gew','8cnagp','xhm73w','fsk7s3','xw6a2n','fzq6qc','8ttmd3','dufqk4','zhzu2w','7zyjhz','ye6735','ha7n6a','bvaact','qh7y2n','xmv7gp','rr3pdz','mg9c5z','rggj7p','4qqbj3','qjf6fw','ndftz7','5nnyqr','dz9xf8','8ebdv8','bh98wr','67h5yd','6zmd5q','8fm9mf','p6vxn9','ac35te','6xhxuw','6uktfd','mm85dq','fzmnss','2bt2rq','4bm8ue','gkwmzv','cytyqc','3gm2jx','u3jy3b','mqax4s','j69gyp','a4p9g8','jrgqk7','ykug3r','gju87r','enm5px','jpsks8','gsmasu','epuw8n','pmskhu','hmpejs','u4yf3r','94yqvd','kpny2v','zknygs','y9fpmh','ndh7ad','dhych9','dwwjjb','k4yes5','uqckcw','2wvxa2','vwxbcs','r59qqe','dqqj39','md5jgm','qqsuvd','gy2nrp','4h2nv2','6qaea5','baez2z','u3jvkp','zx2m64','xcksvq','9fmbaj','ugj2xw','ud6v2c','86dcv5','jcrxkj','h5n3hh','deqeyy','46qt49','c3hg78','9vdsy3','msz5ca','58ak4c','h5g2z5','dzwtd6','nqe6hv','tya3j2','ntr76r','5sjvr2','makg9q','c6c7nq','6neyb7','fpn9n9','g3w4k2','mgb3kn','5twatx','he2fcd','83nuy8','dujz6f','9qrbpu','fzsyku','6rbdxb','uhddme','6vtp7q','4v7zym','mfpd39','2fpmmk','ajh2ct','7uv2nu','faskc8','6autsa','w78y39','ewhvzp','3a2m73','k5q3tb','cwagv3','vsdjj3','eua7rr','z22t82','jpxgnk','87njz9','4kbu6w','6txx8h','5re3yq','3bfacb','vrtn8e','wah957','m4jn9c','7w2d77','tnvavk','mjdbvg','gvacze','a25z8y','zss8en','mjxrnb','wjb5wy','badt5z','89py2j','3z8hmk','sr5h8m','xuys8q','bba7ca','726dzz','582r4y','53234d','kd3e7r','s7gkhn','et53wd','rmabdb','svpy3h','hmxyts','ufarep','pbsxty','q6bu6e','4f2636','58yt8e','s7b4z3','5nubd8','sqrcpz','9b7udb','7g79ps','bkuzuk','rjz8vk','vq3c6h','29p8tx','tnkuqd','aph9ds','f4attw','gwt4vb','a5xyf9','z6zhb2','p9gwh2','aafvkc','j93yqa','4pa6py','uqdf6k','43kkfp','vx2aer','6ed8ds','zvqy5p','cmxkhz','azhqe4','9b6kff','w39tnf','dbdbjm','mbbjdr','38as6m','xf3uwu','eer52b','mtzrfm','vy3qdf','748hyk','d5s8uy','x9ac27','vb5cmn','tk9yvj','frwhtn','tn4dqx','me2uxq','c8uu6q','8n8jst','62g72j','r9hdyc','dzweke','q3cnfj','nq67w9','fza7rz','ur4a83','9tccyn','qzh779','xa26r3','xv95sx','6a4kwg','e985s7','vcb8dd','su5gr3','7gv5ez','j3e2kz','sg94vz','5wf97r','p5xesu','28vnkc','5yb6ef','937jwa','3996jf','w5b9qz','wcz57v','edv7h6','7z8gwy','j3dudr','n2u9r8','jb9nsa','83a85r','vurzez','4s5ebt','4ppsks','p2g8sn','3xeksf','u3a9mx','sw6ggn','v4av7y','bvvuh5','5z85zg','6aq9xy','zc6eqf','h4jkxf','57nq9k','ukpd67','4tfc46','fabn9y','rj2h5e','dvyk7r','br4vhn','4g5dee','2rzzwt','zhwqta','z3knnu','7bm52r','crhjdy','9uqfbb','dc87kj','6sgw3u','czusra','k2fhjg','jqr373','az4kmw','xe4x98','52uggu','xwtn75','phucv7','4r6mur','24dcgh','ekg8rc','qqvhg2','h8jre8','3rz5r2','cwy3d7','zp9vy4','pcap8e','hfmwhd','g6kqm7','g7h7cf','4chs99','nu73jf','pw6jtj','7uctqs','eprs3w','rgxm68','8vk62x','ejqbd9','p6ykvu','e4jtvu','mu798e','hhdaw3','eyk663','4grdv7','zx4ckd','x2qr8t','fvagz3','7dh66d','d8q2mc','gyc39b','pdrxct','zxzmxk','nc3x2a','h5vyyw','w92wcb','9umm8c','q9k5yw','9hkpv3','tcand5','z7nu6h','bcfht6','tax58w','brx65q','tazs6y','d569br','b2w953','yf9e85','ahd9af','ae9mng','duuer3','fmkqeu','kz2us7','a8w6wh','xgqzwv','q43xwg','8scech','eeyset','d3k2rj','yq54a6','wnmfgf','r6kfwk','ugphcr','8kx5h4','bn644f','5923nc','kbwk8s','b3w96u','wv3kt8','ax6u2q','2du9zk','pt9hjr','5rvm4d','jd4u3g','hrnca4','jfa7za','epfqmm','9evce6','4am5cq','rq8bv4','6qw6xn','93gvn2','ppjg2h','usa72a','ra4u5t','2hfguh','ttf39a','tq28z4','5jgudw','bwk7c7','ky7gj3','q5q9j3','pexnj7','dyq9j7','ybwzwt','fe2at8','3ytm9u','az3uge','5bae2e','sad787','3jd4ws','qbxtxw','y78x53','3efdn8','ayxcnn','jqdsmn','2esw3y','j8v5jf','abhkuk','n3vtet','xep64c','acggms','8fngyh','6wzpck','8zyt73','um3n7h','gqw3mh','kxffs6','fxfzf9','6bw6bp','n4wek2','49u8g3','34pxyk','j9mucq','4zkkpu','3ct3zq','kmexwv','d6pusn','znf3yb','786uub','dme33s','wy84bd','adfeyr','bjxkqe','t6ezbx','53kpmg','a87t4h','n23kg9','75hpj6','rze8fe','awd4fv','bvcee9','3nyqwr','rh7cy3','tqdh2p','w7ezrs','r76c4k','sptanm','rnfyvb','tmdg34','47w726','kak2d2','5btrju','84yrtd','crz9tu','7a5ykw','3wrzbc','7u5nay','bv6qxf','d6aqha','6b355j','g9pf75','486st9','jxfznw','wqhm9e','t76yer','n8dr5n','nf8bcp','v42anv','9h9jsh','e7jv4x','dbats4','2d5bfs','pny7yx','bxxjj6','475cdf','x3serx','9ksert','2rtx2w','n7xfdn','6pjr5h','mtnj86','vckhup','3djv8y','m5pqpp','2mgcsu','zmn49h','5s85n4','rm63jq','bttubg','w9pef9','zkq6m8','rse3bp','5ftvsu','anms9h','kj4rmr','7ze7mn','6cf4vx','c37kw3','kuchkt','jw9n4k','872fzv','q4zfrq','52tg8j','kffn85','nyvkec','3qqvcb','8q7rnq','g9gxgg','kek2a9','u2bmjg','f4kvrr','kaqypz','m6ryyh','t7zct2','s9y6t5','h2jfw8','y72qst','nvwmv2','tcukxr','3ep92x','tdac3c','8bnteu','3fypda','yk3wx6','3d8xgj','bardzy','3xusk2','fsnewn','fpzbsz','5ywp3e','c723y8','9ekga7','n9rr3u','9ejd76','mxw5yz','wgu8v2','rjxyxh','vk7p92','akxub7','smhfqw','dtq99c','w48zja','ntu4vd','4m42zz','6gpga7','u863ps','rp7xe2','tpk9zp','spkpdx','s4a6zz','xy89tn','3fhs7z','2xtk8m','uxfu86','5yerbg','994q53','vk6cwq','tfmb85','76rgkv','2389r3','3q8tks','snd26y','7scmzj','x6tpz6','jwff9b','ptaje7','pu335y','kdc4m7','e3byjf','p33nge','dg8vkg','tz4gqp','xd68rr','c5a799','mmv7uk','c9h3jh','pskn7k','6e3xmb','z2ze2v','gn2r22','p2kmwh','4bxau3','xnmx4s','nt9ugd','a4t9b3','5tgc2t','jrxvks','p9jmcs','b6grb7','npyrgx','gu89ek','gnk9qz','n2jccv','qvrds9','yj4qs7','nunydr','q7avdv','7zw4f5','cpcznd','fzts2h','wte9s8','w3btfg','gv7dnu','nrye8k','gr28qe','m7xurv','k5ke7a','4nrwrn','m8wdjw','r9mz34','c44sxk','ctuh53','g7thy4','mz3kvv','9uk9u5','k45n9g','ypp6vv','z6cknf','8yvkvr','kewda6','8r6jgk','byxhja','xr58h3','aefz8k','usxbus','szstcn','997y58','xwpbuf','7dnry9','zy5tzp','7n3snc','4yjc33','3vhrv2','ddmh9g','ncybfq','kprjfu','n2faph','qdcs3k','rc5gqu','yaydp9','df32t9','cv93e8','qp3tmd','8nreyp','hx97gg','29gk94','hf5auh','4wtbqa','vbc6uv','8jpjhj','5f6rze','mm3juu','7es9ba','7p4u4p','jdst62','czr3ph','atxfuq','9qgggd','tb89v5','8cyj82','j7wknv','kh6xfa','fyt5ue','j9m8xw','mwvbek','r46etr','zn7ex3','w7hc36','x9sp4k','u2gq7p','szwhta','bammj9','thjpsp','an42s5','639tnv','w83gtv','yzrmpz','cqxu8m','jswrca','2mq8rp','3qqfbt','4ay4um','ffbvqd','bwqedh','pjszzy','djde97','jqr4ar','4je4m8','xjb495','85dte8','2fzrmf','q3qmuw','jxked8','4bhqam','k2kecb','mb83rt','4h858p','sejbm6','th2kqg','jbu2bw','xtve9y','2wcqck','a764qm','mndub2','r8bhb3','qh3art','6vc83q','gua5uk','d6ems9','pw3bmp','a89c6q','frhhav','gm28fd','gsq4yh','da8vgb','r7f2w8','5rbpzu','7se2zv','ngtfgv','r56rpv','q2au7s','x2yscd','xxx6cx','jkhjmv','266277','72v8fx','mbv977','xuq9jm','cqxrht','8k2ucq','zt5s7n','ugrqd8','4b7uty','q2br5y','3m7c8r','azhmzb','3qzdfa','z5hrpc','tkgvhv','ed7cty','rzzm22','uqyypf','77qqpr','8nqgky','haywwv','xpdat6','yp25qw','qevgq7','5nsb39','5f3u3d','75zh7s','v2gpvh','gstwuf','4pbd7t','nkh2vw','q8qcdf','fnu9e6','yh5mu3','c5x7y4','p2q5p5','2e2xxu','yr46nd','t23mbf','4dsd8p','64xbcr','pczq3u','88ctnz','4h66xn','hd8rx2','h8ern7','6ztfe4','mnyxjg','dgd2dc','3ehc2d','gzzmdg','pdjyru','s6xe2k','qzbzwn','pc6e7q','s3ympm','6aapqx','svkpqg','qpgu9z','certnv','9rbge5','6n84x8','7f786p','yjd6ud','kd7n4d','uf6rqk','t5g3y4','nsagzc','axqugw','udtx4r','59bnck','mbewm6','k3yhyb','9a2u3v','ykybdr','6pdw2r','5cu737','gkc8xq','7yuc74','dfg44g','eae9sy','sqwege','cq6kvr','3bjfkg','6ag489','fp7nq7','5mg7wj','pyvzt9','er6epf','3uvk6r','4a87vg','be9d62','3thqrc','h4g539','9s5ezk','u2rhwn','wk5hmg','zc5ppd','zcmhda','k2rgkn','yn4key','45sp9v','qq3rsn','sqb9cn','347x2h','76pt7b','whuvsj','vcj93f','3juzbx','u23zmj','czauvh','mtajzw','c4xatx','ksnw7c','xhjxsd','r3wtjb','u7hmu4','cww284','6fgt3j','8eu8g4','qxh5p4','f42wdz','ha85vb','63tvgs','c862pj','vc2qmc','gnkv64','p8v4n2','5fvm3h','8bxybu','umpu4f','evxvee','9k8wa6','c5yyj3','5rne3z','9j7vdc','fe5chz','axm7km','9tmt2w','vmd48g','zgdbcg','qn7ubz','ab3a7p','h7xsss','tdakkn','ad9vd8','r8tybq','rmbrey','q9c5f6','7hryg9','bj8fp5','psgbk8','8pg8j6','8cj84r','djr3gj','p56hd3','kzzx6n','6zqdt5','t7rwpq','tza427','a6pftx','pqh2gx','ujnbn6','9zxyhd','693mw6','nm2pgb','rmysf9','3g89c9','qzegmf','cmx4vp','99ckru','qsr8cq','hfjgb4','2t4mmf','pq57a8','nh3x25','wqxq5j','w3ewnv','bfd82m','yf3gwt','jxjcj5','yeg5xj','upkv4q','7xahpq','62damh','g3sctr','jqc7dm','cddufn','hav6cq','p7yhta','qqq9fq','xpdpsy','m77jsh','vu4m2w','3ps9qt','rem3sj','y577vx','mq3dd3','eq3dev','ch3fpf','ygawcu','my5kzn','tc9tq4','cfw6b8','hrcxpj','ve4n2s','b8zgzd','zqt7wx','gcec7v','j8x2an','kqyfyu','gbzef9','s422un','y36q88','yz574f','t97t3w','k7k3cv','tn4dmr','jws43y','csthkz','s7pfxf','4hshxc','znxqwz','ug9au7','d44jwa','ks44da','3hbffb','7gwpra','hw582b','j8xykb','rjbhva','ae34mz','p3s4jv','hy6c2h','fwpapw','jzjqwy','3ue3mh','m3zvup','8d2ae3','ut75jp','9s3fwx','mjwjaj','5nw9ux','t7gjfe','dqgqeg','n3sung','xv26cz','usarqn','wuzgjp','d8yqrf','wky788','tv7rav','2v945b','hk7vqk','qyy7zt','amksph','qnksjz','r39t8c','zeq79x','huvw3c','uzy833','drrey7','8hj75e','5xrcky','amxa2u','z464yh','9u33sx','5a59xv','np2dcr','quzng7','wvgv56','yedeaq','f7344v','embbvn','kqe4ur','bxhnmr','6bu774','yqabrp','7gu4rb','gbrqxp','5uj7pe','3y3z64','5jrtnn','he3snt','jcbh32','nf7kmc','jv5tnm','cfxccu','44ytav','2wayb3','jnkpz4','jtcw3r','8dgmvq','h3ybj3','tygzkv','v8qqsg','wnfc2t','n947mq','kxcatg','a23rgc','fgzgpm','zugca5','fgr7dh','6jx6ks','nn2a9m','jg8a4t','bwa9ub','pefhfy','ss26dg','ha76p5','xy7j4s','a8rrjk','nbqr4t','na4u5b','cjk59t','2pt8f2','s5v97k','kvwbs7','wbegdb','vp7edm','s2b3mf','dnkpbk','zj2wa5','enrpwj','cgd9q4','a7q95r','p5mkj5','5hdjsw','yff3bg','645gmb','v7yd2y','uek9yc','d7g4md','hdgakv','cfhyeg','8j69n6','hvv5qc','gjx3pk','5ncqut','2j4nbp','stjbrv','c66v5j','x254r2','bhve2e','rf5yyr','jmcd8v','6b4gh7','vzae6q','34xuxs','pnq3cc','zuu4r8','y2jvw9','zfjvzb','tbmrsj','jw6ej3','z94gze','352c8r','rshbww','d283te','arjhgc','3ubxzb','m7u5k2','gw2394','274jcp','dbdvfr','72wnej','wgfysh','83j2bg','5qc74c','mvby8g','u25u94','ajn59b','xq262t','mehdja','w9vsy3','9smxms','z9x6gu','qgwxan','qpe62n','4e3r9t','x3nfbe','anu4gs','dtae6c','m95347','qwayyx','m47hvn','uavq2w','e6kaa4','dz2mtc','t5uvk9','vauq66','nzahsc','9dqm67','5zqpbw','5qsrdq','r8hkag','3uu58r','f73t7w','kj5jwz','mbupzb','5829tf','4uh5qg','f8euux','xn3gp4','24vgjj','rc8brz','grff78','myrnvr','ga9pzb','57zujg','37tc7e','5d422d','8wqz4c','f7h7gj','gtck67','bq7gj3','jh9jum','8u2359','m6ssh3','mq4kun','3w573h','5sh7a8','9bnpu5','caatb4','uvu7jz','gehxsj','4wcm29','werhkx','efdx3n','3u39sv','ju6x4r','tv9k8j','6zj5ek','3h2yz5','gxvba3','p9yzkc','ejpgtz','7jdfwf','pqsr7t','sjkvq7','h6vn6s','3zqg64','enkmff','avrk54','dfh9dk','a3mwxa','9bnuh7','xkejd5','ea359r','kgez7z','46ad8a','4sb3pw','tu6ms5','sundzw','jx4qw9','8s8yt9','nf5d2d','drh6tn','757wzz','g9t2y8','g334by','uns7ze','p8sdw3','2s3c64','5ruumy','ay4fde','944nqu','dm54sp','ds4y2t','vyhcjz','akc7dn','vrnhcc','fyw3df','psu6hg','tgsrue','c5x2hu','ht422a','wt78gq','6rrqcj','ubhp6s','s4ejp8','ra6rz5','yrpkwn','6uubxy','fy5vhu','xngcx3','wq5mjc','w2jq6u','atspa5','745d2a','nhrzqp','hsqfmx','n36zrg','v8797w','wjbeyc','xkunvk','edmfx3','c9bv2n','xg4ahp','rxd86f','j5u3rq','88sasb','8dupau','p29db7','xwujmk','9tkf37','kdbqbu','zx7qny','36fs9v','cn2byg','exeesz','ya85tp','rymz4g','tbvtaz','chn4wy','3aw7wy','sdubhj','psgq2a','zkueuj','n3btch','443ph2','yt5s48','2zr5nb','eaevzm','nu5ffp','heras5','wnk3hk','pzn7y6','8m5dpj','wgkxkx','9eavrj','fcgdcs','v5yx8y','akjezt','g5nmxa','45re46','n56rw7','9pvtbu','buqx23','gy3nkt','a85m32','vfj727','mtwspt','y538h9','yjnage','uxy32z','q39ppw','ga3un3','gvug5p','ytvv66','mwta9f','rfnykt','gnyj7m','w2mpn4','2szdvh','yjce45','vxm8at','bm6na6','bntwk5','uy25km','h4maw5','tjmsna','zphkhh','kh972e','fmq95y','xz9bus','k43bxe','53ft73','7v7gr2','x5v444','tb6wxb','vq2fwa','ct48rz','f6wf77','5zg9cv','rztr2x','vgn8pq','gs2ddr','2ntbau','dyxadm','q7phwf','fvkrfm','uc4u9g','hwawj9','e63yax','2c7vva','yr5mjt','cqnb49','kxcgvh','kbuyw5','28a2e6','qgyh5q','99jm3p','avvrtf','54v7x6','hw97vq','f2n85r','2mqr45','wd56m5','tppgme','djztuj','vttvm5','ezweef','g3fqur','m5w7dy','q45tkx','w5vwyj','amjs8g','xzqysn','smv5ys','ddbwmn','qtdb3u','fxbug3','rqv32f','7nxzxr','s7kreq','x7ez94','4ghhsy','xgvbcd','huba9w','b8k4fw','tcegc7','nrb6ex','pf44bd','8z25yb','7w4ux2','wj2fdc','bybtgr','6s4kyz','x9nw9f','q4tpca','zrd7be','w5hhns','nn85hn','fbygnh','58dcp3','h8hu9m','6k7w24','ykut6s','h4py93','nyvn3k','hnjvc3','ppv99t','p9htjh','ab2bvb','87ts9u','rcfhgn','f26xtc','gajdcr','4r3mvr','zy3h69','xv5e3n','m33z6y','kqxxb4','dy9n2s','s8fdec','ff6af3','vzyeu5','v6qsez','3fw6wf','g8shdh','qtz6p7','cty7pb','e6rf59','azyqsq','s4x9vr','tasyx7','n8ccsn','t9xphq','qrtu4e','shepjb','8s7pxm','g2uu3v','rvpcra','rsrrwe','5juvn8','x9chtw','js2gjf','g39hmy','pc6kpg','vyfphw','c77frd','jttns3','3mqdv2','kc8vay','f69k8p','upd2ea','c7r7yq','pzud4z','6sfh65','tfp797','7ff7bf','s6hsy4','em3m5v','ngmafg','y7xvs3','b3tgb2','6n3y4b','hq3yku','9b52ad','ejghd6','zwqbb4','scpdv7','6ba2at','mc828g','ug9b5q','zcw9d6','8zcmym','sv7ct8','ccuj5b','crgnfg','r8dx8t','23dfb5','9p8xyq','grzyur','wk65ev','4xfrja','regn6v','q6tvqd','7wtrg6','z3s3k2','q7722x','c7fjvu','h6vn5d','npu2f5','7r6ccy','994ss6','c6y4uz','6ukas9','x455j5','ru82ak','493u5p','xr43dr','xcdymn','6atm8g','bst3z3','q7chja','pd2mxy','jf84xm','hkansz','ahqp7v','4np9xa','fycxvy','thj49w','8tftc2','d6xf32','vsxvnc','vpf67z','wks8r4','n2ysru','g7x2gq','99be6m','m94qfc','he85t2','z67j23','b9qnbe','deyy4j','64yz2q','w9e6xp','47n3kj','a28x3z','zqndfd','b6pf2g','482xhm','fe7z4f','y5r9b3','ky8dqn','kv6kkf','qd6zsf','8yu5nj','xke6tr','73h6pe','37a92r','h4agpz','bmdnj6','h9a5mv','3v8qv6','3rmsxm','zcm5x7','nrgzan','64xtkh','new7nr','r2ejt6','jqgpg6','4dss6n','z4ju24','bv97cd','x37nrh','zmzpfa','726yvk','3kpbv4','w87gcu','7jdw5g','xvkkac','rdjybd','c3jxa2','dpq7hx','ktn4eh','u393ge','ku66yr','a58syw','2snn7j','3t2bb8','sy596x','n57ahp','uvqtdv','kvfzqa','qkyhgf','n9rttc','8ep2av','nyjb9w','26dy64','pg4d2q','g7xzx3','4cpu5m','nvdc8q','tp5668','2bvf43','fwf4g5','gg4yde','3am7tn','dbwp28','c945mf','pzhbfj','awrrsu','s7nxna','4pqs2a','4aukk3','2spv8f','zyhhhp','m6tmr9','djkcat','bp3f9z','2gd7ka','dsur3q','j7k2gy','d6pr66','mvgzs9','pbvzse','a2x6wb','km6y8a','fhxtup','bnjb5b','6nqfa9','t9bk27','ut7gfs','ym72na','27chak','tkqanb','7rh62a','69ex7b','2q2ubu','bbhvs7','8bz87b','uxya5u','pdb3yy','htevva','mrrsdg','e8gd6t','gwkvx2','zwd3hh','z2zae5','pwqhe4','u5gsj2','zgfx9c','8hqdk3','7c2kt5','vtpyjc','3bp9xh','8xbv2w','vdeqb7','45rmq9','4bpfc6','7sra4m','5frftd','6g99tp','n97knc','gzfk8g','zxzy56','w74bwj','5x6gqu','6nx6ma','4v4ymu','xqhjq7','nn3mpp','h69aka','qnktsq','j8k4cs','sa5jck','rvcjug','cx8ffm','tgj4wh','74zdax','knbwjx','2uuejy','hkvntj','tc7xqb','kxn2rs','53pr2h','23ndvk','82aaf9','vvmcpd','y7wv9c','69ep3w','v32s5r','rev4cz','rqu87d','jkhvan','gcgjfa','tzchfb','ab6wdg','ycjw5d','vkgu69','tsyqsk','vb9usc','egvb4h','m92kb9','vdup74','urvmau','rtrfq3','mp3vrn','gcb9mg','a3bkuq','ranwj4','u8wspv','dvejaw','xhgkpk','ycjq22','8jwj64','3efjtm','3mks3c','qejwhp','cx9r54','me9x4e','qmxuzb','hap3jq','8fw8wg','vwddwr','3uveze','5swa7z','7yp5s6','ddg4dj','7reada','uqd2h9','v9qnqe','3bu7ra','e2n94j','rx74vy','z6ag4b','sy2vk2','mvf6c9','puhtgz','f7bb6v','pf2j8n','mdaxac','zqyn28','zsgn48','n7gs3k','rjghsa','n3gcwr','ak529w','e3f5be','5jrjjy','64wbpb','7wt5y6','e3k5r7','592f6k','v2v6ck','du8p68','h4x6qa','z4u3e4','qpv26p','x52zf5','84jr2k','drscsn','3js79t','unpzgv','yf2apj','gaqhga','3kcky5','hwysyh','xvwzfn','2em7wa','mqhv43','dgzcfp','4tzjqa','6ck7gv','kcksnm','j9kb9u','q4tk5c','a36j4m','8f9vjv','7cq95a','yw744v','3c5js2','yekphn','agkykr','xy2s2j','66sxdy','qr44yt','dn5a6b','6xbgxw','q345r7','r65wuf','2ve5sa','pdspfz','cb4ndy','4h6245','9c9w5d','ns8wqm','wrq388','gqccg7','pn5u3t','qn8kpq','hmd5n8','7qevtw','7s8wsc','nmedq9','2jn69z','tf5wt2','mgf6bm','nr9ury','4urwt3','k56b7t','87d2ry','hhyzws','vjhnxn','h343z9','p6s2jc','ctx7vp','8gw5nx','w8x4t4','mxbpjv','yaj5rb','rhw55t','7aw9j4','kcuk97','zuenqh','b7jgxx','znsks3','e94t7d','xychaj','baqt38','u75s7k','5juknj','8yzvjf','pfhvw7','z5yrh9','abqkeg','mkwaxj','r2yvvt','4uy4ru','sampk9','jrg2cj','tmt2h3','pz38vt','2qfxn9','rvz9q7','g45u4v','wjuyvd','yea872','4wwa7j','yd3htv','sskq2y','x8wrg2','xvrzq6','ktfhpe','gf5jyg','vqax59','avekj7','pty29k','wjhy2n','xuhbg7','uhqzpe','p26k4r','3t2gbd','668vsn','3pn5hp','ytmuyg','aqywab','yf6225','wx2kap','g4ejeq','nxxvtz','snybz7','5twjem','ekpc8s','6ze66t','uz2bdb','99vxtv','nc2knj','x8k9up','knufua','tbxpzn','rjprzb','6998k9','qm4b6f','2gx7dh','ucju82','tputx6','j7rm4d','hmx6xa','b8jb86','vr42dg','g9axkp','ju6tsr','nsc6sc','j2akyj','yg2vcq','a2j3kf','xc8f3b','6ngp3c','pgg9w9','q6vt92','4vfsab','f4jfvt','fvxyq2','xjsxwm','gh9ztw','3gfwx7','3cf6yd','ccsc6h','2ywjk4','w8qyax','jqnqgr','dcp52v','j4n3ps','c3prfs','wtxwes','a6nn27','nb4qbe','7qus5q','vympw3','vxu9ve','h9rydu','k7chab','2ptgse','esw36n','zjhngw','9jb8qk','br7vms','hqcsqu','7vcser','2bp84s','3v4zx6','ns6m57','3bwtfh','t5mk5k','5a7byh','xb5np8','ubsv5z','nx3ead','aqj6c8','umdvz4','2f6z7b','rumvcp','u9y55r','w9syef','tt6k2c','vee2m8','gua5z9','muxkqy','26afm8','bpcstx','2vje9c','wbcyz5','ru4ajp','ufkvce','nyfwxr','zygey2','pq2h9f','7gb2wv','e6thty','bndwnz','ps9yxe','dw2aqm','ypagqw','z4hyam','qufkcc','z4c7k9','k6rn5y','awmqju','q4qvbj','k7pq6b','sp4mwr','bjj7pz','3c3r38','7erpqt','qen8xb','2y6aks','vxd79c','n2cfye','7m7fz5','jnb3qm','3e26hq','rr3ane','t4bu3z','2serkm','amx46n','5nrfh5','czbtqs','zkfs36','cru4vw','2x6k55','fy53ry','b3dg4u','2wwur4','cw8jqk','zmbbsw','ea3afq','du9yxz','rbpdpm','spkmgm','5ssx9e','2m6zyq','ss56pn','e8nyyw','hyavn4','gz8v6u','wxewzp','s38n4q','x4by3g','em83cx','8ba2jt','5wzbwx','fadv8b','76e3dj','uacj64','4zynt5','uwkdh8','pz7zsv','nz8sux','js3pbt','2n6wds','sr3nq6','hta6en','du7qtf','jk6q2q','mmgng7','whan8w','9hrgwh','xntx4w','6sra9m','dzp4qt','752puj','qaudhs','3ab2ws','werhnx','ggvznw','9nz4du','g6v7b2','pxxezb','tuf6hr','dtdsd9','dqcgdp','bfz2rm','c34dm8','gtayre','vkdhdc','c4q5vr','zuaf7j','gdehx7','bfueaw','pkmqd9','xw5ar3','kesz2e','3ywpvh','3snrvy','fcz9wd','uygpe8','ntdjnh','xgm97f','fddxgs','fj5hhd','3eugbx','nb6bw3','uy3h43','p3kshb','c7rkuk','jssznv','qtcxt9','9qsh3b','zdakzv','jthe86','ky5h4s','a8hxe4','nd96a4','6rvfnq','93edtb','nxvgd9','d23ufx','wm6ucv','xxeauk','tk4xsq','j2mju7','2pvuvq','mr8nv5','hndj39','w535s3','rxag43','5faegb','39s9pz','kv8459','8bvsx5','uyzzrj','swfbwc','p5rg4r','a8dc9b','wp4562','4xpvw3','67pqku','axt5ej','cpkn9a','4ebgve','jfvagf','qrwqvm','yreunb','w8rsdj','75s88a','v6exbx','8jc572','kgz2ke','97bja7','uavtz9','65wwrr','a3ypk5','vfhvrj','b8jdsm','x49svw','4vwpk2','rnbkue','8e2e2b','wammq3','z6tk5u','vcxf9d','acdrcg','9tymch','49wkye','tefghk','apddmr','hbu8a9','wzw8h8','957dwm','3faud3','k32t3w','u6ez3f','4fxqda','f8qg8s','nf4gwp','9wazsx','bvfz7x','87spzm','p959p8','9hkprj','wm37eb','xnnc7j','pjpnny','e3re89','gdknst','jkdgmz','etrenj','8nsryq','2fhqf8','6uexn8','6vwyxn','a5n2k3','vd369c','sza2q6','kjfkss','kpd9g3','utgsg8','ess3tm','6pnk6d','wvze2d','g4a37r','k3yzcx','eh9q5r','3dzn7q','5297ce','6k496a','f3rz3f','swv4v4','baafvm','sb4r3b','86s7aa','j735qs','4e3b88','mayxm3','m2fwpg','46zbs4','pj2rvg','ytn7gz','dpvqrn','4f6zuu','mxnf68','hzsb3a','d7auyx','c2qedu','9vq6r9','3gungy','2ptnzb','tzs53u','dyhsza','322y48','6n2z58','a6gmmt','rz4pkm','483t9t','9dvmfu','89w3bg','9b9xd5','zwpgcq','q4qdfk','mpsxkq','r8txsu','eks2x3','pb9hjr','2x32na','hw5j7x','rzftag','d575hk','3wdf8u','4s255f','xvnv5s','bw853q','b2ehg4','5a474j','qdj975','8ttgjk','t7ded9','jbb4dv','qjwe73','32qxne','rzbh9n','kpp23q','bjtz55','m3c75a','wrj2sg','kexq9g','2bnduz','e8fxz5','mxjqky','ge69tz','v6j5ga','zhjxx7','qgy8vm','7pwu7z','gvrrnk','6pc47u','wkcemj','qx9zrd','ygvadw','9q6nxx','s8gauv','wb6275','m647tf','dtka56','gbg6bb','z9yy9p','79tve5','pavj2e','cvbp75','8u2hck','wcyduj','zm34d8','j2d5k2','3eauy6','b2wgyh','m2bqnp','u2fetc','zxd2zw','nahjnv','v7hx2p','4uvpj3','vkhg38','d4f9tb','p5fcfx','4saaqb','tbkmqe','eg2dq4','8ancug','b69596','8c4jpm','pmju8b','8jg7p6','8g8npd','a4g5tb','as5rje','t7bt52','7yrbj6','vvh6fx','rxhgu7','jsu5h8','285xav','9hju6b','mgdev6','ttp5xn','zydmpr','3pxb4t','sa65d6','6jjxgf','3jsptk','hp6j73','8kjuqu','nf672s','vcqtde','jemym8','j2xny9','tupcaz','3e8nd6','d2rwhd','79dey6','xtf4tm','4z87gq','8ffjrq','gadnmf','py4jwt','twsnwn','h2k8vt','57rk4q','uczvnw','h7ujdr','khgrk2','4t7hth','s4enqg','vkpfhc','sk37wh','tfwndd','fu3cfu','8mbaxm','8599sg','5psxyy','sr5nfx','ks2eqc','dz9xbb','qwqf3c','aqumew','cvzqmr','n99mvp','qby523','26qkpr','nws7ud','hz79eh','y7h6ut','x8mbtx','pvbr6r','suua6j','v8ehq2','spxgyy','282a5n','x2j7xm','asyf9e','ufnj2u','hramgg','qgp6w3','9k8tf6','2az9jr','8gxuwf','mm4xpt','94hfen','6bbde8','fp5j6x','jmx67r','zemqbz','98u3jj','wftmm6','sxj2js','8jqu65','23fazh','h6nkjw','9cxmb4','v7as4a','jpebgk','h9wdmk','fck93p','mcjrws','aad73b','ndfms9','edj8pf','yqunws','cmtnkc','pambvw','ubeghn','x72nm4','ssfsms','tpugvg','nyfk2b','54rwaf','mve4ph','e99ga3','hkmwsr','m9jn4z','evn2yx','eqp3by','29qcpn','hfxtbf','28kst8','u4q6n9','hdswm9','m33jey','zm5z5k','hddpu7','zzr85j','33ss4w','kasmtx','vtd6r2','5nejhp','7c93zm','krckkv','ndtepf','4gu8s4','a8p9jv','7xtqrs','yakg92','tmrm4j','6q5rkm','dw6vnv','amxrux','268fcd','5cs7ws','m88v8h','bv6agd','5xxvhs','zpadcy','tcwvyg','pd23wd','rdn8g6','qhvbdd','annav2','znfthn','hyqcf7','pv98yv','gskzmv','zcaxwy','3mxfrt','pbvq75','vgeaqk','jc23yz','ru2s3n','2wbkmy','j5hnch','tkkd5p','v83cd5','fq4bv2','ymfksp','k78bmm','czh7ne','ewvp5f','4a7epq','jcv5jm','b97n4a','ya8cr6','esyjrt','pe4ney','wsp7h7','fyuh2v','htyyk9','s5x8w2','z26h7m','x842wx','vc7fgw','2gydk6','98mfse','dh5az2','74p65e','mknxxd','6rngu5','g5ttd6','t2d9ma','9kvew5','mhy5vm','phvptr','w4x44n','vrwcrc','a5wukb','wwafm4','8zfda9','9485qs','b4ewkg','ue2r84','anmgm5','qgeqqb','7h2t82','phvtbh','bahxct','4ek6xf','e2gpj3','8xzhst','qbzd62','7e7qez','kvhzfy','2pazsd','qubqjz','r5ktuz','9pukwe','wd7k2m','utkz6f','wd8nyu','4xxefq','8vxecr','6k84my','rpyzyh','km77gz','jz4dfk','hmxd38','bkb8cx','zknwe6','fv3w7c','wz23cu','bmcj4k','2nbzbd','pav5eb','myy866','cpkede','yjpynj','xeh5kn','cvke2v','wfe6wt','kj6cb5','gedunz','8t6s89','efw4kj','s5b3cv','s3x8zp','b59qfm','q8djdf','5jyz22','abz3fx','ugwwdh','6e4tyn','5u9ww4','y8n44h','vgak8v','zh3a8v','7avsw3','y27ky8','hqucse','8x5tgu','wmk5c3','fs3ktv','8murv8','3dkcgh','dcrp2h','rhtyuz','j7ybhy','m58r56','qbmkgp','k5gn8p','kae55d','29em9j','arb4us','pehxwr','hbam2d','vhbsqk','vurkkp','hs5tmc','seeje8','3j767y','gh9xwv','j5z5ct','t4bn9c','wpz8z6','yhfucp','7nd5sm','fkfsp3','b4vkhp','yjfjqt','efduwd','aa4ev3','dgx4f9','g84wn4','wuqykw','hg4b44','g9379x','x6nfp6','zhk9z5','s27hd9','3ahbnb','cdu35k','gvskdp','4fg63j','g34a39','swne6s','xhk374','ph5mxa','exutr3','6dsw2t','qpbry9','3fw9vg','xczg2a','z4jtyz','wk9p26','rzmg9d','qfu6pe','r368fh','jahnhu','enmu3h','32szah','4j3zpy','s8jb2h','x9x8d6','gxwtck','q96bbu','5vkc3y','fbc623','vdkfh8','n5a9az','asdfux','95u397','h2y3kp','2dky39','ky29kj','6rvdte','fpkg2c','fjurcg','dcudyg','n3en7z','kq9cv8','gaxc9e','96xnbw','vp7ujt','xy54p7','j6ng68','uz9sts','ar4wf8','b98g45','6wmppb','yeryc9','a2vghr','vny5bb','r9b4rq','t9r55d','tuhj3w','qwthcg','cz28uk','2wkyhb','j8b2gb','r5frvf','qft6rq','c95d8x','payyc6','pgug3b','s4b4cq','3dse6w','8cuhf7','dtzjj4','w637c8','v4nrn5','3eg86z','dzujye','z28mqh','zhc2uz','vped95','gqu7mg','pnu5qv','4xug6y','tc8fr4','brya37','gpt64m','etvdux','uf5nq3','x3qtz6','239gua','7drkpr','vprygv','4su7kq','zf8q2w','kqnvgd','c2g86h','cwacjr','keuw35','wjfxfm','x9sbqx','ca9auu','ea4wwx','c739qq','2bjxxr','63wyxv','wqkx72','taew5j','gjqsxd','7mwqf6','nvqaab','ggsykz','xpdvzd','85cf77','9qwfpb','rd5aem','jqb8su','b9tqt9','c2h5nz','xfescj','wg8d5h','y6bxtb','c33c4t','uyta6f','72d53g','qakvzj','7hvkk5','hu3xcx','f7wsx8','7rjuye','vbnds8','759bbx','dmgueh','rux92d','crxnzf','wxys9g','mbp2fy','kuna2q','khfae5','r3t7gw','waqbvb','e3hm6k','xnhg7a','w87w6m','72xq6c','nunqx5','3ebnzf','9e32n7','mhjjek','zp69dm','ghyw69','s95dq2','yzt8s6','k2z53d','c2ndeu','v7bsk7','ke5mft','amm8bd','cna9y4','tugaab','adn7dv','wfqk4q','4t5etq','dy25sj','neg63b','ah3veb','jtcmhd','peun5t','rupbb4','fknxra','4hcrxf','864mfz','r4y8bt','hr7rqw','5wytav','2t58rd','jha2se','p2ms7w','9pcyez','epwfxg','gcn8hg','9vhwpu','3ju6ck','wq43ve','fdpcpm','2qtzgf','d8d24d','v5yg3p','5uvekw','ktn2tv','8h3y95','52f9a9','wg4cn3','gk9m6t','8wx3gg','zu67gb','2yxy6r','c5yc3y','dvmz6d','agwm5c','bxzm68','m8sxf9','rv5c96','fmkybk','rk4zek','84est9','vb8gfj','f8d2rw','5dky6r','2f88uj','cc2uaq','36832g','8wvu9m','yrc8t6','7qzkfk','4f3vcz','maecyy','t7rchj','wjnjbe','95ahbn','m38mrd','svut9m','kknynp','c43rna','3vnu72','uwhrat','jcb7k4','4r2j5m','94dg36','mrpduk','32jrpz','ggzvdc','hzgp4e','s4rvy6','ce5xzx','7xyx6r','rykkx7','8zeg6u','49d5mz','8smrw8','p9uehn','p6cbg2','mz52xw','6paeks','egrp44','83mq7a','33pbwq','ccvsnp','nh94y7','683qqc','w7dn2t','4bpd6h','w84rmg','eq6697','qy5nny','erh4qb','ceq432','myw9cu','mtqzyc','5hrffv','fsyxsu','evqxuq','ae9sye','bgebxz','cqp3uy','td8znz','tuyh9y','dsyz9k','4ksv4y','2w9ps6','bdf75g','6kze6q','czs983','pq9797','pu9tqt','ga49wn','8nx368','h9tvh3','8t2btg','w66kxn','mcvzyd','f7f9x2','ec585u','pcnvyv','3znd6u','7yer3g','wyg8ju','pfu3dk','8hd27j','d3mnps','r3u528','9fevdm','jc5qsa','t7zu2v','bevhmz','fpuajf','4qs9d5','k6dpqb','zaufgj','hbhhjw','s4545z','qqtmta','ebsdc4','7fbsdp','ffyykp','t568he','de5bas','jb27vg','x6vwdw','u3psrg','pe4pna','ca9x63','x97qt9','zgzax6','by246z','rxvnk8','upf764','urqcs3','bags95','7eh8ee','6jdcdc','ageg8w','dzahfh','sdg3zn','2f7x4j','98fzam','ur8jg8','uwkwhx','t9zu4z','f9nk3d','zn7qyv','j8bubt','bj9t96','7urt5d','rmuq8t','v9nnpf','gxtyba','zwdarp','qm99ke','ugvmvd','af4aea','k8x9fd','ahkdk4','8sdq4z','jc72aw','t25rjp','9wvkke','b5aqhm','jp5c7s','y8jxw4','8de7sa','tfet8x','sz655w','jc3662','mgu647','z4q65h','8cwu3j','gm7t52','98fd8z','b6gvmg','m2wj86','rcm3tg','mr68d4','pckb92','xseqzx','f8uh92','twcmve','mykrhw','fcz88v','qsyk5e','wm5g5c','bc869u','v6mck3','279ekj','uk6zy7','ztggrs','wrbhpm','4f95fa','rqh83u','q8fdsr','xaq63u','hv3g33','6nsf2h','vgw5eb','xjryzw','sqqr6b','axa5at','qtgrwc','geqjbj','bvktfg','qc9mtj','9b6j7h','dkbvqz','sabaxf','7jdu7s','rzfvta','sg5hm6','pf29tw','n6fbte','mgs35f','ma95km','qdcztn','znnfya','r2dyag','3j8na3','33s7ys','bqdmka','n58nq4','z2r6u9','v9fdqu','uxgcfn','vvjj2g','w8yw84','qnztua','9gdxag','4tyuq2','w2wsu5','cn8afu','59b62v','pyfz63','77k65r','5xfcud','8zanev','jpas3k','a7v2ww','upd3eh','fwerys','8z6yz4','8x2tuc','vqhfte','ak6rdu','5d8b7s','25wy3j','yu2cct','huvaag','39znh7','s3yzu5','vhtyga','8vrf2w','whfy7u','5jqgfz','h2munz','rtja22','rt4878','57e63c','tdvu3s','55uedn','kbntwt','w7bq77','hekqnz','wj4say','agvyhd','b65w29','qqbzc5','5hn2xm','76ujqz','rp5du3','p6exvm','6wat7g','8d4sz5','umpjkc','k2zyx2','cpd39b','atxkaq','gfudsc','8z58wv','tvnve7','jh7kuu','ctfraz','g82e27','s5w8ku','vv7fp6','qg8k5f','z4a2ze','dc66ks','b9bz78','3xajbz','4p9qu9','3j93af','x3h4cc','kuzudm','x58hrp','fgez7t','2j7rsv','e9eqcn','sf32p7','n9mufb','bb3ury','mb3uzh','uzy4rj','3c8z2q','ckpwqe','xc75ar','vr24vb','zffm9w','n5tqgy','f2dafn','h725yq','ve9mew','536vxf','6f5dz8','gwbk94','e8gzn9','nt6huu','kkpnt9','cgcepq','tay9zm','hg3yb9','jyh9w7','fuxtsa','mkynw3','vrk2pg','fyud33','sf9rsa','5kqhpk','cfybbs','meq4fq','5x842b','2guqse','7qkqh4','8a2s5m','ymxsdh','f4x7u5','rxmj6k','c7x273','q9hmjq','9ypwwt','vxpy98','gddws2','x58ngj','ab7uct','vy7pfn','v28dvg','d4du8k','f4gcgm','8rf4t5','dd4886','k3rznn','csqr6z','hjsn7k','9s2d5w','t5tpy9','7mxzsv','k7nkzm','ukys6y','82mbgp','sp52vv','uuucb8','2enzbz','zmd39z','5v2na4','rn4qxr','nzym8n','4v45a7','wtrhgu','sbf5sk','pz5ukv','juqpu3','4wwkph','s7zgrz','hax7zk','43qx2p','76k2sc','tfntak','pbj59r','eyp8xk','tbtg5s','9xv3h8','2jfvxw','bn8nqm','d7cnt2','kdafcb','tbwcxw','4vnrjq','g4qqv3','sq69n8','z68rpc','6rte45','d4myec','ekgxmw','kvqf7r','uk96j4','589u9e','g975ux','jnaj7c','7thyje','kwq5ta','m6a7hy','gchkxd','9eu9mg','mrd4a2','gj5h49','2bmraw','freg83','d7sn2f','cy4mg4','7prufg','mutwc2','xfa6gg','887xbm','avbkj8','vsqu7m','xgcuyc','zdc6rz','vtuh5w','w2h26b','k8s95q','9h43u4','zwjukj','p54stk','pvq4sx','kjeb6k','q9cw22','gym7nc','6fwx3x','vdvrkw','e2zgzr','8dfphd','34cv84','ve26tn','ujmjzy','2e4q2c','5evywj','nj78da','wxukae','5s93v8','p3n2xd','re7522','3zcjva','kvmh6a','qq2v7z','mqnzyv','q4a8s8','a3vs3z','te6wzy','3affng','zea2s6','6bvf8n','vx8dvt','cm63j5','wmt3y8','6zpwjz','xh4cua','9j8x9k','2mqjjf','4quxsx','sbhf4a','zphktt','e2nswu','8kqnng','we3a5s','yyayb7','pbxvkm','cw9v76','myc8rm','bvfm2b','t5jnw2','u3vtkw','4arp2c','5mcp3g','czu499','r8dgke','tntduf','j28hwb','e9ha65','hbjh2t','pphv2z','65j5vy','468ejx','8ncfxa','y7c4mk','937nzk','jm6bhh','982ctk','37n2gf','puaufh','an4jap','awm2yg','6mgxgu','u52ye3','pwjqdb','mxfd3p','dg8bms','t5dvkf','4p6j5a','uamw7p','jp9tcg','tvhd7a','zuqp2v','ks2bed','m387sz','4jewyg','yprtva','38r7ym','575fcv','czxfhn','zb6fy8','fmenun','dzdes5','cxhz8k','gmgd33','b9r546','mwtzkt','fja89g','yhvp79','q77dvj','93sxad','vdushn','zqun2r','bxzh5h','byuqed','k2snwj','dyy8kp','tx4dr8','qk5ekt','bwyd6u','6ygesq','xba486','aq7pud','c2nvap','88hcnu','cg6r74','h4r7bp','vtrtsr','8y5my4','ks55du','kbw3bp','v2u2y3','x96k77','bhsb93','m9w2gc','98y39x','7k2bem','7swd6y','fpyn6v','z5snxn','r6r2bz','uu5emk','artay6','zvcts4','6eebvw','88vmbg','dg63bb','hhyevf','naa24t','cpfvcp','6477es','sxrvc7','c4v5vf','up2yhj','7q672y','9smm87','3dxq5d','k9redx','kncjhq','cpt5kx','ss6g5q','pny9ys','9yk78p','5nn6fe','2dcd89','gen9n6','7uubua','5vvm9d','uv79zp','spr68y','h7u98m','zaezrw','nxqhqz','nadmme','y9rsez','pzte4f','f8muek','mkc85a','7jhhjw','7ycnfc','e57pue','35ymc7','w2gx8a','nfcxtz','3ngmcr','w62g2h','kn3rfe','n3p4bp','k4cpt9','5t253n','842zn4','z6heru','bj6uk9','54ctz4','u7dqb2','ane6rp','yhcyja','tr874h','rt2997','93dgup','s8rgns','52bfkw','uzwgvn','xvcvt8','hpeeup','bzysgz','zxn2c3','86qrm5','6rre75','dahtqv','bjj87m','8xuu95','g5e823','pt3wq9','t5mvnk','2eh4c3','wsf2b7','7xfynq','be8r67','u95qxp','ftk6qu','3cacty','zawcqj','x65tq2','cenw6m','yraafj','64b6gu','uzny9s','cnjt59','cc52av','pr49vj','zyz7u3','wgj4un','fs5fjs','fs4a6n','gkj35m','7hy5ck','eawjh8','28f4tz','6y33vx','2hu6ee','ja3acg','hhq4zy','cbschn','p4jhdp','q248ry','d8xq56','9gaywm','xdnhjn','ts4af7','eyxmt6','zrja8x','s9tu9r','zyf6rd','9y8smz','nj7faz','hwa3wk','78v4me','5q4y6k','dsudqa','vccx8m','fyg9h7','d87dwm','banrhq','hrhhkd','hw5rqq','85n54j','tkswyz','ps99j6','43tn9e','qtsupd','v4a6un','ds6e6c','hz2w73','86vnbs','d2hjmj','k2gqgk','8kmwb9','u9q35x','qzqj9v','6abnex','kmacex','hjuej7','w6rytn','gqxcuv','zsr7vx','pjxdph','f2966h','gcwb3b','tpwbz7','pqq9wt','ayrpus','tuu89a','gtteqd','a8h4us','n8g2v8','sgybde','t4ejks','tckgk7','6desqs','npnsga','jgesv8','ysquth','38dzmu','2synda','u3vnz8','5ybw5m','rn9vd4','mcnt3c','63d7an','jxhnz6','e5w5uj','rf9w5p','4gr3kg','gnts2a','63mecv','4qac2r','npwqxb','q3auqh','sp9eza','zmx9mh','6dv8gg','r3qab2','phcdbm','uxkupw','kj5b55','ugnduj','fgukbu','hqyqq7','2zxsy6','9u245s','p67ppe','g59f3g','em7rxh','s4qynd','a6v876','j83mgf','8vbxuf','dqwy5k','kxqqpz','m9k564','dfkzx2','zpwvxb','pssbb4','gcab57','aycjmq','sgwk5y','s658ug','j4dsrv','zjpgd7','64896m','btf8ze','x3vdet','4bsgfz','azyzbr','4cdxwq','8v7eym','htt2wq','2mhf5x','jnawcq','u6k3f9','wg4mzk','uzy22k','35kw2u','skeuyx','fssssq','hfebxt','eepd5e','dkjjyq','vk9faa','bq2qrh','vwgqns','vdxafa','qh3xph','szf8as','edwaq5','mn5sua','4g9tvy','edtay2','3hj2cj','b99y77','x6f63p','cqgk8g','e5vem2','z9vbpt','rm3uxw','w858sp','2s56qa','bz5ph6','78kwpb','ha3bmq','3t977a','tvvxta','tq6xxz','frtxqn','jc4p5p','dgqkx8','xudz44','x4um2q','s2faak','p7ws88','yp4qtb','9re8ec','e39mkv','yx6uy4','ph6e9f','k4887w','kvsanr','5eyn4v','b6e2se','ryzxxp','9wq8fq','f7bv62','nhvja6','6n8ks6','8bf9e8','gwedu7','zmnpac','7vt87w','8ramqa','9mwuka','fmrsfc','gtmca2','kyfuvc','krgbre','n9ptcf','gbgdz2','7k7hg2','ngu4g2','b8hd72','dmyprd','xdpn9w','hm8cey','zyfhxd','6mx96z','7azutw','bv6ymc','74ddbz','xaxcc2','wrcua5','4fn9qn','u7yunw','r5e2t4','ap85nz','6gq839','4b7rmy','dn9bmb','dcpdwf','f2c439','mdc2q7','8bxhme','87kbnf','axw492','daaug9','brhsx2','9qewv4','d2frg5','6h8v93','b7jjpd','yf2m2n','g539gx','zv6jzp','3eeeaa','vsd9fm','atsfaw','75236m','r7rruy','ae6ezj','49ngkp','6z5k6e','z9psm5','seft5r','yjsuvt','43xsdx','2qfcwa','bvu8a9','wv3mtu','bqev8t','uw4uwn','6rvu5e','wnqcc2','n8ukue','3umj73','jtewvd','b9y42m','kh5qm9','5bzmqh','7ne29e','6vrtjj','3ta3hf','usz75a','ebvwh7','fsghcm','zse2yq','2bsbc8','q9fqgf','kwfzph','78v4b5','de644g','j68h4q','zakn3c','nman6r','2xsptg','u5kgxc','bnguge','tts5gu','g6k6pd','xyq7kk','nfugjr','y9qna8','y8cqzz','vftmab','emxzdg','w8fz72','5wjy6d','ufpqjj','vt3m7r','6r9nt9','kcgsjc','4spfmu','crrabw','c5ycrz','2aujwg','p7qfhv','8xug9m','gjcmtp','3a7wsq','bkmgjx','26py5y','p8tdbv','3jde95','m8cv6p','m5v27n','yyf7cz','qngxb3','nsv9jw','gkcnj4','7ev2cd','mxzc68','9r4366','cqqc47','agegc9','mwzmm3','dzkgrz','5yj7zt','8qb8td','7gsz4j','9s5b5p','ksk5rn','wn9yhu','ukuwet','xyfrk7','xxgg3n','nzndd3','dxbjdh','utybbz','zgeg5s','b3e276','zefujb','uqt9fg','9a92wy','kbps6b','2t3hqx','gxpdmx','q4xfgn','yzsj8y','j56c3u','k6q3pa','tegar3','jvf2fh','5drh94','vnt5q3','7637md','aucpga','4yemzy','58ten3','2dmb9m','9cs9mz','qupk3b','6drfpd','vjjkmu','55p5uq','kj3242','qhtdny','vvduv4','cs36ns','rpjb67','mvy4hj','s8kvm7','ywje4b','365pr9','b6brr4','95y4dt','s4as8c','8fy4za','59ehzh','zxkkee','f42tve','unsrk8','fqb7gw','dccn59','7y9xjv','hhy9t2','7qhzps','6rhx3z','mgk7jc','hhc9vx','tjssyt','dwdzwt','ga5che','ath9n7','fp33ax','4qznuw','zbfs6c','ad6b9h','55ce8j','7hvq54','grp7s6','xy3v4m','yvxnjh','p99v94','ncsb29','b2p7px','5ch63t','g94rfm','hj5jrh','56fctn','5xtku3','zc9xxs','j3wf2n','vyfedz','9xacq7','uswxsz','b52kqc','3zu5cr','ym246z','54aqgj','bs7ntr','hhbg5z','xrjpgq','wd3vgy','6hakgb','ypuebc','zfhsfv','pc5jwt','cv5af3','fp5f8x','z2xv67','646hnd','xg4kyk','etug4a','cwv3h8','qh49zb','95x8mt','sups28','zwan2e','pjrpdk','9gh3ek','xxek3j','9qcn4q','qfew9f','wu9g66','68uspa','562j5d','t5hd82','658va8','bv2vnj','r9ymca','qnup56','h2b8n3','vart28','uyhtbb','trf4yz','3w3te6','umfbw7','bf64kd','jud4hv','zrqms3','sydx3a','65g844','nrwrjx','3wpjq9','erjs5u','zhc7t3','y76ys5','fgkg2z','eckb4g','jm2fmj','v6fssj','vq2f4p','3fxvk7','7w8vzf','vhgqb9','mkxrw2','kntaqx','mr5u5r','88a8g8','wbnh24','e7p29j','u7gnvk','5y36jm','fx5ymm','aqhfec','t69k2w','dvdpqn','qyesbb','tqgt5h','xz46kx','h8thgs','6q3764','xek82j','54hqv4','ap55ay','thqm9s','wgy8hk','6j9kb8','c23tjt','qmarva','emszue','kvg5f4','zjf2ev','hzqzhq','bcf2ee','uhy5g2','r8g2tc','cg378f','vxe9xt','zkbtuk','trzz42','usvj8j','98h2un','27u4gf','qqdm45','gyrfpf','pb8gk5','5t5mw5','7r4gbn','7vhpas','9hc4ke','xgv5te','2fggrm','kt3pjv','zacgfw','82gjb5','eqnvxd','rc7y82','xhtn8z','qr6md6','9m533e','zaamrj','5gwabg','k6sbyx','37ab4k','ufje5j','yg6qy9','5sfpcw','ky6cqy','2acqjn','cy6acc','4cubg8','8zb3ta','8qxg48','rgfk3h','u7trv8','6pgdkx','m2zrpt','7529eh','2azyx7','52jnwx','59jyge','esnenb','63z9jw','5ffnwb','awdrt2','y9qtjx','rkapu4','z36kwk','4bx53b','sx6tcr','up6u55','kjey6u','38pnpc','zpuf43','vypv2m','cf6jc2','mphe4r','ceubez','cbcb2c','nmaaqy','y736wh','p8g5pu','9kdb2z','rpdhp9','jbdc3y','g9g559','qgk5ph','52qtqr','m6akye','97jbpn','tuxu7z','zc5tbe','xk724p','c8pfe7','fd72xm','fcrrxq','yu3wf8','axbmpu','925k5e','c9mjs8','zm2qfq','adv88m','vq2ve9','6fmvyn','5wuwsn','8ykew8','6xytns','jnsc66','3tbm3c','htx9gx','dmxfqc','sggwrb','4ursrk','5625ec','pznuze','wpep7z','knhbbg','74saf4','ktpp23','vaxea2','5wzecr','tyezmr','jjzbnv','fgj7x7','fa5m75','4npgjr','7ycmfh','d2sptb','ewfz2d','3xw6j7','vxymtw','cczaw3','99puve','25bvdh','tzczqq','73kx5r','45sb55','reqnw4','dacdzu','cdku3p','ewa4kg','ej9ub9','5mparc','96zhrd','kfyup4','ws9g8h','efxtyb','tew597','qzbu78','f5hqkb','psjvdh','d4ndwy','aek2ka','md3y36','9xxget','ww443g','jyt9nu','jwtdny','n4vvcs','ebqu9k','tg56rn','e6harf','tyn4rp','9kff2s','td4r9p','vj5y7h','8g9pdt','tbbtjw','54b3sn','vjva2r','fcv5f8','kem7m8','np2we3','tvpr7g','4a6skj','dpmf9j','me7dj7','9ghgtq','6k5f53','6v34af','dbcwew','4jdnf8','4pzzjp','vr24jj','cye8ue','a4fqnv','prhyqn','tkz73n','h9x76w','3sdqqn','5emsb9','a9df4p','yyu7su','8hgbfh','vdgm43','mngc9m','9brnry','asutta','eh2qun','qxb3yj','qwx9sy','8smqxp','5yvjer','j24k3d','4dakqy','2v72ud','yyqn8u','5rt2js','ta358s','ghst2e','wejgwg','4382su','5gdung','3cnfpw','neu7su','h2hcxd','cucvts','6g682d','5uqtfd','nr2pft','a9z4et','dnsufv','e59kde','sap88e','hwmmwv','z4up5n','7d4rmr','4btuqs','gxt68t','rgjap7','4hv8gz','pqnr5j','6spqsa','du7tuv','su6bbw','8xcss3','swe2ma','vk84cp','2xk2d6','dtbwhc','8ectrz','ded47h','des6wr','9ycp7j','8k62tb','wxh335','9pw3ea','ej72bk','xfzrp6','xeshmj','e3gez8','6nhvuz','k7nq4m','zgwa89','nu6tef','mtyn66','us75mg','xwdpy9','v4gqfn','x5t9bm','uf7m9s','4bqm7v','dynub9','frmd6p','kxyydk','unn5fg','xz47h5','grgxbe','75wdfa','j8bxm6','az8zxy','emsw2p','2hdme2','v9hxjf','n2uzph','4efx8p','mra5xj','24qyj9','j9t8sd','dgyjae','hhcw2v','t8udz6','qvk5sj','u6n4ke','6zk66e','aufeyx','j44868','bjwete','j6brm8','mgqx6z','z4g7an','cb5bk5','pjhgsr','hy7zmc','nbgpd8','f7nv3w','dmfv7b','anp4p2','87cz4f','jxsyhh','eez6v4','kfarth','x9a89e','bjgq62','px5v7f','9mrca9','g2gqmp','n3kcyh','vjca5x','ywbh2f','km47g4','b26vdx','vaqjgg','mj3xr9','8y9w8h','4e4d7b','9r58ef','fkpruc','z4qq6c','jhfcg5','b4wtx4','c5sqmb','mwvw58','7hjxcx','wpgesu','kmazfx','zjcds6','76eyqx','y599wy','pnfj2t','hqmpbz','dcjycy','rnyhvb','g69vs2','68nc5p','ff4z8y','uq4qg5','vqdhk9','msmxuj','3xt24h','nwnztd','phztwv','hjjdwj','nq8mq3','wgtuvt','7ngqya','73bj6p','bjxawu','y5fvxt','qqvnsx','c94a4z','9g9qth','u2jxud','87fxcs','edxnfg','yy6yst','4g4jpw','mqg6qc','rxkp3b','9cwta9','s8tu2k','xxtjt8','vwdfvq','ecfmmk','7qghec','fhv3cp','hrs22x','2dfp5r','jddxg5','upbatr','t88uet','npbhfe','chmxne','3mvvwq','n4qt6r','kmjpyt','3k28qy','8xutxp','hct7vw','ax4hb9','3xnqkb','sn6vnp','hk8gk7','pg5bw5','djreda','h82zww','7ph834','74fyed','srh6k5','nrzukq','f5nx4b','eywq45','k63rz8','r29uk8','ch4n3w','w2fdaz','r6dv63','rdwvet','4yz5d9','c6ntwn','53tru9','thez9w','chnyfw','svvnxc','tjzu2j','493apc','5vuvfa','9su6pd','ssk54z','ve5jtc','4veytx','fmchpp','vt5v86','a3929x','m8t387','es7anu','psc94u','yp4vtg','m8zdgn','pvh3ky','fm4fdz','agdjm6','aeccdq','k94cqj','uxv48c','qzzvcj','xavxhh','2qd5pb','43xs5a','xqsscc','53ua24','hsqzb2','tasb7v','34xx83','2hxaan','a4khrn','8hujk4','ajm2ej','dtqrdw','8m8mhp','5vvz3b','fgp7mj','t5th9y','f2zygg','k6exwr','u4s55a','ab2mdp','w65rnq','xatbwq','gsrmgk','mru584','w4wuex','cdzdg9','g688v9','ccxmhj','vpc653','rsqwzg','sen3rb','gv36fq','e5rz9c','erfnxw','8fbx2m','7sp48m','matcdu','25z7kn','bctrjz','2w9asu','qupdzd','mhr8qs','mh7ubs','3nph8k','e3v3dw','ejbzc2','72dpe5','sbvmzu','x4pyeq','fsgwrh','qcnmdd','6chxbw','v6usr4','4dukxq','ymfumd','c6p6mf','9qr28q','62ed88','4anag2','r9bawn','m5j8wq','fap2np','ged5cn','n3tvf5','7rcf5z','6q5596','jmnzyj','5efvhb','d2xd2n','7bm3dr','vxh278','gub68d','ve826u','kvc8c3','as582u','8zu7fp','28wdkh','f6e8rn','ph7ycn','uwkd84','bppw8h','eaez53','a6fwaa','twwh66','5bhqu3','8vpgrv','5bvtez','7rbxeq','m435bt','pmd7t8','8dwnsc','x83sjb','ab6fcn','7px8t8','za5y6u','bm48a4','swb2zg','4tcgzz','dyuxu7','gnfbdp','32xh4d','zwn4jd','pubtat','yajbam','967spw','6q39pf','hswqgh','5fhfdy','6jv53r','v2535a','db5ygt','83fewb','myxc2s','7wrswh','sfur2s','nmqwjq','rgcphh','qbud7f','pzez47','5zgkjj','sa8nd6','umkn2q','mjhjjc','veuazz','7x64gj','m79pe2','68urht','k328m7','vf74xm','33df5e','a459u3','489a8c','jrvg2j','a38mxx','uuhe23','bqznb4','b252bs','8jwhpf','yxhrqm','edmtzy','hz8aby','k7r3xz','z2bfku','jjnwkr','9qtr8r','22tv3a','rumyaf','jxtumb','5hf2ff','fcy7f6','hetexg','d7sxm6','np8e6z','hbn6u7','fzhz7d','pwu453','2nbpp7','75np2y','27uj2z','g5anc4','zzbbh7','thxpa4','6ne2qg','ffbjp2','jzfb2c','rkgf52','z4yuqn','xsw5pr','7gvy4s','tgyrzd','tv4vv4','g8p34t','zcxser','wmzvuu','nz278d','tvsbxu','yjsew5','wt3dpb','v4mcgh','q5zqw7','bjswjh','399727','cdgsnd','dbjghj','hk6bem','3jpd67','tse9bf','35zuk3','89czaj','598tmr','nvc7e6','29upt2','aqcpuy','4ut6b5','4d8vna','z8yx4r','4enfbm','y6rjfk','gyp7nr','kapgdy','4r5ywc','btrv46','rdbbqm','a728q4','57nuxb','spxd2c','dkbmnq','3bg3yn','k53r3q','ene9u2','4f5shw','sseue4','yknq6j','p7en6u','94rxry','ssqgys','q745wp','a9sxfe','ncys46','fr82pc','d7dnf3','h9hcvc','k9bahr','jvzbec','cetnx4','2dnevd','qjjwxw','sfg9ev','k7xamh','za4asa','vfpte9','2vgpsn','baacbc','ggw7es','xrvb7a','fu7tth','kfcqrq','hhwqn8','py32zf','8pvt8r','mb4pxp','p8ybjj','p4mgbk','y4skg3','r68dmw','je8xad','nmd4mm','b8habu','748yga','pvdf86','6tskyp','z5e2s7','bu6bft','7n7d6m','67qrqq','4kqnpj','3qa2vy','73kzuw','6zdz9f','xqwmk8','t5tp6e','25k5xa','4vqqfn','gcbsx9','uk739h','z7zffw','stcepx','mhw2ct','yqdjuq','g8s638','96mxwx','t63tmy','8e745t','hy3rqs','bdwxgd','9hsa79','cu9u26','urzfbv','p6aqw4','jkquyb','jtv73v','tqd3dd','26unfh','7kzwwb','zpxhej','wgwwqg','cxh3zb','fehejz','w4k3f9','zhy38v','3qjkx9','27qsvs','54vupv','249bng','d6hrxe','nr4fmn','xts4w3','4dwt8b','ys4fnu','x4d544','397evn','baw8sf','4cz9ph','qwfve6','c56bwh','c3xfhw','7bj85q','aux56r','7rtg26','bvh6fu','b7b7bx','k762uw','zdbqg3','8f89sq','hp9urn','esrz83','2k6eth','jepvgw','5uqh6v','2ds2hg','4qrd2y','dussz9','dw8a9z','eambem','r37pzb','3dv77r','maju3t','7tba7b','2jyt7z','9fc3rn','62x7pa','2gw356','56nykp','6kuu46','v6ttny','e5yzyz','gfdqm7','83yrhv','9vnpwe','q2vpu3','7uygrw','aeb6gm','kytuvs','uc7h79','ed5f65','73t3n2','2544zw','usrmpa','nms3uh','57qhja','qua5mx','hx7zbn','wrynec','cb3yak','u85qwz','hrmynh','ygrtjs','rctape','2fjg5j','eab2fs','n4ad6v','dt69y7','w7h5h3','hcb6az','duf6an','35xe2m','rrpcub','8p5cgy','guwmp8','gq4r6g','7962qv','ehk583','eu3yh5','npxk34','n7ekc9','b3ce69','ncty6a','zj5s9v','vj56b7','4vmtj2','qk8f5c','up477e','h7e2bf','sfk8uh','p6zjg2','z473au','4kpdx5','fmqmbf','fhdehj','ccajem','az5cmj','nt795r','gfzjs8','6cu4nq','6vut2y','hk5hek','4hcuuu','2jgpzg','aqus8t','7ncgps','khumnn','ea7bhd','acbrr7','6ad86f','yzj8t7','qva8zm','ap2s8v','2qbvca','yqbkns','cu74gd','8wwpsw','8sa5yb','z4sr2k','48x3mf','nrjwam','h7a3mk','x9wxvy','c4skgx','auqvxk','hghgds','qh6yns','pt4s5z','y7n4wq','83zwt7','5nvaf8','qv5tgu','a83s7w','yevbj8','jxc2t4','u8hkds','8392qa','sg6akp','dbh4pq','we4td5','xyweh6','3nfcxa','45ht8m','vnn5wd','5y6e9z','rgpdyx','r62jf7','xr5t2e','cxp5bv','bu98xw','pw2ney','qhtk7h','efn7vq','38c2qa','89vscy','uqq5ez','42jfz9','2ykvtn','zmvcgv','3cnfnk','x467tm','w7y8d7','g3gt48','avuyh2','c43rwy','k2mjms','sd896a','qxkbsg','4rj6z7','sdc5yv','67nx3t','ubh4g4','nyn7jk','ksq6kk','2vvak7','qf3wvx','tpu8c7','ng5b7z','hnng7v','f5h6pf','j4y5hw','wbdbcw','7pd47q','35a3yk','7nrmu7','gbaab4','4kj6kn','cdjqzr','2ynycr','x39jwa','anzzxr','6a9xwz','779hd4','nbvhqh','8ga2w8','ck5us9','3f4khq','nd6r48','ktks2t','az8hzh','u4hre5','4xt7wc','xrc2ut','grsm9j','3tgmdv','6hg2kq','jgfybu','vz395n','wv2jb7','ewvheu','2by4jd','wy56hc','dv378w','k2vqfx','r2bekx','46p9bd','xju652','tgv8wx','a699zx','z2a65k','swwsyf','d7prd7','ufbav4','s7xcq7','f7mbb9','fspkbe','md37bk','g4hacu','8z29dw','wxphhc','sn8z9j','69r6u7','jbpyf6','a8aw78','5bpzqg','kpf27e','7ka6gz','bz4bd6','t74x8m','fyqkph','eaxt6m','xqc76t','9t2kf6','nmxhg4','rrmpn9','arv4hg','a2ftuh','ghrgbk','q6r4ag','cph9qc','a5d46j','n66gx2','vegtbn','ag4r24','8mcahx','chedgg','ndb4e2','s4dbrj','sr5mwb','6sxa2r','ngdfuw','ehgcn7','wjvk9z','w7mq7h','upyh6h','quqqky','63xnjq','j7dr5g','bqfp4b','j67h7v','p7uetw','4g7pa5','uuhyza','xqpzbn','gn2nve','3tfur3','whgpjp','6ebnhf','xex2g2','f7cpce','mnb9nr','s8psy7','96xpsv','39y2mv','s9xaz9','wygnmc','qabr4q','j9sbwe','va3k6n','pjnn6n','ggkvb9','g3szhf','kv4g2w','ggaa8f','k375kk','bqckq9','gtjf2r','jdxnkb','rkmdzu','3svph5','43942r','4gh7mk','nh35fe','3ne2ha','knjfzf','vkmbet','rxpnwk','tdfv99','pf3sv6','2ahjv8','pm9hej','66nydp','s4uxxa','b5tkaw','3mu9jc','d7n2wv','qq5anu','mz9xwd','qwa625','yeqbuh','yzk64w','a25kaa','jetpj4','94vzsu','cufcsh','u335je','qneb5h','t3g7ap','dmacbz','m8g6jf','mfpn9k','tmfbfm','6awa7u','9wvtxp','7p2zc9','dnyv8f','2x99un','hkc7bq','ve4tkm','3kgvxd','2p3knm','b892e3','3hfq52','mc6hu8','jm7vhx','czyh7p','kfee43','q3897q','r8uwvq','8ccuq3','pmuakr','fk8wv7','9jdf9r','7qyjar','6xbaqp','pmzyj8','ff7rzq','3zshyv','vgd4hs','jmk8n5','ab8sv9','caqx4s','bgcydr','dftjf3','9vqyms','ffzq7b','43u7em','vrcs6h','m8stth','7r99pd','873xqt','jygrrr','9pgmfx','j3xgcg','kce8dw','eyzm7w','cyr5e3','u7nzsw','mqysxq','wcnsru','tjb69n','d2z22y','g9xhm8','xju7ww','gvcb83','nj9ww8','ayqjdt','anj7rq','sqw7u7','xgvhjj','pxts7m','yp28jy','ay56y6','6m2b4a','6j6vef','vxvr6j','kebqjm','ffbmvk','mep7rw','9db3r6','vanc7u','ujg62a','mfxzbk','xv8jvc','cv5t9a','a2rr9k','u8rdpm','y5n6e3','f4kj7q','8pnbkb','2mcz2k','xbc596','bbcypf','9h8e4e','3hy8um','qz6u5c','v2ftj9','es6hj4','b9cyym','hkzhw4','caemxh','ts3v2x','jnshgg','cp3nvr','5bxx63','ka6ysv','yjf9kx','pm8heh','jq3xr3','wbfpd4','5sfbeb','84c87n','j957ky','p2vawg','k5g8b4','z8x3bd','kqkutw','nzqc7p','4jcf6b','2kxxsn','c7zcrf','cbff66','y4twzd','8egsrx','enfaaz','wxkzu8','cr2ndm','bwgjvk','tkn3su','6ypzcj','7e398v','cwgf9u','hdawmk','muqfpz','8vgmfn','ea88xb','tavgu8','fbhj3j','wu3p9v','4783kz','ucyevg','cpusp3','pr9ex3','eqzm8u','hhtcrq','k8vkgz','93cn39','f9c6cc','wed8bs','dwy5ub','bt2kb3','cjcdfx','2ekwjv','jsrmtg','ku4jag','wmkrfc','vybf3p','kppym9','2b893k','b445zn','uka22g','hvge6k','86aacu','tfny3p','2gybxq','eynaqh','2rmwu8','5yhqas','8qpf7a','k632rm','mv4r7q','29qbuz','cbup5r','wcjz8b','ej3sfa','xxfs6r','bjnkaw','hdj93v','pfj4ft','kuqseh','z93hw4','bkbukz','e5q7k8','jepv3k','6xa2th','cbuu9z','adasah','4rpcxe','5vbpr2','km8d3s','kxcxt6','rvz9n6','6ee5gw','huq4jx','tap3cr','uvc338','5d83be','zyhdsy','bsspyq','zpkc8j','z66pur','v45dqz','yjj9xb','ux2svj','6zr7cc','u28n5y','2s65a8','k6um7j','5kdcxq','k2qspr','qzw2gh','x4nv68','qd4m74','nsr3rx','gb334r','4j652d','cy3wee','candxh','dxrdux','jk2gjp','xxe7m3','dj77hj','eqqqvt','7qqu3u','dz5e6r','ym2fn5','ut9q46','ykze9z','j89kax','qt2qy3','v3p8fk','cw2u92','bwfdr9','nyh33c','yevwhj','jk789s','byf9tt','4fpyex','v3hamt','7vfufz','tgnvmj','autkw5','qpdxfr','mbe9x3','whh92b','e8gkxa','x7htjj','j24xux','xn2ryw','kn3a6h','ctjtpt','b3uzyd','25psav','egaqbm','ftmt3d','qr76v6','nrrrz6','n7fysf','gwfcyb','78e5tw','z339rm','7hj9zj','wwts25','ccswtx','zhah2v','kybukw','veh22w','9uut36','m6afpu','a8g4e4','uc826p','3n4dxj','34hqk2','e5td8a','6smxsm','sn2brc','hzhrps','8ghtj4','92ufsp','dhfbma','cyc95b','yygwu4','hkrb36','7f4qf5','5rcztb','txnwud','a6dka8','87zg3c','suvphd','terwye','gn9w2a','pq3n3d','3kud65','j3f6nb','efa2au','kqhewy','avrkg8','9pcrq6','bp97bu','ssk23k','tafveu','x96cvv','853zzd','rep3fz','3xjhb4','438jyn','bxnju2','44h22a','8weg3y','ztc659','p3k3ys','9ep2d3','6t7qkm','8d6mxy','qkkape','v9n2ek','mpcus8','4u8cy2','98mrjx','tr4bzn','wwvzqj','y9kr5p','7fsf37','npdvxm','gkfhjs','8e3ahw','ezx976','5nqpee','xujj5r','jjy47w','spqqj8','du7n6f','4fyktu','cfccff','e6gw5a','jhz9j9','eqarqa','pnpdj5','n5fxa3','7wbzad','6hpfgm','zp7v5g','4sacjk','njspu2','g2uys2','7jsabe','9wngcb','4ubpa8','vpgyw6','db6uut','g6wsf4','jpmd3b','79gh7n','dnh37w','hvb3ug','uz9wrg','eusngq','ft6x35','ttkzhn','9dxxqf','enquau','ykvn3e','29xm37','ma725v','8f2caz','w33hr3','newp2d','g6wnbe','dgpund','t999pe','j7zawn','yeekk9','57spwr','qs4xf7','524fzf','axcknu','a3p4w8','8zx6dg','uff9mp','bnaa2j','zms23c','mf8v4h','q4mrz8','upfk2w','8msauc','3745r7','xy5k2c','kw89pk','s6f2ns','nqtguz','xpv3t4','bv68yc','xqc2vt','r3jhmw','r6x8zx','jn37pp','manf3y','vznrg7','ytehdz','cqn8f2','ps2nuz','7g45b4','hr3br3','vuyq88','grs785','2qrfnm','t4w2g4','j3yku5','p4fjtd','pf6w35','33mqut','je2v8w','7nrsys','hg6rpq','dx2a2n','vmd8y7','fv5m2y','e45dx6','dmm8ef','ujpcx7','mhb68z','f72vr8','dqem3s','nec2gb','wjvara','wpna96','2fn4y7','pm324j','4gfr88','uqzwmx','p2xz3e','rw2n37','rb4rqd','d9gq57','8abaeh','62ezvw','84cyhc','tt8529','acncu5','gft9qh','4gzqaf','c5vkxb','344gvt','e7qmzr','mfy6yq','gu8z28','he7hsg','j4d64s','6a5e2s','rhn6c3','jyrqnv','35n58g','pe9ktg','x32dry','uyycka','ee6x39','nnyb3g','8fufe8','28skej','evx5dd','nm26xg','qg9sks','u7cgz8','4shrah','dmnzv2','cq4e7u','3td8gx','7qc9bx','g6npa5','c7d8ds','t4cdk4','shzqa9','reg37g','n7twqd','cmes6h','47hqct','vnzb8q','jevz7v','s2tp6p','nuhvr6','g8vrhv','fhxtpz','a848m3','mbdfwk','vjg4nj','qfrx6z','kshjy7','964ypk','smy27k','qfdmq7','a9c5np','p9hdzp','9wdrb7','f3nk64','hrmzn6','54uzxc','y4jgfp','rvs65c','uhxvzm','bsw93c','cuxwyt','xcj7d3','tmtnsy','rxzfw6','3uj328','sabw8n','ray4xj','j8ne8n','mhs9gc','sneb24','y8jtc5','cbks3t','w9jzsj','yak48w','vdzkxb','y5h5cu','pb4b7j','z46nkx','3fsz53','jcyjba','35k49v','q2hzdw','hr3hcp','qh9kse','5h2bwk','kbp2xr','69h4yc','89wduf','qk6f3u','cv3wmh','y5ybsu','p24uzj','qku2xn','y2xg5x','uyy2rk','62whqw','tse3vw','xr4wv6','kre3yq','f498h8','4y6rr7','xy2h4d','9mq8zx','7bhuw9','96vrdp','5tnqbt','phv35h','x8v9nb','vnn9bv','2suexw','7cs5h7','9swzgh','4hs59r','2cyy8b','8ubwfw','nmdxyz','9a8gaf','3zxbs9','8grqk2','y63bq6','eq7awu','6bh7k9','rsj9gx','faysty','qv6jyf','egf2ra','vppvc9','h3nzz3','v43674','h6g9pw','8rm8gu','jadvkt','3k8sjp','qbnvye','uv6zgx','hjcyp5','3tbtgx','7h4yqm','mazecu','qcqcdv','yg4wvm','e442ua','48xqf6','y2uk2b','4bwy6p','a24f5u','8faqtp','s4xzxe','3xaexc','qyc9fj','9ksdkx','8pyhrn','ceggha','qcu2ms','mx2bdu','d6v6mb','b82228','crtfys','zvxuvz','n9er82','f329pa','t5wsad','ebdjt5','8tmkee','wtr58h','uncpgd','4qc4hu','s5g3v8','skp4yq','fytx7u','hrm6wp','88e2wa','h84x64','pgmybe','ypbcr2','8swv6b','kpvrxd','ttugtp','qtczdn','85bv5q','2phx5f','ae2f86','9kz5cd','57mve5','mx7drh','b4gswj','2954hu','h2hnbx','86aeru','37mz2q','34yv38','g2xkyr','9944f6','xvdtf8','7q36yy','ry2hm5','3qvcmg','7jqf5j','by86zj','6d753t','2wsx3q','ua3dzg','wkaqa2','n6g4ce','fas36b','prcqjc','qxdqma','938msu','6fbez8','h5wepv','swmuhe','a2hmej','mmmzys','q9c7s8','tb9623','p2wb5r','a9nty9','nb799m','qben92','rt926z','8wknv3','jckyw4','q23t8b','vuz846','3h6mrp','pe4f56','9bn5rp','vm448m','xsxt83','27sjb6','tsu6q7','hr7z9d','sqwa4p','98q58g','ucsydp','9emjvc','q9ymb7','p6d4e9','cdekxj','ekwwum','dam4bp','96684p','4s48ga','hb9jy6','mhwe9c','fdvtte','7grc5x','ft7zsa','5uwre3','4rg8dx','6aha4v','cc2evz','bbsvw2','2gzcy9','nt8e6r','k89pjf','r3ms7u','xucz32','rqqe26','v2ddnm','ft73zh','z29j6h','t48zh6','a22n95','gzt6dj','9qsr6p','ykwnfq','dxhzhj','vvrpzx','2695df','s6dkyj','8ukw23','7mcw8k','u6vvfs','8apndy','qd7up4','9683vg','m29jgp','bud9tu','wbjr2q','5njnrq','mnukh5','cdmq74','6gjtk7','ap33uj','evfrb8','kkg63e','8bjpar','fur9br','fc29aj','zjtdvd','a997kh','45kexy','mnjrb4','bjvjv2','bkxcx9','vyj7gc','bnf6f7','er7eft','hv4ckj','xjfcey','sxme9e','r8fexb','jwgv73','vyjrez','pb2d6d','zer4hr','7bt38t','9ver6j','4xbwfp','6w8jup','5wu363','8whx7g','fmyyue','ub88c9','uw3ev6','hk5mux','fdetg8','u2w5jg','3a4e9q','rh3d94','8p5wsk','cbtgyr','dusqc7','fqedsy','htmfwj','qjwb5j','3emnn7','bbg35m','azv9j2','bqja9x','det8cs','yzr84s','nk32s7','2uaer2','dfu6ty','r6zbtf','xqpk3c','y4jc8k','ke5asg','v85u7f','ntc9sm','dd7h65','8z6bas','ejbv87','f5vwcr','r6bhnd','3sezuy','97ph5y','nb9n78','den89v','v888ej','6tfnwv','4s7ppq','6pd4sg','teun6e','qmt4ac','wf8d3u','4s946u','txpmev','22mecb','5n5646','kdvx55','9aumff','ebmk6x','fb2uce','egad5v','x2j9n8','g3zrpw','4s4f6k','pke4jd','gywptz','b2cpmd','x6mju4','j5qcsn','fauaag','c8r3fd','uv9zuy','93b5nd','8vrsbm','26haq6','423j4h','huukuq','uhr6rt','q2ad9q','xfu6pb','tg3gse','4mq3sy','82n237','p8jnvf','wf2sfp','22um8k','s4xb7b','4tef4z','vp7ctm','sxt5cp','fwrptz','9estvx','t9rshr','7aykfc','pu8xfr','yty469','hvnkta','52r238','5dcrc2','v5fnwp','628ug8','6qxsdw','cwat2s','7vjbxt','zzh4wq','9knpa6','2dz33p','hhq3za','vqzfws','njcfe8','f5cgx9','9jf3ny','85kz2w','e6ccdy','mthm6x','atjtdw','mrxjr5','uuumqw','k7a237','tr8cr7','qyfmf2','835dqh','gbdxs9','5a5ke2','aaavvh','hddre2','87jxyk','zpc4fq','xjrywv','92swu5','pkg3vc','brenwe','rhc54k','t4jtf2','yjuc6e','w7uca4','rpfame','a3zcta','vwzemh','4dvpeh','xcgm6j','qezs5k','gg4q35','aspj5p','nx2vau','php9pj','s5c3v9','26v6bh','akk7hn','tjunjg','auw4gu','dy8te2','maapv8','kgka8k','tut3av','mphad7','fskg7x','d5kpft','44sg9m','hw56de','za6jhn','jyaxxx','zsdxus','jfh656','t9jwdt','yuueaj','ch4k3v','5eysgv','sfjw6p','waaf83','s2vzz5','xjzc9c','unhgd6','upyf86','xrad9n','tt6js7','zc7gjm','sj49dv','p8czun','ykdter','xtkw24','axnqfv','ww9kjb','mxmd6q','hr3cgh','p366c8','ydand3','nuhpc6','vbztjk','gmy5a3','rfpfyb','gfe52j','d9qcah','qdnuq2','s25vgy','dsfpt3','judfb8','pn4nau','ejharq','5gvzma','svk2gz','au8xtj','hxc78q','ds46bz','qj2yr3','k3bykt','ecvhnx','ee48qy','tqy5qt','ew36ek','j4jua8','ckwkca','snfc3n','9tamk2','pbaj4h','gk36tr','rt5t5y','s5fen3','hsjk4q','zs2gvw','rzv6md','8xbc3p','pfm59c','e3gqnk','dfv988','dp8yyf','jhxqmm','vetnae','859jje','qcvzyh','xaekn3','ryknce','m4wju8','zvfrrq','kz5379','93n7g6','22fnhe','az4kkf','28wz23','2vgdm9','64952u','qr2ve3','m8tj5y','2bt58s','h6shqc','zhkp56','xz52t6','eqnu35','99rkxx','wjzehc','hcyxm8','68kxrp','35wvca','evxepn','fsd739','4yhcdc','4358yu','95yk9t','x3yme9','5sg5vg','v9qcba','9nzah3','svekb7','dtg7py','gdudka','srcfak','hq74zu','zx9gqs','pruw67','ax9c9j','nkumb7','z3zt7c','dp26u2','6je3b3','vp3kxc','uw9uv4','hn3vta','m26fbf','p63kkh','kuk7vn','un59u3','k54qcd','wqjefn','gusjjv','gd8wex','by35uw','6xj9xa','xsbdwg','95ugs7','sg29gq','5qxnsa','ms6j4y','zrzhje','pvmwnk','6a39aw','qcx8ne','at4yya','qnzk7w','n9srsf','gfxevq','8b8fdv','kwb9qy','nsq5fu','qeuczx','gxymjt','3f45mz','vv3cup','2spzyc','fsfra8','e5vc8p','y5pb6e','vbftgr','uj4hvn','bpxy5v','wp5yma','89hwyv','sbsdu9','c6cggp','n4jcm4','xpa27n','3rzgsa','ws4pxa','3738r6','kfudsu','5m6298','679c4v','vty5nq','zztjms','arwn32','x65uyj','pktd8w','v3snha','8dj7h7','9x7tn5','pgzht6','negegu','sdvm39','3zx8fd','x63ced','spkbxt','6w9mhx','agedmb','c7yhsk','nxzuy9','dg69zc','hvuhs4','8pu37x','c2uzd7','vjaefj','zyxjds','cvrvt2','hwstnf','v45h7m','jas773','5ry96h','f58g2j','zwdt6r','dt2bgv','kvtx73','pakumu','bf364p','78945h','sjkja7','5s8j5y','y7r3tv','dcfewp','2xdzzx','7rk2db','273h2h','wmyxjp','jh5h5k','b7z2hm','vb8v5n','fafj6n','mck266','fv987a','77bckt','khf9pq','urm6vj','td5zqq','wzh7ep','z9xv37','kprdj7','cjkkev','uwu4jk','bd7y3a','9hf84t','j3nd4z','mmqfnk','2uh9x9','5bke3p','bctpvb','566y2c','2faut8','f7nzyy','judqgv','thd4qv','6jwp3y','wzndw8','4x5vsj','hxbu2k','6k5mtz','rdxpsm','fftfbw','dwr6rp','k7k6sp','7s587q','wnqu8f','uffc28','y45jkm','ud558q','t59dep','smtqbg','xar25v','9a6uqh','b9b4kq','ywcrxs','szgb8v','hk2de8','8r2e7m','qs9hy2','wsz85z','dfw22y','gdc6tw','3vxq3h','td85yx','pp9mfb','vad3bz','rjmr5h','4ergv3','8qbnev','8wqder','fstpq4','vsz6py','552dtr','gvf4rz','pp52ea','q9qbqp','tyb7jg','5jwem8','dgf7xx','qw3kq7','r2an8u','7jvgq4','6bfykw','4x4yhu','35snx8','cq7a3y','rgew6a','zdpqrq','g4wjfb','3g293b','2xdv3j','3m75qh','r5p85j','3hzxaq','pfs8nq','z24v2t','99ej8m','b3yy9f','uyzkj3','qcxv5k','r4a77v','es8nv6','95hfwf','3affwb','jsuzz8','y77qef','k5syuu','wcycpm','rpsaqh','zq4rh5','j3buk8','t4r96k','b9tc7s','f9xqyn','akuwpt','xn4eyd','t4a6vg','jbq63s','57vpuj','ud6k2b','srru3k','6xwhzv','7vyfqh','f7x24j','jet378','d28fw5','dr6vwv','eccgth','2tbwq7','uzswt2','mrs4d3','2arqkj','veasck','wz9ejj','2zgmct','56pbwr','9vunpe','54kp9w','9spu77','4k4fa8','uwhpzk','6y38t5','rwexam','2n7jpr','t2d34z','h3f9eb','5xrvsf','n5fpxr','bvs8z5','ep4m3z','6w68pe','7mknbv','whxu7f','3jq8ct','jvv98c','epgyvb','kgw24w','e7fy7t','capchf','hgeext','6nvwj8','ef7fd9','yfnv6k','cyyz78','2jwq88','uwbjzp','ht5nuw','qepwkx','b7cxa5','bxck6w','g6suj5','rpk4mf','wk5rkj','tfsr9m','brmamr','8tm57v','zz28yy','kpjxce','e27svf','4x9qe6','ex4qjs','mvgkgv','4yet9u','bgymgb','qm3eeq','vtump5','nyxnzt','tm2tsq','zv3rsp','s84t2w','r86fpw','q4dr9z','ysqr4u','dcyrrx','v97cka','vx7dmw','5a4tph','8ujwwm','2akcrz','c7t9dk','ad6c8c','zpbezr','3ua9qn','9er867','kxghsj','5yg59v','g6n3fd','w9dyfy','s6pukh','hr9fdk','dbfhgn','mcjw9b','8ew7up','6mgk6v','gr6m79','vw9ggb','vkz4pe','s8padx','nya4bx','3buvuz','9hvx9p','6c9rcc','mnz7cx','s2k2ue','a5fuc6','skbz5y','3gt2ar','7tabcu','7ssshy','ekwf8p','u732fz','wqpzzb','f27xnn','sxj9yu','wxu58h','5qj2gy','tmwmq9','xgk3ze','mcck5n','svwygw','fcfc8k','jvmmsp','6eytm4','jg3824','nnf8mh','hkn6qz','242xg3','g83byu','9aned2','xbh52r','x5n8rv','9hx3rm','aeev2n','9um5by','eft4x8','xu2dhf','jy522z','4mrvmz','dermmf','nx58ap','8ax3gc','2m8b6h','4qf4n5','4mmntp','psp4a9','xb49w2','cmdhrd','zmzm85','uskpdg','cuzees','q35uxe','ug9xjv','b22dps','2ay973','68w3jb','4k2g5q','5rum62','tpjfhg','4476xj','yu382n','dr9vba','bjw4vx','pe45dq','d4eud7','qjdfc7','zm5j36','33bat8','h4equ9','ke9khp','89q7t7','yytwk6','sg77uq','buwvrn','k4tjn5','wegakc','32hwca','9ggv2w','j8kv2r','bqnta8','vx3zww','jtcc8n','rt929k','8gurbv','7pjs79','heevfp','232ba7','w7pja7','xxeg6q','9bpah2','t5ps2b','ajmw85','2qh97z','gjasup','cu557e','uvu2wk','e4yqwp','tptxn5','vzx7s8','z4c9z5','qnje6g','ksvhn8','s48kt9','7uk2yr','pxdepy','xwnfz9','uxuhqn','ucccwa','hqcz3a','f3t22w','2pjjmx','tcmt8d','479w59','uwyxw7','td4cnd','6n2gac','rhnhep','tpq37d','w565bu','fpbnrw','b4bsbq','abdqwp','m2ge4k','2g6sxu','ukup4u','87qknt','83v2s4','5cdmtb','8b8qtg','erwaca','2gqt8m','trt5wd','8kphz2','8bmhpm','vaywgh','c8nmqp','ycpv8q','vnspcm','2bnvfk','gffquf','g9uxs6','ftzhv7','kqh2cz','2jaxus','49bc6d','z83kn4','dw44pd','2ss678','p7dr7v','a9kjmf','288ytz','avngxr','46pz8f','u85vte','7z64xc','5pft3d','zs6p75','2yrdhe','kjuucq','4zbmsh','dpquw6','kbdfjz','5vffgs','82cqbw','95ghd8','388asq','adrs69','8wjqph','uh2w8v','w49zv6','nxscev','dujkpk','nhyt4y','aeh6ed','6aaxam','ehhs4u','uvm5ma','cqgu7d','kzzsh6','6njpyc','2mveb4','wdrug7','wwbany','622b8q','vt2fj3','nx4zy4','86tgrx','x3h8zn','uunkpe','qt97aw','5ymfjq','ys2qn5','rhxzhu','e9rcqe','ga7cbg','sjrfee','chyyfr','rxd4us','33jnpa','ndq2d9','bfs97j','w6fcs3','s5h2xh','7p3mm5','wjrd6z','pb58rt','g3stzg','dmyzsb','8ggsma','8hk4jf','emx9pb','749tdb','v83665','4y8zx3','x2q7j9','djq4nb','3ztcm2','atvy9k','tqnyjz','7kmqx3','awtf6h','h7evb7','ge2ddx','m4jyyt','3bsvxt','u77gxd','8ws96z','bxzsur','5x2w5c','bhkmjw','3ayvft','xwm5d5','x4bump','t3uz9c','tf6ya6','psugg2','38bhjh','acf58y','6p33vn','zka8pp','e5fasp','pubyq6','f333eq','tfgmhv','pma2uf','wqegyv','6wq9rb','ead8ge','gjvgb4','4jucua','bm29ak','k3b8ws','4kcakq','m3h3mk','7rny22','7snbse','m2dsuq','6faunx','jm7yrz','hkvnek','5bqv9e','5dw2g9','ba7fkk','wwkwfy','fkqcce','n6mr6b','qvgcq8','na9m6c','vkdbvw','jgyxx5','f4hwju','xusnhx','tqjgfp','6t2f4h','pky5bh','fxqxcp','ydkh6s','cf3wjc','s8by5n','wgtnmj','srfe9f','9rgkpj','muspzp','9fe9tw','r3aup4','zn9xhd','8bpujy','49aceu','p279av','u5vbz2','dugqv8','27nhnf','ns9wnn','v4npum','k3978b','tpx8p2','d76vj2','c4bw5z','rez98a','8q8mqq','2hg8z2','2w9m9m','rpckun','nenu24','wn6uhq','jafh8z','cck6nc','ff82gu','2k54dy','edzhm7','9zfurj','fn48qd','pw4yb3','rs6puh','mq3apf','sh9p6k','2q3skx','2aure9','kmwu2g','auqacq','uxwvug','6qdjhq','n2z87u','px89cp','d42a99','ws2p2y','nxy6jj','t3sre2','k2qhb9','2uytk8','32w2ux','z2r644','j27tug','q8xmky','5bvx9e','33eznk','sbutjx','c7mfec','4bunr5','4bj2pk','x9y35w','sggs3z','zr7dm2','vh296p','zvgp7f','utpcnh','2mpcf8','q8my3k','z3k687','6b7zd3','f9sfgj','r9huhm','mctzwv','cdzsmm','2nfpn8','3gdseb','m2k9md','4n5wsk','qwtx2s','fm9bja','dtjhrb','zt4u7p','m9yqhs','y7p97w','8c4fm7','fdmyvt','v77chd','uxfkxk','nc333g','zsrncu','vr9jua','c8pfzy','9gpv4f','fuxs5x','meu9vu','bus3mx','583g3p','jdbpje','7kk5k5','y943by','u7dgc3','scp45t','8ku2c4','3m4ut9','n4cw32','3jag3n','j2a3ar','eewgc4','stdg4d','9u3nch','a45ufm','szuvbs','ydfz46','7xun6u','ysv3gu','7yvmsj','7cd4y6','rh5uwg','a5pmr2','bs53ez','9dqxxq','m6meam','acdevm','u4zqu5','2znzcj','fw5hbm','rrsdzr','xwqwjh','mx65p7','hux9jg','czqzje','d3whdw','h3kak7','46xqme','nz9rdh','cyccxr','85ae28','qqtzuf','wbydak','5fcct9','rt69ks','sg68k6','bnfnfa','e5jj8x','5fq57a','ndv245','av53x9','6wxy7m','98kdnk','jwevmj','3wyegy','p5rbsd','a5s662','72sscw','u9kkrk','49wjcb','e37qqj','hyk7w7','wyw8ax','hcnbpd','nayt6r','qgwvxm','3f78a5','2u52hh','cd6qa4','pbfnxz','mgxqa6','qqr4hs','66rmb8','c9ckgp','c24f4k','pht3nk','zb57fd','pegfzq','kh5jay','yentwj','q72ebn','xv5w6w','7uunva','vm62gg','28qf9k','6vdwam','v8wpbk','gsaeks','sbqfkk','e62n9j','z9duju','3kub6k','sq2vm6','8y7ddy','xvau3f','9k8zjv','m8a4ng','dbwwyr','h3zxru','jfmzvk','xfc39v','6vder5','n8jqwt','x5755z','36atyr','pm4qrv','thu4yx','snkycn','hyufj2','py77er','n7c8sw','x2cam5','spty6v','qbbrgj','2d5mrx','au66dr','d5w4sx','j5wsy3','gnpwpa','3kjzk4','8afdr9','wm7fac','m7vnrz','u5g9cm','ryy4br','ermj6u','y2wgt5','x4vrvc','hzpmtj','3nvx6x','7txvp5','cna8yu','rdfr5c','zsms8y','9udqfw','cxv2jc','etn7kf','mssfsg','swhrhu','kdzbmn','mr5xcn','6kxbw8','gspkhh','8zrrqk','zantpu','3ju4gw','9r559k','ucj28g','zpfht5','n5kma4','wn5fut','5q5hsc','99z6xz','6nn5jt','vc63b7','kjkxnq','w24sb8','nbcqr5','292xnx','9p3auq','vysz66','bamf8y','7tu7cm','gbnhtj','hmjk4f','cwst53','sgkpa2','q7fhaj','br6syd','4f8sqr','ypjjd8','dk7key','sd8w9v','rhkstf','wtx5yv','q6pwjh','t9reak','754d6v','th79ue','ws2e6j','n6ngc4','xfxumg','y32fza','gktgdz','ryzuau','38ezxw','3e6ggd','zymas8','svmx4p','pra8q5','655kds','6v98hq','5njy2v','v9jt8c','zbrgkw','yexyjj','2dsmbe','mryevk','dneyas','m32edy','sfz56b','ttgydw','4skbep','gwkd7t','djpwdh','b6k6a7','xhn9kx','cyxbne','ueqwrg','d2n8nb','vypg5a','885dg4','yyzwxy','b7drxr','mbt7pf','bskynj','mn4evw','vyefh3','xjrg6a','xqcvbb','34gmsn','wfpbq5','f47fnm','rrxzjg','m8rtsc','rmceen','8pkhcv','6q6mt5','v7ttvb','ennmbn','8dm4bv','bk82k6','f9xjub','kdmcny','ue2awp','ae9xmn','egjxu6','npm3um','bvms4d','dd34wq','be3ssv','m5n7d9','j28uwm','3a99jp','w39ns7','47xh5d','k6mbbz','euwu25','nxuu7b','3mhfx7','nnefwr','zgzwea','dbhmma','4jbjw6','6zxumy','fq9tua','vf6twv','md2axe','k5xftr','ftpv4r','bazusr','eukcn5','wxdun7','t8k3ub','ewnwjr','xuzkwt','wzsu6r','jfdxek','b47mpf','r4q6yh','f4qypt','42bzvc','zjbw4k','47kdyh','3u5yqx','uunesb','k9u8gh','78scdc','xncf5b','ymx2ms','bbeatv','t683fn','gfr9cv','3zuh3g','j96s6e','3bcf6p','gqg7vq','rhus5y','2tun9n','su98hf','9tsf4p','twehn7','s6y84r','b6bmja','stqsrk','kkaruh','5jvh9g','x6392t','mykwba','5v3b8t','cuaeby','hqm79y','vd4wsj','s226tr','c2zhfp','bn86j8','99u6vg','nvg6fv','wafw7q','u2am8t','yq76me','88zp3t','cb3sqg','3veqxt','xsqbfz','23j2p3','xrgpwf','uj33hs','xd9wd8','p7pczd','3545z3','tp5ak6','jebvpa','t5h3j8','w34adm','sgxafe','tqb96h','32qjdy','mttmt5','seuvug','u2mt29','yej4k5','cx9fbk','96bv2q','j9ay55','hxqurp','b6ex9y','umbhne','7knvvv','c467sm','559fvt','eqwbaz','p5bkqt','rvft25','7pgm4r','gjqqr3','c4spgj','uyua9m','q3xwmu','m5qg33','nqj3up','pdzm7v','32vd4y','4u3rc2','h5c885','vj4jfq','5mpjam','vdkzua','he6pb6','a6ferj','3p7n4b','swhs2q','anykvb','kkhvv6','esxv9f','brywtj','nwar23','8tybak','6f9msh','wgqz24','qgt7cg','u7thhf','zz9mwb','cq7aqh','bu5hgs','4wbapn','qm3cyc','7563gb','juhrp5','4f8e4s','tbt9nn','mfr3s6','ac7uap','p4p5wd','u4y535','mtt3sg','dfahyb','w3aree','xee9ea','n7fbrf','fnrga4','vhwyr6','d7nkec','84k7kj','psexav','kmjc69','vcwh9q','ppn6ad','ucmm59','yvpumb','qubm7e','y94rmj','ryxy4z','r2uvb7','x5u7a6','suh2dp','nkyqdx','xpspf5','vxpbkw','tnsjmy','4uf3gs','xr62b8','m47frg','3akynp','5pw38e','veeeqq','rz6xb4','8ae88k','fsfv7c','g5w5xr','ga4sv3','m6249p','yfhv76','ytwry4','6u8ttr','c95szd','gphhr5','aw52gg','h9mbd7','mgx6vw','waxj7y','kuv6wy','gzgu7b','3wzwws','sxmy6v','rm689q','fne6rj','bmwgmm','cyd94z','2pxu9g','2wqjqm','fw99eg','e5ea8d','sh87xg','wk5u8y','gy6j86','z2k9th','vckw89','hmr92h','yxsxwt','d3bk8p','asj3g7','qyrft7','dpnezj','agx6nj','5mbwvv','pr42u4','q8sanm','u5tu5m','7nvxz8','kp9g3k','zaqp87','a3rpz9','67tjvk','jzyqv9','3fdn4g','8w2dw7','v3p8jd','dmg6px','sauz67','szxsre','zt3jw4','8fjjfn','9b8u6m','q8xr7k','wj33tw','y5frgq','mar74b','hzapub','exubsz','twnnfp','wet9tq','crnbgt','cxe48f','5e4kmc','e7rvde','2fw7an','7wgpf2','vyjg5a','4fjs2t','sea4j8','jkmmk2','nuazs6','nwajf8','9yem3p','qxpwd9','tpz3bk','wgm4bh','u2dmav','ux73ta','6rkd9w','mhsabx','drnud6','ag3czb','p3yncz','dcafmf','zgakry','wvqe3z','q4k6s6','gub43w','zpdmwu','4w6wat','gh6znc','mbx967','uvwktu','qq4w5y','hbbswd','8cvvf4','km7n6h','rwhmcq','mhcym6','g3abj4','r32t8s','wbs8rm','e5de66','8q4qkr','exsjz3','evejwh','gaasur','2k5w4d','fmgptu','7mdks8','pezkru','7r4ged','jyt6qk','ph8zy6','jqw5xw','dfexud','e8ta9e','8us2b5','cy9t2p','tgkg9x','26r74q','9g5byp','krak8n','r5fmp6','nz4qdz','462nn6','muttks','q9jr2h','kbwkb6','wk2sb3','d5y4bc','b538q4','ppp9kp','2sfagt','epu66c','asmekj','ahy2pn','wrbe6t','qhb58t','waksqx','ynskr2','m6x93m','cxkm54','69kvzy','rhvg85','4pc8tg','fj5qu4','xjexww','f2zdb2','5gg93t','zteyd9','m94vzk','p9u7qz','wpz2ax','tpp7ng','2cs7gu','k4wmws','y4uwua','aebv79','4pxh9u','xqc8be','eb958c','8p26cv','mrcvca','4q8a6a','wbqk34','e6z77y','k5kzj8','9575eh','ake54r','wfa9c2','qu3b29','383bs8','fshj42','g6xc7h','4vzn2z','v6xk5g','rnejsd','xry7jp','bsz9j5','xk9gas','zg2c69','nhrg8f','kaknke','h55prz','25bbaj','mmvkxe','ce2xxz','42ncwe','2rf89h','hedf9s','52t5qp','bx4ngy','dk9xfa','xnjm6v','hhrz3s','rrpjph','jck4um','uyvj2e','9kgf9e','64nn6x','wwkp8k','gh4x4c','8k7758','824bpz','8zaqwn','wsbqh8','7nejd5','zeq9w9','nv2e9z','rkckb5','pck3yh','umxw2z','qnf3v2','trxtaw','wnhrtr','5s93e7','dquxwm','x9g3c7','k8cr9f','bzg9me','r6tnj4','p8fkr8','r6cry8','62evu8','3jm9j3','ht3vjt','ee2pmq','kdpvsb','9p25b2','jtmfzw','m7yk43','9639g6','26urap','f8c8h8','26hu6f','jx5ju7','yg3ab2','g2mm2t','e3bhx6','xctfya','7k59p2','sydwpc','pepfbh','88yrng','cbdntd','tven79','3wk89n','y4yfnf','sw95sa','9adfy9','8v395m','nuhbsb','u24b36','bzdszq','y3jhfx','vu6ct2','9xe7nd','c8z8eg','8zqyc8','78ypej','79m2ne','24r2c4','gbhgpg','kpzyha','skdk4c','th6h52','fttyxx','274xqz','3frd47','gtqqrd','tbncjs','7awt2u','77as7j','pkm7aw','5uarge','6h5mvj','9p2gk4','faj4qh','3fcfpp','hr84nj','n4ffm3','g3yfjb','g7vqnf','xmndv2','rsxphg','km8nzr','56bqn6','nu77u3','spxx9j','jsjvxd','2na68j','yawf2x','5paxgh','grj57r','wtzme3','g5jtfh','dwcm34','x9mp3x','nn8rfq','r7fq6u','b2nfdk','kax5am','x6hc3j','g892f8','krx2qt','4mbw9j','4zpyef','2ghrdr','2u59w9','mkxnme','cz74tr','94s3bv','vpzmej','3w5x5g','rd6gkk','z49qrz','8thd8p','c3pzuf','4qwgzu','tctq3z','kumq69','vjbumk','7tk3yr','jmmrhg','j4uj3u','wew5m7','mf3hsr','qd2zja','9a6kwy','e59hsk','shuq3u','kkgwye','g6q88b','wmc32b','sjzuj8','nscy5u','mgy35e','czfqc2','bbtarg','6nau29','5xggyb','kdqc4b','mytpcm','n9d3jb','459eet','yupwqd','hkk5tx','3dmq2n','shez94','m7v9zj','qr62sr','zxqyhh','c874qj','g65xzb','f86qub','k3gryx','nngvg3','6cszat','24n65m','kn9nkh','728v6t','una8xd','2bnm9u','cp8dkc','by52dr','fvc893','c2x2w2','bb48zy','urmz3s','x7da22','qhxdzh','cen2fq','w845g8','xvexe2','bynt55','4fmzah','swg3e6','zvn68q','8pcnjt','ze8e7f','fbbsxn','vwx82e','gjydb6','qjmbpf','8ba6nc','32szw6','xwbcv4','d5jbfa','nx55qr','9jyht3','3qm3bc','f6twgc','arzy2b','vkysnb','5njb9f','tfs9xt','6446pz','x9h6t8','khq86z','w7eaz5','5e3xgj','fazjvq','4vg43t','w86nqr','gdvqst','ekeegk','2d9g74','f9xkkq','n5u9az','rqn4hq','urcxtn','79uapd','xe2hfy','k4wpvd','e6tmb9','teqfff','3bzk3v','rb9hh2','h8m24u','6mwzx3','j57ntv','zp6gw3','crxpx2','tukxby','wncvqf','2z8dwv','jafphf','svdg69','fhzxg2','6c4k7b','mwqt63','9tus37','pbbzpe','jmpcbz','sfsrmj','pkq2g3','pmzssr','ejfh2z','2qzy8q','8hynnz','4tvq87','vep2rh','78w2ej','h9w928','pay4j5','3v2db3','phhdb5','g2yx4c','q5bqzv','q8m3hj','s6b2gm','9qmy2v','3yk9yc','kfmy5x','k4yd34','guyqtg','rcnnvn','zh82ug','yuysbb','r4gqwg','m9sr8e','8c8gx7','dctupn','yt5pka','pzrgb5','fdyj8p','hm4z6d','srjee2','ntrc9n','n38qtd','y3mr2m','vvb9xw','3wgf2y','ty9mt5','rjttub','ktbd27','z34gt6','fxh7pp','wv7hkw','9ccasa','bh2rd4','cwtgeu','y3whdp','8rna5n','5vkkhn','cyj6jn','2gsyhp','9r6vf3','889gv6','93sajr','89nw9s','d3ehr8','sp68fg','ccpv5c','7ff4fc','wnw7bg','5aejwn','5jm62w','4vmfyz','8ph6tk','aerdd7','u4ckbs','4eycqq','3arr9x','dgfv5c','u5hkzd','ma933z','698rjr','tbva8y','vhpwec','4wqc6g','v8t5zf','wfwt5g','8xy6ex','97d8r6','ssjda6','pc3e5r','t3d2sa','xykjka','4s3tmu','s9vyje','sunrsa','jj3un9','s3g8mw','j2mmnq','zrtgnn','tt64ts','h9hwmn','djrhyk','yxtsjd','avermp','5rvbsw','wc62d7','fx8qfm','9xjpe4','smp9h8','jvbh3u','5dp3fg','q2u9g5','x9yem5','5fvuhz','sqxve7','fhd8xw','73ubpu','4eqq26','dfqk6z','6ayauy','rar5t4','8fkb3a','267pf4','7ktx2w','r4xsz4','cyy6k2','ut8g88','5juzy4','s2c4hs','vgj5va','2nfufm','248xgn','4fye8a','8xw9hv','dskrs7','zmx9nf','x8aaj7','au27k3','cnh8ku','pnh2up','b44c7r','6zth98','cxt4by','vx6nmb','sj9pe6','3rpday','v6b6wj','fsmncy','qwrttz','yetcmw','mef39y','9rcm2j','yvbbvj','gc7tu3','23ue4y','9t5qv3','etna5y','xq72my','937ghu','9e8sjr','epe52z','z9mfta','4xr79w','d84vhb','sfa52p','9kfwqx','zt7aj5','j2wsnc','2cmrgz','wrr64q','khmync','4fvdmz','k72kme','euad4t','hr55re','w5qcpy','7w523c','2tbyak','z9x4hr','5epxwp','ghf7rs','pa59zt','axcpt4','9wpjkz','hbh84u','dpkbxf','99mwhr','4g98my','v468n5','7d9bdb','ehdk6g','e9xpkn','t2hcsq','g2yqu7','4t6qwp','v6fvse','4s7nfk','zx9g86','dyq5v9','b67xwj','p4dw5g','mcq6nq','xy6xp3','haysgk','yttfes','g2v775','92yrwy','8fpvn2','yyepv4','xcbkxc','bkxu7m','c5sxth','475s67','2bbpza','rn3acs','t5kfc7','fkxb6t','enz9ba','kb74r5','a7j4n3','8kp42f','xxe2d6','w9a54g','rjpeqp','ygchpz','wqv4nc','v6ww2d','9tshct','eyg3gp','qcsrj6','xtjfwk','hpg757','annyut','g6gqxa','xqedxp','pyerk5','cddgmn','kfxdub','eaagu9','jjpm6t','ah88mg','v7baj7','fqx9dj','bn2z4v','zyvx9p','rqck22','bwjxv5','agph6t','zxuuqv','ay4p9k','m3qdhz','um6hg4','5rtrn2','gxcf5d','m37pc3','5nx7pw','mf9yrz','dmnrde','nksbyb','45xhtx','qprs7f','hvbf5g','4qyqch','7s9d8r','b69fzj']);
-
-function isValidCode(code) {
-  return STUDENT_CODES.has(code.trim().toLowerCase());
-}
-function checkPassword() {
-  const input = document.getElementById('passInput');
-  const err = document.getElementById('passErrMsg');
-  if (isValidCode(input.value)) {
-    document.getElementById('lockOverlay').classList.add('hidden');
-    sessionStorage.setItem('gaokao_authed', input.value.trim());
-    saveForm();
-  } else {
-    input.classList.add('error');
-    err.classList.add('show');
-    setTimeout(() => { input.classList.remove('error'); }, 300);
-    input.value = '';
-    input.focus();
-  }
-}
-
-// URL浼犲弬 ?code=sd0001 鐩存帴杩涘叆
-function checkUrlCode() {
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get('code');
-  if (code && isValidCode(code)) {
-    document.getElementById('lockOverlay').classList.add('hidden');
-    sessionStorage.setItem('gaokao_authed', code.trim());
-    saveForm();
-  }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  checkUrlCode();
-  if (sessionStorage.getItem('gaokao_authed')) {
-    document.getElementById('lockOverlay').classList.add('hidden');
-  }
-  document.getElementById('passInput').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') checkPassword();
-  });
-  document.getElementById('passInput').focus();
+document.addEventListener("DOMContentLoaded",function(){
+  try{var r=localStorage.getItem(STORAGE_KEY);if(r){var d=JSON.parse(r);
+    ["name","phone","wechat","totalScore","rank","scoreChinese","scoreMath","scoreEnglish","scoreSub1","scoreSub2","scoreSub3","prefCities","parentExpect","notes"].forEach(function(i){var e=document.getElementById(i);if(e&&d[i])e.value=d[i];});
+    ["gender","category","hukou","schoolLevel","region","tuition","freeEdu","income","familyEdu","gradSchool","personality"].forEach(function(n){var e=document.querySelector('input[name="'+n+'"][value="'+d[n]+'"]');if(e)e.checked=true;});
+    ["subjectGroup","majorGroup","guanxiGroup","healthGroup"].forEach(function(g){if(!d[g])return;var c=document.getElementById(g);if(!c)return;c.querySelectorAll("input[type=checkbox]").forEach(function(x){x.checked=(d[g]||[]).includes(x.value);});});
+  }}catch(e){}
+  updateProgress();
 });
-
-window.onload=function(){loadForm();updateSubjectCount();};
 </script>
 </body>
 </html>
-
