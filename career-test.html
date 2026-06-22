@@ -97,7 +97,7 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;backgr
 <div class="header">
   <h1>🧭 专业兴趣测评</h1>
   <div class="sub">霍兰德职业兴趣 · 帮你找到适合的专业方向</div>
-  <div class="badge">⏱ 约5-8分钟 · 30题</div>
+  <div class="badge" style="cursor:pointer;" onclick="location.href='index.html'">🏠 返回志愿表</div>
 </div>
 
 <div class="container">
@@ -125,6 +125,7 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;backgr
     </div>
     <div class="btn-row">
       <button class="btn btn-primary" onclick="startTest()">🚀 开始测评</button>
+      <a href="index.html" style="display:block;flex:1;padding:14px 20px;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;background:#e8eef4;color:#1a3a5c;text-align:center;text-decoration:none;">🏠 返回志愿表</a>
     </div>
   </div>
 
@@ -148,6 +149,7 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;backgr
     </div>
     <div class="btn-row" style="margin-top:8px;">
       <button class="btn btn-success" onclick="copyResult()">📋 复制结果</button>
+      <a href="index.html" style="display:block;flex:1;padding:14px 20px;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;background:#e8eef4;color:#1a3a5c;text-align:center;text-decoration:none;">🏠 返回志愿表</a>
     </div>
     <div class="result-panel" id="resultPanel">
       <div class="section-title">📋 测评结果</div>
@@ -285,22 +287,26 @@ function showWelcome() {
   document.getElementById('resultArea').classList.remove('show');
 }
 
+// 打乱题目顺序：交叉排列6种类型，避免连续同类造成暗示
+var SHUFFLED_ORDER = [];
+for (var r = 0; r < 5; r++) {
+  for (var t = 0; t < 6; t++) {
+    SHUFFLED_ORDER.push(t * 5 + r);
+  }
+}
+
 function renderQuestions() {
   var html = '';
-  var typeLabels = { R: '🔧 现实型（动手实践）', I: '🔬 研究型（思考分析）', A: '🎨 艺术型（创造表达）', S: '🤝 社会型（助人服务）', E: '💼 企业型（管理领导）', C: '📋 常规型（细致规范）' };
-  QUESTIONS.forEach(function(q, i) {
-    if (i % 5 === 0) {
-      var tl = typeLabels[q.type];
-      html += '<div style="font-size:14px;font-weight:700;color:#1a3a5c;margin:16px 0 8px;padding:6px 0;background:#eef4fa;border-radius:6px;text-align:center;">' + tl + '</div>';
-    }
-    html += '<div class="q-item" data-idx="' + i + '">';
-    html += '<div class="q-text">' + (i+1) + '. ' + q.text + '</div>';
+  SHUFFLED_ORDER.forEach(function(idx) {
+    var q = QUESTIONS[idx];
+    html += '<div class="q-item" data-idx="' + idx + '">';
+    html += '<div class="q-text">' + (idx+1) + '. ' + q.text + '</div>';
     html += '<div class="q-scale">';
     var labels = ['非常不符', '比较不符', '不确定', '比较符合', '非常符合'];
     for (var v = 1; v <= 5; v++) {
-      var checked = answers[i] === v ? 'checked' : '';
+      var checked = answers[idx] === v ? 'checked' : '';
       var circleText = ['✕', '✕', '—', '✓', '✓'][v-1];
-      html += '<label class="opt"><input type="radio" name="q' + i + '" value="' + v + '" ' + checked + ' onchange="onAnswer(' + i + ', ' + v + ')"><span class="circle">' + circleText + '</span><span class="label">' + labels[v-1] + '</span></label>';
+      html += '<label class="opt"><input type="radio" name="q' + idx + '" value="' + v + '" ' + checked + ' onchange="onAnswer(' + idx + ', ' + v + ')"><span class="circle">' + circleText + '</span><span class="label">' + labels[v-1] + '</span></label>';
     }
     html += '</div></div>';
   });
