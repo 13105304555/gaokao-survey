@@ -143,22 +143,53 @@ textarea{min-height:60px;resize:vertical}
       </div>
     </div>
     <div class="field-group">
-      <label>院校层次偏好</label>
-      <div class="radio-group">
-        <label><input type="radio" name="schoolLevel" value="985" onchange="saveForm()"><span>只去985</span></label>
-        <label><input type="radio" name="schoolLevel" value="211以上" onchange="saveForm()"><span>211及以上</span></label>
-        <label><input type="radio" name="schoolLevel" value="双一流" onchange="saveForm()"><span>双一流</span></label>
-        <label><input type="radio" name="schoolLevel" value="一本以上" onchange="saveForm()"><span>一本及以上</span></label>
-        <label><input type="radio" name="schoolLevel" value="有学上就行" onchange="saveForm()"><span>有学上就行</span></label>
-        <label><input type="radio" name="schoolLevel" value="无所谓" onchange="saveForm()"><span>无所谓</span></label>
+      <label>院校层次偏好（可多选）</label>
+      <div class="checkbox-group" id="schoolLevelGroup">
+        <label><input type="checkbox" value="985" onchange="saveForm()"><span>985</span></label>
+        <label><input type="checkbox" value="211" onchange="saveForm()"><span>211</span></label>
+        <label><input type="checkbox" value="双一流" onchange="saveForm()"><span>双一流</span></label>
+        <label><input type="checkbox" value="国家重点" onchange="saveForm()"><span>国家重点</span></label>
+        <label><input type="checkbox" value="省重点" onchange="saveForm()"><span>省重点</span></label>
+        <label><input type="checkbox" value="具有保研资格" onchange="saveForm()"><span>具有保研资格</span></label>
+        <label><input type="checkbox" value="双高计划" onchange="saveForm()"><span>双高计划</span></label>
+        <label><input type="checkbox" value="示范高职" onchange="saveForm()"><span>示范高职</span></label>
+        <label><input type="checkbox" value="部委直属" onchange="saveForm()"><span>部委直属</span></label>
+        <label><input type="checkbox" value="省部共建" onchange="saveForm()"><span>省部共建</span></label>
+        <label><input type="checkbox" value="有学上就行" onchange="saveForm()"><span>有学上就行</span></label>
+        <label><input type="checkbox" value="无所谓" onchange="saveForm()"><span>无所谓</span></label>
       </div>
     </div>
     <div class="field-group">
-      <label>地域偏好</label>
-      <div class="radio-group">
-        <label><input type="radio" name="region" value="省内" onchange="saveForm()"><span>留在山东</span></label>
-        <label><input type="radio" name="region" value="省外" onchange="saveForm()"><span>去省外</span></label>
-        <label><input type="radio" name="region" value="不限" onchange="saveForm()"><span>不限</span></label>
+      <label>地域偏好（可多选）</label>
+      <div style="font-size:13px;color:#666;margin:6px 0 4px;font-weight:600;">🏙️ 省外偏好</div>
+      <div class="checkbox-group" id="regionOutGroup">
+        <label><input type="checkbox" value="一线城市" onchange="saveForm()"><span>一线城市</span></label>
+        <label><input type="checkbox" value="新一线城市" onchange="saveForm()"><span>新一线城市</span></label>
+        <label><input type="checkbox" value="二线城市" onchange="saveForm()"><span>二线城市</span></label>
+        <label><input type="checkbox" value="三线城市" onchange="saveForm()"><span>三线城市</span></label>
+        <label><input type="checkbox" value="省会城市" onchange="saveForm()"><span>省会城市</span></label>
+      </div>
+      <div style="font-size:13px;color:#666;margin:10px 0 4px;font-weight:600;">📍 留在山东</div>
+      <div class="checkbox-group" id="regionInGroup">
+        <label><input type="checkbox" value="青岛" onchange="saveForm()"><span>青岛</span></label>
+        <label><input type="checkbox" value="烟台" onchange="saveForm()"><span>烟台</span></label>
+        <label><input type="checkbox" value="威海" onchange="saveForm()"><span>威海</span></label>
+        <label><input type="checkbox" value="济南" onchange="saveForm()"><span>济南</span></label>
+        <label><input type="checkbox" value="其他地级市" onchange="saveForm()"><span>其他地级市</span></label>
+      </div>
+      <div style="font-size:13px;color:#666;margin:10px 0 4px;font-weight:600;">🚫 不去偏远地区</div>
+      <div class="checkbox-group" id="regionNoGroup">
+        <label><input type="checkbox" value="西藏" onchange="saveForm()"><span>西藏</span></label>
+        <label><input type="checkbox" value="新疆" onchange="saveForm()"><span>新疆</span></label>
+        <label><input type="checkbox" value="青海" onchange="saveForm()"><span>青海</span></label>
+        <label><input type="checkbox" value="甘肃" onchange="saveForm()"><span>甘肃</span></label>
+        <label><input type="checkbox" value="海南" onchange="saveForm()"><span>海南</span></label>
+        <label><input type="checkbox" value="黑龙江" onchange="saveForm()"><span>黑龙江</span></label>
+        <label><input type="checkbox" value="吉林" onchange="saveForm()"><span>吉林</span></label>
+        <label><input type="checkbox" value="辽宁" onchange="saveForm()"><span>辽宁</span></label>
+        <label><input type="checkbox" value="云南" onchange="saveForm()"><span>云南</span></label>
+        <label><input type="checkbox" value="贵州" onchange="saveForm()"><span>贵州</span></label>
+        <label><input type="checkbox" value="广西" onchange="saveForm()"><span>广西</span></label>
       </div>
     </div>
     <div class="field-group"><label>想去的城市</label><input type="text" id="prefCities" placeholder="济南、青岛、北京、上海..." oninput="saveForm()"></div>
@@ -305,7 +336,7 @@ function collectData(){
     scoreMath:document.getElementById("scoreMath").value,scoreEnglish:document.getElementById("scoreEnglish").value,
     scoreSub1:document.getElementById("scoreSub1").value,scoreSub2:document.getElementById("scoreSub2").value,
     scoreSub3:document.getElementById("scoreSub3").value,majors:gcg("majorGroup"),
-    schoolLevel:gv("schoolLevel"),region:gv("region"),prefCities:document.getElementById("prefCities").value.trim(),
+    schoolLevels:gcg("schoolLevelGroup"),regionOut:gcg("regionOutGroup"),regionIn:gcg("regionInGroup"),regionNo:gcg("regionNoGroup"),prefCities:document.getElementById("prefCities").value.trim(),
     tuition:gv("tuition"),freeEdu:gv("freeEdu"),income:gv("income"),
     guanxi:gcg("guanxiGroup"),familyEdu:gv("familyEdu"),gradSchool:gv("gradSchool"),
     health:gcg("healthGroup"),personality:gv("personality"),
@@ -321,7 +352,7 @@ function exportData(){
     "═══════════════════════════════════","  山东高考志愿填报 · 数据采集表","═══════════════════════════════════","",
     "【基本信息】",l("姓名",d.name),l("性别",d.gender),l("类别",d.category),l("电话",d.phone),l("微信",d.wechat),l("户口",d.hukou),"",
     "【高考成绩】",l("总分",d.totalScore),l("位次",d.rank),l2("选科",d.subjects),l("语文",d.scoreChinese),l("数学",d.scoreMath),l("英语",d.scoreEnglish),l("选科1",d.scoreSub1),l("选科2",d.scoreSub2),l("选科3",d.scoreSub3),"",
-    "【意向】",l2("专业方向",d.majors),l("院校层次",d.schoolLevel),l("地域",d.region),l("城市",d.prefCities),l("学费",d.tuition),l("公费/定向",d.freeEdu),"",
+    "【意向】",l2("专业方向",d.majors),l2("院校层次",d.schoolLevels),l2("省外偏好",d.regionOut),l2("山东偏好",d.regionIn),l2("不去偏远地区",d.regionNo),l("城市",d.prefCities),l("学费",d.tuition),l("公费/定向",d.freeEdu),"",
     "【家庭背景】",l("年收入",d.income),l2("人脉",d.guanxi),l("家族教育",d.familyEdu),l("考研",d.gradSchool),"",
     "【其他】",l2("身体限制",d.health),l("性格",d.personality),l("家长期望",d.parentExpect),l("备注",d.notes),"",
     "填写时间:"+new Date(d.timestamp).toLocaleString("zh-CN"),"───────────────────────────────────","发给你高报师即可🎯"
@@ -344,7 +375,8 @@ function updateProgress(){
   if(d.name)f++;if(d.gender)f++;if(d.category)f++;if(d.hukou)f++;
   if(d.totalScore)f++;if(d.rank)f++;if(d.subjects&&d.subjects.length>=3)f++;
   if(d.majors&&d.majors.length>0)f++;if(d.gradSchool)f++;
-  ["phone","wechat","income","guanxi","tuition","schoolLevel","region","freeEdu","prefCities","parentExpect","notes","health","personality","familyEdu","scoreChinese","scoreMath","scoreEnglish"].forEach(function(x){var v=d[x];if(v&&(typeof v==="string"?v.trim():v.length>0))f++;});
+  ["phone","wechat","income","guanxi","tuition","freeEdu","prefCities","parentExpect","notes","health","personality","familyEdu","scoreChinese","scoreMath","scoreEnglish"].forEach(function(x){var v=d[x];if(v&&(typeof v==="string"?v.trim():v.length>0))f++;});
+  ["schoolLevels","regionOut","regionIn","regionNo"].forEach(function(x){if(d[x]&&d[x].length>0)f++;});
   document.getElementById("progressText").textContent="已填 "+f+" / 19 项";
 }
 function showToast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},2000);}
@@ -356,8 +388,8 @@ document.getElementById("subjectGroup").addEventListener("change",function(e){
 document.addEventListener("DOMContentLoaded",function(){
   try{var r=localStorage.getItem(STORAGE_KEY);if(r){var d=JSON.parse(r);
     ["name","phone","wechat","totalScore","rank","scoreChinese","scoreMath","scoreEnglish","scoreSub1","scoreSub2","scoreSub3","prefCities","parentExpect","notes"].forEach(function(i){var e=document.getElementById(i);if(e&&d[i])e.value=d[i];});
-    ["gender","category","hukou","schoolLevel","region","tuition","freeEdu","income","familyEdu","gradSchool","personality"].forEach(function(n){var e=document.querySelector('input[name="'+n+'"][value="'+d[n]+'"]');if(e)e.checked=true;});
-    ["subjectGroup","majorGroup","guanxiGroup","healthGroup"].forEach(function(g){if(!d[g])return;var c=document.getElementById(g);if(!c)return;c.querySelectorAll("input[type=checkbox]").forEach(function(x){x.checked=(d[g]||[]).includes(x.value);});});
+    ["gender","category","hukou","tuition","freeEdu","income","familyEdu","gradSchool","personality"].forEach(function(n){var e=document.querySelector('input[name="'+n+'"][value="'+d[n]+'"]');if(e)e.checked=true;});
+    ["subjectGroup","majorGroup","guanxiGroup","healthGroup","schoolLevelGroup","regionOutGroup","regionInGroup","regionNoGroup"].forEach(function(g){if(!d[g])return;var c=document.getElementById(g);if(!c)return;c.querySelectorAll("input[type=checkbox]").forEach(function(x){x.checked=(d[g]||[]).includes(x.value);});});
   }}catch(e){}
   updateProgress();
 });
