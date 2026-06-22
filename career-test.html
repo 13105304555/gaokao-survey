@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>专业兴趣测评 · 高考志愿助手</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#f0f2f5;color:#333;line-height:1.6;padding-bottom:80px}
+.header{background:linear-gradient(135deg,#1a3a5c 0%,#2d6a9f 100%);color:#fff;padding:30px 20px 24px;text-align:center;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;bottom:-30px;left:0;right:0;height:60px;background:#f0f2f5;border-radius:50% 50% 0 0}
+.header h1{font-size:22px;font-weight:700;margin-bottom:4px;letter-spacing:1px}
+.header .sub{font-size:13px;opacity:.85}
+.header .badge{display:inline-block;background:rgba(255,255,255,.2);padding:2px 12px;border-radius:12px;font-size:11px;margin-top:8px}
+.container{max-width:640px;margin:0 auto;padding:0 16px}
+.progress-bar{background:#fff;border-radius:20px;padding:4px;margin:16px 0 12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.progress-fill{height:6px;background:linear-gradient(90deg,#2d6a9f,#4a90c4);border-radius:10px;transition:width .4s ease;width:0%}
+.progress-text{font-size:12px;color:#999;text-align:center;margin-bottom:16px}
+
+.section{background:#fff;border-radius:12px;margin:16px 0;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.section-title{font-size:16px;font-weight:700;color:#1a3a5c;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e8eef4}
+.q-item{padding:14px 0;border-bottom:1px solid #f0f0f0}
+.q-item:last-child{border-bottom:none}
+.q-text{font-size:15px;font-weight:500;color:#333;margin-bottom:8px;line-height:1.5}
+.q-scale{display:flex;justify-content:space-between;align-items:center;gap:4px;padding:0 2px}
+.q-scale .opt{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;user-select:none;flex:1;text-align:center;transition:all .15s}
+.q-scale .opt .circle{width:32px;height:32px;border-radius:50%;border:2px solid #d9d9d9;background:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;color:#aaa;font-weight:600;transition:all .2s}
+.q-scale .opt .label{font-size:10px;color:#bbb;transition:color .2s;line-height:1.2;white-space:nowrap}
+.q-scale .opt input{display:none}
+.q-scale .opt input:checked + .circle{background:#2d6a9f;border-color:#2d6a9f;color:#fff;transform:scale(1.1);box-shadow:0 2px 8px rgba(45,106,159,.3)}
+.q-scale .opt input:checked ~ .label{color:#2d6a9f;font-weight:600}
+
+.traits-tags{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 12px}
+.traits-tags .tag{padding:4px 12px;border-radius:14px;font-size:12px;background:#eef4fa;color:#2d6a9f;font-weight:500}
+
+.btn-row{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.btn{flex:1;padding:14px 20px;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;min-width:120px;text-align:center}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:linear-gradient(135deg,#2d6a9f,#1a3a5c);color:#fff}
+.btn-secondary{background:#e8eef4;color:#1a3a5c}
+.btn-success{background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* 结果页面 */
+.result-holland{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.holland-card{border-radius:12px;padding:16px;text-align:center;border:2px solid #eee;background:#fafafa;transition:all .3s}
+.holland-card.top3{border-color:#2d6a9f;background:#eef4fa}
+.holland-card .letter{font-size:28px;font-weight:800;color:#1a3a5c}
+.holland-card .hname{font-size:13px;color:#666;margin-top:2px}
+.holland-card .score{font-size:18px;font-weight:700;color:#2d6a9f;margin-top:4px}
+.holland-card .bar-wrap{background:#e0e0e0;border-radius:6px;height:8px;margin-top:6px;overflow:hidden}
+.holland-card .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#2d6a9f,#5ba3d9);transition:width .6s ease;width:0}
+.holland-card .rank-badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:10px;background:#2d6a9f;color:#fff;margin-top:4px}
+
+.match-section{margin:16px 0}
+.match-section h3{font-size:15px;color:#1a3a5c;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #e8eef4}
+.match-list{display:flex;flex-wrap:wrap;gap:6px}
+.match-item{background:#f5f7fa;padding:6px 14px;border-radius:16px;font-size:13px;color:#444;border:1px solid #e0e4ea}
+
+.type-detail{background:#fafafa;border-radius:12px;padding:16px;margin:12px 0}
+.type-detail .type-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.type-detail .type-letter{width:36px;height:36px;border-radius:50%;background:#2d6a9f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800}
+.type-detail .type-name{font-size:16px;font-weight:700;color:#1a3a5c}
+.type-detail p{font-size:13px;color:#666;line-height:1.6}
+
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,0,0,.78);color:#fff;padding:10px 24px;border-radius:24px;font-size:14px;opacity:0;transition:all .3s;pointer-events:none;z-index:100}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.result-panel{display:none;background:#fff;border-radius:12px;padding:20px;margin:16px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.result-panel.show{display:block}
+.result-panel pre{background:#f5f7fa;padding:14px;border-radius:8px;font-size:13px;line-height:1.5;overflow-x:auto;white-space:pre-wrap;word-break:break-all;max-height:500px;overflow-y:auto}
+
+.copy-ok{display:none;color:#27ae60;font-size:13px;margin-top:6px}
+.copy-ok.show{display:block}
+
+.footer-note{text-align:center;color:#aaa;font-size:12px;margin-top:20px;padding:0 16px}
+.footer-cta{max-width:640px;margin:0 auto;padding:0 16px 40px}
+.footer-cta .box{background:linear-gradient(135deg,#1a3a5c,#2d6a9f);border-radius:16px;padding:24px 20px;text-align:center;box-shadow:0 4px 20px rgba(26,58,92,.25)}
+.footer-cta .box p{font-size:15px;color:#fff;line-height:1.8}
+.footer-cta .box .phone{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.2);color:#ffd700;font-size:15px;font-weight:700}
+
+@media(max-width:420px){
+  .header h1{font-size:18px}
+  .q-scale .opt .circle{width:28px;height:28px;font-size:11px}
+  .q-scale .opt .label{font-size:9px}
+  .result-holland{grid-template-columns:1fr 1fr;gap:8px}
+  .holland-card{padding:12px 8px}
+  .holland-card .letter{font-size:22px}
+}
+
+#questionArea, #resultArea{display:none}
+#questionArea.show, #resultArea.show{display:block}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🧭 专业兴趣测评</h1>
+  <div class="sub">霍兰德职业兴趣 · 帮你找到适合的专业方向</div>
+  <div class="badge">⏱ 约5-8分钟 · 30题</div>
+</div>
+
+<div class="container">
+  <!-- 欢迎页 -->
+  <div id="welcomeArea" class="section">
+    <div class="section-title">🎯 你的专业方向，从这里开始</div>
+    <p style="font-size:14px;color:#666;line-height:1.8;margin-bottom:12px;">
+      很多考生选专业时迷茫，是因为<strong>不了解自己</strong>。本测评基于<strong>霍兰德职业兴趣理论（RIASEC）</strong>，
+      通过30道简单题目，帮你发现自己的兴趣类型，匹配适合的大学专业和职业方向。
+    </p>
+    <div style="background:#f0f6ff;border-radius:10px;padding:14px;margin:12px 0;">
+      <div style="font-size:13px;font-weight:600;color:#1a3a5c;margin-bottom:8px;">六种兴趣类型</div>
+      <div class="traits-tags">
+        <span class="tag">🔧 现实型R</span>
+        <span class="tag">🔬 研究型I</span>
+        <span class="tag">🎨 艺术型A</span>
+        <span class="tag">🤝 社会型S</span>
+        <span class="tag">💼 企业型E</span>
+        <span class="tag">📋 常规型C</span>
+      </div>
+      <div style="font-size:12px;color:#888;">每个人是多种类型的组合，测出你的<strong>前三位</strong></div>
+    </div>
+    <div style="font-size:13px;color:#999;margin:12px 0;text-align:center;">
+      📝 如实回答即可，没有对错之分
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="startTest()">🚀 开始测评</button>
+    </div>
+  </div>
+
+  <!-- 问题区 -->
+  <div id="questionArea">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text" id="progressText">0 / 30</div>
+    <div class="section" id="questionSection"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="showWelcome()">← 返回</button>
+      <button class="btn btn-primary" id="submitBtn" onclick="submitTest()" disabled>📊 查看结果</button>
+    </div>
+  </div>
+
+  <!-- 结果区 -->
+  <div id="resultArea">
+    <div class="section" id="resultSection"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="exportResult()">📤 导出结果</button>
+      <button class="btn btn-secondary" onclick="startTest()">🔄 重新测评</button>
+    </div>
+    <div class="btn-row" style="margin-top:8px;">
+      <button class="btn btn-success" onclick="copyResult()">📋 复制结果</button>
+    </div>
+    <div class="result-panel" id="resultPanel">
+      <div class="section-title">📋 测评结果</div>
+      <pre id="resultData"></pre>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="copyResult()">📋 复制</button>
+        <button class="btn btn-secondary" onclick="document.getElementById('resultPanel').classList.remove('show')">关闭</button>
+      </div>
+      <div class="copy-ok" id="copyOk">✅ 已复制到剪贴板，发给高报师即可</div>
+    </div>
+  </div>
+
+  <div class="footer-note">本测评结果仅供参考，建议结合分数、位次和家庭情况综合决策</div>
+  <div class="footer-cta">
+    <div class="box">
+      <p>选对专业，少走十年弯路。<br>有任何疑问，欢迎咨询</p>
+      <div class="phone">📞 电话/微信：13105304555</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== 题库：30题，每类5题 =====
+const QUESTIONS = [
+  // R - 现实型 (0-4)
+  { id: 0, type: 'R', text: '我喜欢动手修理或制作东西（如拼装、维修）' },
+  { id: 1, type: 'R', text: '比起坐在室内，我更喜欢户外活动和体力劳动' },
+  { id: 2, type: 'R', text: '我对机械、工具、设备的工作原理感兴趣' },
+  { id: 3, type: 'R', text: '我擅长手工操作或需要身体协调的事情' },
+  { id: 4, type: 'R', text: '比起理论分析，我更愿意动手实践' },
+  // I - 研究型 (5-9)
+  { id: 5, type: 'I', text: '我喜欢研究事物背后的科学原理和规律' },
+  { id: 6, type: 'I', text: '做实验、查数据、分析问题让我很有耐心' },
+  { id: 7, type: 'I', text: '我喜欢阅读科普、科技或学术类内容' },
+  { id: 8, type: 'I', text: '我对未知领域有强烈的好奇心，喜欢刨根问底' },
+  { id: 9, type: 'I', text: '我更喜欢独立钻研，不太依赖别人' },
+  // A - 艺术型 (10-14)
+  { id: 10, type: 'A', text: '我有丰富的想象力和创造力' },
+  { id: 11, type: 'A', text: '我喜欢写作、绘画、音乐、摄影等创作活动' },
+  { id: 12, type: 'A', text: '我容易被艺术和美的事物所吸引' },
+  { id: 13, type: 'A', text: '我喜欢自由发挥，不喜欢被条条框框束缚' },
+  { id: 14, type: 'A', text: '我和别人想法不太一样，常有独特的创意' },
+  // S - 社会型 (15-19)
+  { id: 15, type: 'S', text: '我乐于帮助别人解决问题' },
+  { id: 16, type: 'S', text: '我善于倾听，能理解别人的感受' },
+  { id: 17, type: 'S', text: '我喜欢和人打交道、交朋友' },
+  { id: 18, type: 'S', text: '做志愿者或帮助他人让我很有成就感' },
+  { id: 19, type: 'S', text: '大家有困难时愿意来找我倾诉' },
+  // E - 企业型 (20-24)
+  { id: 20, type: 'E', text: '我有较强的领导力和组织协调能力' },
+  { id: 21, type: 'E', text: '我喜欢在群体中发表自己的观点和想法' },
+  { id: 22, type: 'E', text: '我对经商、管理、赚钱很感兴趣' },
+  { id: 23, type: 'E', text: '我敢于冒险，愿意尝试新事物' },
+  { id: 24, type: 'E', text: '我善于说服别人接受我的想法' },
+  // C - 常规型 (25-29)
+  { id: 25, type: 'C', text: '我做事有计划，喜欢有条不紊' },
+  { id: 26, type: 'C', text: '我对数字和细节很敏感' },
+  { id: 27, type: 'C', text: '我喜欢按规则和流程办事' },
+  { id: 28, type: 'C', text: '整理和分类信息让我感到舒适' },
+  { id: 29, type: 'C', text: '我不喜欢经常变动的环境' }
+];
+
+// 类型信息
+const HOLLAND_INFO = {
+  R: { name: '现实型', emoji: '🔧', color: '#e67e22',
+    desc: '动手能力强，喜欢机械、工具、户外活动，做事踏实务实。适合技术操作类、工程实践类方向。',
+    majors: ['机械工程', '车辆工程', '土木工程', '建筑学', '电气工程', '自动化', '测绘工程', '地质工程', '采矿工程', '石油工程', '海洋工程', '航海技术', '飞行技术', '农学', '动物医学', '园林', '消防工程'],
+    careers: ['工程师', '技师', '建筑师', '飞行员', '驾驶员', '农艺师', '兽医', '测绘员', '机械师', '厨师'] },
+  I: { name: '研究型', emoji: '🔬', color: '#3498db',
+    desc: '喜欢思考分析，善于钻研，对科学和研究有浓厚兴趣。适合科研、技术研发、数据分析类方向。',
+    majors: ['数学', '物理学', '化学', '生物学', '临床医学', '药学', '计算机科学与技术', '人工智能', '数据科学', '统计学', '心理学', '材料科学与工程', '环境科学', '地理科学'],
+    careers: ['科研人员', '医生', '数据分析师', '程序员', '大学教授', '实验室研究员', '工程师', '气象学家'] },
+  A: { name: '艺术型', emoji: '🎨', color: '#e74c3c',
+    desc: '富有创造力，喜欢艺术、写作、设计、表达，追求个性与美感。适合设计、传媒、文学艺术类方向。',
+    majors: ['建筑学', '城乡规划', '工业设计', '视觉传达设计', '环境设计', '动画', '数字媒体艺术', '广告学', '新闻学', '汉语言文学', '戏剧影视文学', '广播电视编导', '音乐学', '美术学', '服装设计'],
+    careers: ['设计师', '作家', '记者', '编导', '音乐人', '画家', '广告策划', '摄影师', '编剧', '演员'] },
+  S: { name: '社会型', emoji: '🤝', color: '#27ae60',
+    desc: '乐于助人，善于沟通，有爱心和责任感。适合教育、医疗、社会工作等服务类方向。',
+    majors: ['教育学', '学前教育', '特殊教育', '护理学', '临床医学', '中医学', '康复治疗学', '社会工作', '心理学', '思想政治教育', '公共事业管理', '劳动与社会保障'],
+    careers: ['教师', '医生', '护士', '心理咨询师', '社会工作者', '培训师', '公务员', '人力资源'] },
+  E: { name: '企业型', emoji: '💼', color: '#f39c12',
+    desc: '有领导力，喜欢管理、商业、竞争，做事果断有魄力。适合管理、金融、法律、市场类方向。',
+    majors: ['工商管理', '市场营销', '金融学', '经济学', '法学', '国际经济与贸易', '行政管理', '电子商务', '旅游管理', '酒店管理', '物流管理'],
+    careers: ['企业家', '管理者', '销售经理', '金融分析师', '律师', '公务员/选调生', '项目经理', '市场总监'] },
+  C: { name: '常规型', emoji: '📋', color: '#9b59b6',
+    desc: '做事细致有条理，喜欢数据、流程和规范，稳重可靠。适合财务、行政、信息管理类方向。',
+    majors: ['会计学', '财务管理', '审计学', '档案学', '信息管理与信息系统', '行政管理', '人力资源管理', '图书馆学', '统计学', '税务学'],
+    careers: ['会计师', '审计师', '行政主管', '数据分析师', 'HR', '银行职员', '税务专员', '档案管理员'] }
+};
+
+// 类型间推荐组合
+const COMBINATION_HINTS = {
+  'R,I': '技术研发型——动手+动脑，适合工程技术研发岗',
+  'R,A': '工艺设计型——动手+创意，适合工业设计、建筑设计',
+  'R,S': '技术服务型——动手+服务，适合医疗技术、康复治疗',
+  'R,E': '技术管理型——动手+管理，适合工程项目管理',
+  'R,C': '技术规范型——动手+流程，适合质量检测、标准化工作',
+  'I,A': '科研创意型——研究+创意，适合科研中的创新方向',
+  'I,S': '专业服务型——研究+服务，适合医生、心理咨询师',
+  'I,E': '商业技术型——研究+商业，适合科技创业、产品经理',
+  'I,C': '数据分析型——研究+规范，适合数据分析、审计',
+  'A,S': '人文服务型——创意+服务，适合教师、记者、编导',
+  'A,E': '商业创意型——创意+商业，适合广告策划、品牌营销',
+  'A,C': '设计规范型——创意+规范，适合平面设计、排版编辑',
+  'S,E': '商业服务型——服务+管理，适合HR、培训管理',
+  'S,C': '公共服务型——服务+规范，适合公务员、行政管理',
+  'E,C': '管理事务型——管理+规范，适合财务管理、运营管理'
+};
+
+let answers = new Array(30).fill(0);
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2000);
+}
+
+function startTest() {
+  document.getElementById('welcomeArea').style.display = 'none';
+  document.getElementById('questionArea').classList.add('show');
+  document.getElementById('resultArea').classList.remove('show');
+  answers = new Array(30).fill(0);
+  renderQuestions();
+  updateProgress();
+}
+
+function showWelcome() {
+  if (answers.some(function(x){ return x > 0; })) {
+    if (!confirm('返回将丢失当前进度，确定吗？')) return;
+  }
+  document.getElementById('welcomeArea').style.display = 'block';
+  document.getElementById('questionArea').classList.remove('show');
+  document.getElementById('resultArea').classList.remove('show');
+}
+
+function renderQuestions() {
+  var html = '';
+  var typeLabels = { R: '🔧 现实型（动手实践）', I: '🔬 研究型（思考分析）', A: '🎨 艺术型（创造表达）', S: '🤝 社会型（助人服务）', E: '💼 企业型（管理领导）', C: '📋 常规型（细致规范）' };
+  QUESTIONS.forEach(function(q, i) {
+    if (i % 5 === 0) {
+      var tl = typeLabels[q.type];
+      html += '<div style="font-size:14px;font-weight:700;color:#1a3a5c;margin:16px 0 8px;padding:6px 0;background:#eef4fa;border-radius:6px;text-align:center;">' + tl + '</div>';
+    }
+    html += '<div class="q-item" data-idx="' + i + '">';
+    html += '<div class="q-text">' + (i+1) + '. ' + q.text + '</div>';
+    html += '<div class="q-scale">';
+    var labels = ['非常不符', '比较不符', '不确定', '比较符合', '非常符合'];
+    for (var v = 1; v <= 5; v++) {
+      var checked = answers[i] === v ? 'checked' : '';
+      var circleText = ['✕', '✕', '—', '✓', '✓'][v-1];
+      html += '<label class="opt"><input type="radio" name="q' + i + '" value="' + v + '" ' + checked + ' onchange="onAnswer(' + i + ', ' + v + ')"><span class="circle">' + circleText + '</span><span class="label">' + labels[v-1] + '</span></label>';
+    }
+    html += '</div></div>';
+  });
+  document.getElementById('questionSection').innerHTML = html;
+}
+
+function onAnswer(idx, val) {
+  answers[idx] = val;
+  updateProgress();
+}
+
+function updateProgress() {
+  var done = answers.filter(function(x){ return x > 0; }).length;
+  var pct = Math.round(done / 30 * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = done + ' / 30';
+  document.getElementById('submitBtn').disabled = (done < 30);
+}
+
+function submitTest() {
+  if (answers.filter(function(x){ return x > 0; }).length < 30) {
+    showToast('请回答全部30道题');
+    return;
+  }
+  // 计算各类型分数
+  var scores = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
+  QUESTIONS.forEach(function(q, i) {
+    scores[q.type] += answers[i];
+  });
+  // 排序
+  var types = Object.keys(scores).sort(function(a, b){ return scores[b] - scores[a]; });
+  
+  // 渲染结果
+  showResult(scores, types);
+  document.getElementById('questionArea').classList.remove('show');
+  document.getElementById('resultArea').classList.add('show');
+  document.getElementById('resultArea').scrollIntoView({behavior:'smooth'});
+}
+
+function showResult(scores, types) {
+  var top3 = types.slice(0, 3);
+  var maxScore = Math.max.apply(null, Object.values(scores));
+  if (maxScore === 0) maxScore = 1;
+
+  var html = '<div class="section-title">📊 你的测评结果</div>';
+
+  // 分数卡片
+  html += '<div class="result-holland">';
+  var order = ['R','I','A','S','E','C'];
+  order.forEach(function(t) {
+    var info = HOLLAND_INFO[t];
+    var rank = types.indexOf(t) + 1;
+    var isTop3 = rank <= 3;
+    var pct = Math.round(scores[t] / maxScore * 100);
+    var rankLabel = rank === 1 ? '🥇 第一' : rank === 2 ? '🥈 第二' : rank === 3 ? '🥉 第三' : '第' + rank;
+    html += '<div class="holland-card' + (isTop3 ? ' top3' : '') + '">';
+    html += '<div class="letter" style="color:' + info.color + '">' + t + '</div>';
+    html += '<div class="hname">' + info.emoji + info.name + '</div>';
+    html += '<div class="score">' + scores[t] + '分</div>';
+    html += '<div class="bar-wrap"><div class="bar-fill" style="width:' + pct + '%"></div></div>';
+    html += '<div class="rank-badge">' + rankLabel + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // 主类型解读
+  html += '<div class="section-title" style="margin-top:16px;">🎯 你的核心类型</div>';
+  top3.forEach(function(t, idx) {
+    var info = HOLLAND_INFO[t];
+    var labels = ['第一', '第二', '第三'];
+    html += '<div class="type-detail">';
+    html += '<div class="type-header"><div class="type-letter" style="background:' + info.color + '">' + t + '</div><div class="type-name">' + labels[idx] + '类型：' + info.emoji + ' ' + info.name + '</div></div>';
+    html += '<p>' + info.desc + '</p>';
+    html += '<div class="match-section"><h3>📚 推荐专业方向</h3><div class="match-list">';
+    info.majors.forEach(function(m){ html += '<span class="match-item">' + m + '</span>'; });
+    html += '</div></div>';
+    html += '<div class="match-section"><h3>💼 推荐职业方向</h3><div class="match-list">';
+    info.careers.forEach(function(c){ html += '<span class="match-item">' + c + '</span>'; });
+    html += '</div></div></div>';
+  });
+
+  // 组合解读
+  var comboKey = top3[0] + ',' + top3[1];
+  var comboKeyRev = top3[1] + ',' + top3[0];
+  var hint = COMBINATION_HINTS[comboKey] || COMBINATION_HINTS[comboKeyRev] || '';
+  if (hint) {
+    html += '<div class="section-title" style="margin-top:16px;">💡 类型组合解读</div>';
+    html += '<div style="background:#fef9e7;border-radius:10px;padding:14px;font-size:14px;line-height:1.7;color:#856404;"><strong>' + top3[0] + top3[1] + '型 · ' + hint + '</strong></div>';
+  }
+
+  // 使用建议
+  html += '<div class="section-title" style="margin-top:16px;">📌 报考建议</div>';
+  html += '<div style="background:#eef4fa;border-radius:10px;padding:14px;font-size:13px;line-height:1.8;color:#333;">';
+  html += '1. 以上推荐专业仅为方向参考，具体选择还需结合<strong>高考分数、位次、选科组合</strong>综合判断。<br>';
+  html += '2. 你的前三类型组合(' + top3.join('') + ')代表了你的兴趣倾向，建议优先考虑重叠度高的专业。<br>';
+  html += '3. 如有多个感兴趣的方向，可预约专业高报师一对一分析：<strong>13105304555</strong>';
+  html += '</div>';
+
+  document.getElementById('resultSection').innerHTML = html;
+  // 保存结果供导出
+  window._lastResult = { scores: scores, types: types, top3: top3 };
+}
+
+function exportResult() {
+  var r = window._lastResult;
+  if (!r) { showToast('请先完成测评'); return; }
+  var info = HOLLAND_INFO;
+  var lines = [
+    '═══════════════════════════════════',
+    '  专业兴趣测评 · 结果报告',
+    '═══════════════════════════════════',
+    '',
+    '【分数】'
+  ];
+  var order = ['R','I','A','S','E','C'];
+  order.forEach(function(t) {
+    lines.push('  ' + t + ' ' + info[t].emoji + info[t].name + '：' + r.scores[t] + '分');
+  });
+  lines.push('');
+  lines.push('【核心类型】');
+  r.top3.forEach(function(t, i) {
+    var lab = ['第一','第二','第三'][i];
+    lines.push('  ' + lab + '：' + t + ' ' + info[t].name);
+    lines.push('    推荐专业：' + info[t].majors.slice(0, 6).join('、'));
+    lines.push('    推荐职业：' + info[t].careers.slice(0, 4).join('、'));
+  });
+  lines.push('');
+  lines.push('【综合建议】');
+  lines.push('  兴趣倾向：' + r.top3.join('') + '型组合');
+  lines.push('  建议结合高考分数、位次、选科综合考量');
+  lines.push('');
+  lines.push('填写时间:' + new Date().toLocaleString('zh-CN'));
+  lines.push('───────────────────────────────────');
+  lines.push('有任何疑问，联系高报师：13105304555');
+  lines.push('点此查看专业方向与院校匹配 → https://13105304555.github.io/gaokao-survey/');
+
+  var text = lines.join('\n');
+  document.getElementById('resultData').textContent = text;
+  document.getElementById('resultPanel').classList.add('show');
+  document.getElementById('copyOk').classList.remove('show');
+  document.getElementById('resultPanel').scrollIntoView({behavior:'smooth'});
+}
+
+async function copyResult() {
+  var t = document.getElementById('resultData').textContent;
+  if (!t) { showToast('请先导出结果'); return; }
+  try { await navigator.clipboard.writeText(t); } catch(e) {
+    var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+  }
+  document.getElementById('copyOk').classList.add('show');
+  showToast('复制成功！');
+}
+</script>
+</body>
+</html>
