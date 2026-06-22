@@ -297,10 +297,10 @@ for (var r = 0; r < 5; r++) {
 
 function renderQuestions() {
   var html = '';
-  SHUFFLED_ORDER.forEach(function(idx) {
+  SHUFFLED_ORDER.forEach(function(idx, num) {
     var q = QUESTIONS[idx];
     html += '<div class="q-item" data-idx="' + idx + '">';
-    html += '<div class="q-text">' + (idx+1) + '. ' + q.text + '</div>';
+    html += '<div class="q-text">' + (num+1) + '. ' + q.text + '</div>';
     html += '<div class="q-scale">';
     var labels = ['非常不符', '比较不符', '不确定', '比较符合', '非常符合'];
     for (var v = 1; v <= 5; v++) {
