@@ -123,7 +123,7 @@ textarea{min-height:60px;resize:vertical}
   <div class="section">
     <div class="section-title"><span class="num">3</span> 意向偏好</div>
     <div class="field-group">
-      <label class="required">意向专业方向（可多选）</label>
+      <label>意向专业方向（可多选）</label>
       <div class="checkbox-group" id="majorGroup">
         <label><input type="checkbox" value="计算机类" onchange="saveForm()"><span>💻 计算机类</span></label>
         <label><input type="checkbox" value="电子信息类" onchange="saveForm()"><span>📡 电子信息类</span></label>
@@ -147,7 +147,7 @@ textarea{min-height:60px;resize:vertical}
       <a href="career-test.html" style="display:inline-block;padding:8px 24px;background:linear-gradient(135deg,#2d6a9f,#1a3a5c);color:#fff;border-radius:20px;text-decoration:none;font-size:14px;font-weight:600;">🧭 开始专业兴趣测评 →</a>
     </div>
     <div class="field-group">
-      <label class="required">院校层次偏好（可多选）<span style="display:inline-block;margin-left:4px;padding:1px 8px;background:#ff4444;color:#fff;border-radius:10px;font-size:11px;font-weight:600;vertical-align:middle;">🍑 不懂的问豆包豆主任</span></label>
+      <label>院校层次偏好（可多选）<span style="display:inline-block;margin-left:4px;padding:1px 8px;background:#ff4444;color:#fff;border-radius:10px;font-size:11px;font-weight:600;vertical-align:middle;">🍑 不懂的问豆包豆主任</span></label>
       <div class="checkbox-group" id="schoolLevelGroup">
         <label><input type="checkbox" value="985" onchange="saveForm()"><span>985</span></label>
         <label><input type="checkbox" value="211" onchange="saveForm()"><span>211</span></label>
@@ -352,7 +352,7 @@ function collectData(){
 }
 function validateRequired(){
   var missing=[];
-  var fields={name:'姓名',gender:'性别',category:'考生类别',hukou:'户口性质',totalScore:'高考总分',rank:'全省位次',gradSchool:'考研意向',majors:'意向专业方向',schoolLevels:'院校层次偏好'};
+  var fields={name:'姓名',gender:'性别',category:'考生类别',hukou:'户口性质',totalScore:'高考总分',rank:'全省位次',gradSchool:'考研意向'};
   for(var k in fields){
     var e;
     if(k==='gender'||k==='category'||k==='hukou'||k==='gradSchool'){e=document.querySelector('input[name="'+k+'"]:checked');}
@@ -362,8 +362,6 @@ function validateRequired(){
   var subj=document.getElementById('subjectGroup');
   var checked=subj.querySelectorAll('input:checked');
   if(checked.length<3){missing.push('选科组合(需选3科)');flashField('subjectGroup');}
-  var majorC=document.getElementById('majorGroup');if(majorC&&majorC.querySelectorAll('input:checked').length==0){if(missing.indexOf('意向专业方向')==-1){missing.push('意向专业方向');flashField('majorGroup');}}
-  var levelC=document.getElementById('schoolLevelGroup');if(levelC&&levelC.querySelectorAll('input:checked').length==0){if(missing.indexOf('院校层次偏好')==-1){missing.push('院校层次偏好');flashField('schoolLevelGroup');}}
   if(missing.length>0){showToast('⚠️ 请先填写带*的必填项: '+missing.join('、'));return false;}
   return true;
 }
