@@ -348,7 +348,32 @@ function collectData(){
     timestamp:new Date().toISOString()
   };
 }
+function validateRequired(){
+  var missing=[];
+  var fields={name:'姓名',gender:'性别',category:'考生类别',hukou:'户口性质',totalScore:'高考总分',rank:'全省位次',gradSchool:'考研意向'};
+  for(var k in fields){
+    var e;
+    if(k==='gender'||k==='category'||k==='hukou'||k==='gradSchool'){e=document.querySelector('input[name="'+k+'"]:checked');}
+    else{e=document.getElementById(k);}
+    if(!e||!e.value||e.value.trim()===''){missing.push(fields[k]);flashField(k);}
+  }
+  var subj=document.getElementById('subjectGroup');
+  var checked=subj.querySelectorAll('input:checked');
+  if(checked.length<3){missing.push('选科组合(需选3科)');flashField('subjectGroup');}
+  if(missing.length>0){showToast('⚠️ 请先填写带*的必填项: '+missing.join('、'));return false;}
+  return true;
+}
+function flashField(id){
+  var el=document.getElementById(id)||document.querySelector('input[name="'+id+'"]');
+  if(!el)return;
+  var box=el.closest('.field-group')||el.parentElement;
+  if(!box)return;
+  box.style.transition='all .3s';
+  box.style.border='2px solid #e74c3c';box.style.borderRadius='10px';box.style.padding='10px';box.style.marginBottom='16px';
+  setTimeout(function(){box.style.border='';box.style.padding='';box.style.marginBottom='18px'},3000);
+}
 function exportData(){
+  if(!validateRequired())return;
   var d=collectData();
   function l(k,v){return v?k+": "+v:null;}
   function l2(k,v){return v&&v.length?k+": "+v.join("、"):null;}
@@ -368,6 +393,7 @@ function exportData(){
 }
 function previewData(){exportData();}
 async function copyToClipboard(){
+  if(!validateRequired())return;
   var t=document.getElementById("resultData").textContent;
   if(!t){showToast("请先导出数据");return;}
   try{await navigator.clipboard.writeText(t);}catch(e){var ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);}
