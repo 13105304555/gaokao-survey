@@ -289,6 +289,8 @@ textarea{min-height:60px;resize:vertical}
     <div class="field-group"><label>考生备注</label><textarea id="notes" placeholder="还有什么想说的？" oninput="saveForm()"></textarea></div>
   </div>
 
+  <div style="background:#fef9e7;border:1px solid #f9e4a0;border-radius:10px;padding:10px 14px;margin:12px 0;font-size:13px;color:#856404;text-align:center;">🔒 导出/复制内容已加密，发给高报师即可解密。请放心填写。</div>
+
   <div class="btn-row">
     <button class="btn btn-primary" onclick="exportData()">📤 导出数据</button>
     <button class="btn btn-secondary" onclick="resetForm()">🔄 重置</button>
@@ -299,7 +301,7 @@ textarea{min-height:60px;resize:vertical}
   </div>
 
   <div class="result-panel" id="resultPanel">
-    <div class="section-title">📋 导出数据</div>
+    <div class="section-title">🔒 导出数据（已加密，发给高报师即可）</div>
     <pre id="resultData"></pre>
     <div class="btn-row">
       <button class="btn btn-primary" onclick="copyToClipboard()">📋 复制</button>
