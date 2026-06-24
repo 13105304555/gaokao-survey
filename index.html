@@ -98,7 +98,7 @@ textarea{min-height:60px;resize:vertical}
   <div class="section">
     <div class="section-title"><span class="num">2</span> 高考成绩</div>
     <div class="inline-group">
-      <div class="field-group"><label class="required">高考总分</label><input type="number" id="totalScore" placeholder="裸分，不含加分" min="0" max="750" oninput="saveForm()"></div>
+      <div class="field-group"><label class="required">高考总分</label><input type="number" id="totalScore" placeholder="裸分，不含加分" min="0" max="750" oninput="saveForm()"><div class="hint">总分应与下方各科成绩之和一致</div></div>
       <div class="field-group"><label class="required">全省位次</label><input type="number" id="rank" placeholder="一分一段表查询" min="1" oninput="saveForm()"><div class="hint">比分数重要！去省招考院查一分一段表</div></div>
     </div>
     <div class="field-group">
@@ -368,6 +368,22 @@ function validateRequired(){
   var checked=subj.querySelectorAll('input:checked');
   if(checked.length<3){missing.push('选科组合(需选3科)');flashField('subjectGroup');}
   if(missing.length>0){showToast('⚠️ 请先填写带*的必填项: '+missing.join('、'));return false;}
+  // 成绩校验（选了才验证）
+  var ids=['scoreChinese','scoreMath','scoreEnglish','scoreSub1','scoreSub2','scoreSub3'];
+  var vals=[];var allFilled=true;
+  for(var i=0;i<ids.length;i++){
+    var el=document.getElementById(ids[i]);
+    if(el&&el.value!==''){vals.push(parseFloat(el.value));}
+    else{allFilled=false;break;}
+  }
+  if(allFilled&&vals.length===6){
+    var sum=vals[0]+vals[1]+vals[2]+vals[3]+vals[4]+vals[5];
+    var total=parseFloat(document.getElementById('totalScore').value);
+    if(Math.abs(sum-total)>0.5){
+      showToast('⚠️ 各科成绩之和（'+sum+'分）与高考总分（'+total+'分）不一致，请核对');
+      return false;
+    }
+  }
   return true;
 }
 // ===== 加密函数 =====
