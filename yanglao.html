@@ -2,44 +2,49 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=10.0, user-scalable=yes">
 <title>东明县居民养老保险待遇申领 - 5项业务1次办好</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#f0ebe3;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
-.top-bar{height:6px;background:linear-gradient(90deg,#8B0000,#C0392B,#D46B08,#8B0000)}
-.header{background:linear-gradient(135deg,#8B0000,#A52A2A);padding:28px 16px 22px;text-align:center;position:relative;overflow:hidden}
-.header .main{font-size:24px;font-weight:900;color:#FFD700;text-shadow:0 2px 4px rgba(0,0,0,.3)}
-.header .badge{display:inline-block;background:#FFD700;color:#8B0000;font-size:18px;font-weight:900;padding:6px 28px;border-radius:50px;margin-top:10px;box-shadow:0 3px 12px rgba(255,215,0,.4)}
-.header .sub{color:rgba(255,255,255,.8);font-size:13px;margin-top:10px;letter-spacing:1px}
-.poster-wrap{max-width:900px;margin:0 auto;padding:12px}
-.poster-wrap img{width:100%;height:auto;display:block;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.15);background:#fff;cursor:zoom-in}
-.zoom-hint{text-align:center;font-size:13px;color:#999;padding:8px 0 0;display:flex;align-items:center;justify-content:center;gap:4px}
-.zoom-hint .finger{font-size:18px}
-.footer{background:#8B0000;color:rgba(255,255,255,.7);text-align:center;padding:16px;font-size:12px;line-height:1.6;margin-top:10px}
+*{margin:0;padding:0}
+html,body{width:100%;min-height:100%}
+html{-webkit-text-size-adjust:100%}
+body{background:#333;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+
+.info-bar{background:#8B0000;color:#fff;text-align:center;padding:10px 16px;font-size:14px;font-weight:700;line-height:1.4;-webkit-user-select:none;user-select:none}
+
+/* 图片原尺寸显示，不缩放 */
+.viewer{padding:6px;background:#f0ebe3;min-height:100vh;text-align:left}
+.viewer img{
+  display:block;
+  width:900px;
+  height:auto;
+  border-radius:6px;
+  box-shadow:0 4px 20px rgba(0,0,0,.25);
+  background:#fff;
+  -webkit-user-select:none;user-select:none;
+}
+
+.hint-bar{background:#f0ebe3;text-align:center;padding:6px 10px 2px;font-size:13px;color:#888;-webkit-user-select:none;user-select:none}
+
+.footer{background:#8B0000;color:rgba(255,255,255,.7);text-align:center;padding:14px;font-size:12px;line-height:1.7;clear:both}
 .footer strong{color:#FFD700}
 </style>
 </head>
 <body>
-<div class="top-bar"></div>
 
-<div class="header">
-  <div class="main">🎯 东明县居民养老保险待遇申领</div>
-  <div class="badge">✅ 5项业务 · 1次办好 ✅</div>
-  <div class="sub">不用多头跑 · 一份申请表 · 一个窗口 · 一次全搞定</div>
-</div>
+<div class="info-bar">📢 东明县居民养老保险待遇申领 · 5项业务1次办好</div>
 
-<div class="poster-wrap">
-  <div class="zoom-hint"><span class="finger">👆</span> 点击图片放大查看</div>
-  <a href="yanglao-poster.jpg" target="_blank">
-    <img src="yanglao-poster.jpg" alt="东明县居民养老保险待遇申领海报" loading="eager">
-  </a>
+<div class="hint-bar">👆 双指捏合缩放 · 手指滑动查看</div>
+
+<div class="viewer">
+  <img src="yanglao-poster.jpg" alt="东明县居民养老保险待遇申领海报">
 </div>
 
 <div class="footer">
   <strong>🌟 东明县人社局 · 高效办成一件事 🌟</strong><br>
   5项业务1次办好 · 不用跑腿不用烦 · 养老待遇轻松领<br>
-  把这个好消息告诉身边的家人朋友！📢
+  📢 把这个好消息告诉身边的家人朋友！
 </div>
+
 </body>
 </html>
